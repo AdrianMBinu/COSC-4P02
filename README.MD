@@ -1,5 +1,3 @@
-Project Proposal
-
 Project: Web Summarizer and Shortener (Website/Database)
 
 GitHub Repository: https://github.com/MaulikMann/COSC-4P02.git
