@@ -1,3 +1,6 @@
+Project: Web Summarizer and Shortener (Website/Database)
+Github Repository: https://github.com/MaulikMann/COSC-4P02.git
+
 Members:
 -	Maulik Mann 6994214 mm20as@brocku.ca
 -	Adrian Binu 6970677 ab19xe@brocku.ca  
@@ -8,6 +11,17 @@ Members:
 -	Jason Hunter 6744247 jh19pp@brocku.ca 
 -	Brett Terpstra bt19ex@brocku.ca 
 
-Meeting Time: Tuesday 3:30pm-4:30pm
-1-week sprints
-Way of communication: Discord and Brock email
+Meeting Time: Tuesdays 3:30pm-4:30pm
+Sprint Cycle: 1-week sprints
+Communication Channel: Discord and Brock Email
+
+Product Manager/Owner: Maulik Mann
+Scrum Master: Vishant Khamar
+Stakeholder: TAs and Professor 
+Dev Team: 
+-	Adrian Binu
+-	Thanushan Pirapakaran
+-	Devaan Zastrow
+-	Michael Boulos
+-	Jason Hunter
+-	Brett Terpstra
