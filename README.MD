@@ -17,12 +17,17 @@ Members:
 -	Brett Terpstra			6920201	bt19ex@brocku.ca 
 
 Meeting Time: Tuesdays 3:30pm-4:30pm
+
 Sprint Cycle: 1-week sprints
+
 Communication Channel: Discord and Brock Email
 
 Product Manager/Owner: Maulik Mann
+
 Scrum Master: Vishant Khamar
+
 Stakeholder: TAs and Professor 
+
 Dev Team: 
 -	Adrian Binu
 -	Thanushan Pirapakaran
