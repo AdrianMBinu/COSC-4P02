@@ -17,3 +17,8 @@ Thanushan Present
 Vishant	Present		
 Michael	Not Present	
 Brett	Not Present		
+
+| Name        | Present    |
+| ----------- | ----------- |
+| Row 1, Col 1| Row 1, Col 2| 
+| Row 2, Col 1| Row 2, Col 2| 
