@@ -1,5 +1,5 @@
 Jan 10
-| Name        | Present?    |
+| Name        | Attendance  |
 | ----------- | ----------- |
 | Maulik      | Present     | 
 | Adrian      | Present     | 
@@ -11,7 +11,7 @@ Jan 10
 | Brett       | Present     | 
 
 Jan 16
-| Name        | Present?    |
+| Name        | Attendance  |
 | ----------- | ----------- |
 | Maulik      | Present     | 
 | Adrian      | Present     | 
