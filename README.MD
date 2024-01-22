@@ -16,7 +16,7 @@ Members:
 
 Meeting Time: Tuesdays 3:30pm-4:30pm
 
-Sprint Cycle: 1-week sprints
+Sprint Cycle: 2-week sprints
 
 Communication Channel: Discord and Brock Email
 
