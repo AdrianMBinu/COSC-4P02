@@ -22,3 +22,15 @@ Jan 16
 | Michael     | Not Present | 
 | Brett       | Not Present | 
 
+Jan 23
+| Name        | Attendance  |
+| ----------- | ----------- |
+| Maulik      | Present     | 
+| Adrian      | Present     | 
+| Deevan      | Present     | 
+| Jason       | Present     | 
+| Thanushan   | Present     | 
+| Vishant     | Present     | 
+| Michael     | Present     | 
+| Brett       | Present     | 
+
