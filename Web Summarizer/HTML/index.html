@@ -1,1 +1,66 @@
-test
+<html><head>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500,900" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Web Summarizer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/dist/all.min.css">
+    <link rel="stylesheet" href="css/dist/landing.min.css">
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/landing"><img class="navbar-logo" src="/images/x.png" alt="Image failed to load" width="28px"></a>
+      <p class="text light medium page-title">Landing</p>
+      <ul>
+        <li><a href="/password-reset" class="navbar-link">Password Reset</a></li>
+        <li><a href="/register" class="navbar-link">Register</a></li>
+        <li><a href="/login" class="navbar-link">Login</a></li>
+        <li><a href="/landing" class="navbar-link">Landing</a></li>
+      </ul>
+    </nav>
+    <div class="container-fluid" id="page-container">
+<h1 class="text center light xxlarge">Summarizer <br>4<br> Kids</h1>
+<h2 class="text center light medium">Web Summarizer</h2>
+<div class="inline-div">
+  <form class="inline" action="/login" method="get">
+    <input type="submit" value="Login" class="text medium light">
+  </form>
+<form class="inline" action="/register" method="get">
+  <input type="submit" value="Register" class="text medium light">
+</form>
+</div>
+</div>
+<style media="screen">
+#page-container{
+  background-size: auto 100%;
+  background-image: url("/images/landing-sky.jpg");
+  height: 100%;
+  padding: 25vh;
+}
+.inline-div{
+  text-align: center;
+}
+.inline{
+  display: inline;
+}
+input{
+  width: 200px;
+  height: 50px;
+  padding: 8px 8px;
+  color: #EEE;
+}
+input[type="submit"]{
+  background: transparent;
+  border: solid 1px #EEE;
+  transition: 0.5s;
+}
+input[type="submit"]:hover{
+  background: #EEE;
+  color: #333;
+}
+</style>
+
+  
+
+</body></html>
