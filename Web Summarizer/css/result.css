@@ -1,0 +1,31 @@
+.text{
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+  }
+  body{
+    overflow: hidden;
+    width: 100dvw;
+    height: 100dvh;
+    background: url("../images/v1_3.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #namer{
+    color: black;
+    width: 20dvw;
+    height: 5dvh;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+  .sumResults{
+    width:90dvw;
+    height: 60dvh;
+    background-color: white;
+    border-radius: 20px;
+    
+  }
