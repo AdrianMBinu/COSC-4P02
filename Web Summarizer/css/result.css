@@ -6,7 +6,7 @@
     overflow: hidden;
     width: 100dvw;
     height: 100dvh;
-    background: url("../images/v1_3.png");
+    background: url("../images/landing-sky.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -17,7 +17,7 @@
   #namer{
     color: black;
     width: 20dvw;
-    height: 5dvh;
+    height: 35px;
     text-align: center;
     border-radius: 20px;
     font-size: 20px;
@@ -27,5 +27,64 @@
     height: 60dvh;
     background-color: white;
     border-radius: 20px;
-    
+    display: flex;
+    justify-content:flex-end ;
+  }
+  .title{
+    color: aliceblue;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+    margin-left: 5dvw;
+  }
+
+  .saveButton{
+    display: flex;
+    justify-content: center;
+    color:aliceblue;
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 15px;
+    background-color: #A37C7C;
+    text-align: center;
+    margin-top: 2px;
+    margin-left: 10px;
+
+
+  }
+  .saveButton h2{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .saveButton:hover{
+    background-color: #a37c7c6f;
+    cursor: pointer;
+  }
+  .renameSection{
+    display: flex;
+    justify-content:center ;
+  }
+  .sumResultDiv{
+    display: flex;
+    justify-content: center;
+  }
+
+  .secondCon{
+    margin-right: 5dvw;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .secondCon div img{
+    filter: invert(50%) hue-rotate(86deg);
+    margin-left: 10px;
+  }
+  .secondCon div img:hover{
+    filter: invert(30%) hue-rotate(86deg);
+    cursor: pointer;
+  }
+  .secondCon div{
+    margin-top: auto;
+    margin-bottom: auto;
   }

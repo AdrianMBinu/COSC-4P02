@@ -3,7 +3,7 @@
     <head>
     	<link href="https://fonts.googleapis.com/css?family=Raleway:500,900" rel="stylesheet">
     	<meta charset="utf-8">
-    	<link href="../css/main.css" rel="stylesheet" />
+    	<link href="../css/result.css" rel="stylesheet" />
 		<title>Summary Result</title>
     </head>
     
@@ -17,12 +17,21 @@
             </ul>
           </nav>
           <div class="body">
-
-            <input id="namer" name="namer" placeholder="untitled">
-            <h1>Summary:</h1>
-            <div class="sumResults">
-              <img onclick="" class="resultSymbols" src="../images/speaker.svg" alt="Image failed to load" width="40px">
-              <img onclick="" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="40px">
+            <div class="renameSection">
+              <input id="namer" name="namer" placeholder="untitled">
+              <div class="saveButton" id="saved"><h2>Save</h2></div>
+            </div>
+            <div class="secondCon">
+              <h1 class="title">Summary:</h1>
+              <div>
+                <img onclick="" class="resultSymbols" src="../images/speaker.svg" alt="Image failed to load" width="40px">
+                <img onclick="" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="40px">
+              </div>
+            </div>
+            <div class="sumResultDiv">
+              <div class="sumResults">
+                <h3 id="sumResultText"></h3>
+              </div>
             </div>
           </div>
     </body>
