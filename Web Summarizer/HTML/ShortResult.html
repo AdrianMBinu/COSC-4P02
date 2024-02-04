@@ -4,7 +4,7 @@
     	<link href="https://fonts.googleapis.com/css?family=Raleway:500,900" rel="stylesheet">
     	<meta charset="utf-8">
     	<link href="../css/result.css" rel="stylesheet" />
-		<title>Summary Result</title>
+		<title>URL Shortener Result</title>
     </head>
     
     <body>
@@ -21,17 +21,20 @@
               <input id="namer" name="namer" placeholder="untitled">
               <div class="saveButton" id="saved"><h2>Save</h2></div>
             </div>
-            <div class="secondCon">
-              <h1 class="title">Summary:</h1>
-              <div>
-                <img onclick="" class="resultSymbols" src="../images/speaker.svg" alt="Image failed to load" width="40px">
-                <img onclick="" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="40px">
-              </div>
+            <div class="shortSecCon">
+                <h1 class="shortSecConh1">Shortened URL:</h1>
+                <div class="shortResultDiv">
+                    <div class="URLResult">
+                        <h3 id="ShortResultText">Sample URL</h3>
+                    </div>
+                    <img onclick="" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="40px">
+                </div>
             </div>
-            <div class="sumResultDiv">
-              <div class="sumResults">
-                <h3 id="sumResultText">Sample Result</h3>
-              </div>
+            <div class="shortThirdCon">
+                <h1 class="shortSecConh1">Number of Uses:</h1>
+                <div class="counter">
+                    <h2 id="counter">0000</h2>
+                </div>
             </div>
           </div>
     </body>

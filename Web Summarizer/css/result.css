@@ -16,7 +16,7 @@
   
   #namer{
     color: black;
-    width: 20dvw;
+    width: 300px;
     height: 35px;
     text-align: center;
     border-radius: 20px;
@@ -28,7 +28,12 @@
     background-color: white;
     border-radius: 20px;
     display: flex;
-    justify-content:flex-end ;
+    justify-content:left ;
+    overflow-y: auto;
+  }
+  .sumResults h3{
+    margin-left: 10px;
+    margin-top: 10px;
   }
   .title{
     color: aliceblue;
@@ -50,8 +55,6 @@
     text-align: center;
     margin-top: 2px;
     margin-left: 10px;
-
-
   }
   .saveButton h2{
     margin-top: auto;
@@ -76,15 +79,63 @@
     justify-content: space-between;
   }
 
-  .secondCon div img{
+  .resultSymbols{
     filter: invert(50%) hue-rotate(86deg);
     margin-left: 10px;
   }
-  .secondCon div img:hover{
+  .resultSymbols:hover{
     filter: invert(30%) hue-rotate(86deg);
     cursor: pointer;
   }
   .secondCon div{
     margin-top: auto;
     margin-bottom: auto;
+  }
+  .URLResult{
+    width:80dvw;
+    height: 45px;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    justify-content:flex-end ;
+    overflow-x: auto;
+    display: flex;
+    justify-content: left;
+  }
+  .URLResult h3{
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .shortResultDiv{
+    display: flex;
+    justify-content: center;
+  }
+  .shortSecCon{
+    margin-top: 20dvh;
+  }
+  .shortThirdCon{
+    margin-top: 10dvh;
+    display: flex;
+  }
+  .shortSecConh1{
+    color: aliceblue;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+    margin-left: 9dvw;
+  }
+
+  .counter{
+    width:9dvw;
+    height: 40px;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    justify-content:flex-end ;
+    margin-top: 25px;
+    margin-left: 2dvw;
+    display: flex;
+    justify-content:center;
+  }
+  .counter h2{
+    margin-top: 8px;
   }
