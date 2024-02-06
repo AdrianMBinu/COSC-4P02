@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Website</title>
+    <style>
+        body {
+            background-image: url('background.jpg');
+            background-size: cover; /* Stretch the background image to cover the entire viewport */
+            background-position: center; /* Centers the background image */
+            font-family: Arial, sans-serif; /* Sets the font for the entire page */
+            margin: 0; /* Removes default margin */
+            padding: 0; /* Removes default padding */
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: rgba(255, 255, 255, 0.7); /* Adds a semi-transparent white background to header */
+        }
+
+        main {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.7); /* Adds a semi-transparent white background to footer */
+        }
+
+        /* Style for the search form */
+        form {
+            margin-top: 20px;
+        }
+        
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Style for rectangular boxes */
+        .outer-box {
+            border: 2px solid #333;
+            padding: 20px;
+            margin-top: 20px;
+	    display: inline-block
+        }
+
+        .inner-box {
+            border: 1px solid #333;
+            padding: 10px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* Style for text inside boxes */
+        .text {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>This is the web summarizer</h1>
+    </header>
+
+    <main>
+        <p>This is a paragraph of text on my simple website. You can put any content you want here.</p>
+        <img src="logo.png" alt="Logo Image">
+        <!-- Search form -->
+        <form action="#" method="get">
+            <input type="text" name="search" placeholder="Search...">
+            <input type="submit" value="Search">
+        </form>
+        
+        <!-- Rectangular boxes -->
+        <div class="outer-box">
+            <div class="inner-box">
+                <span class="text">Sentiment(tone)</span>
+            </div>
+            <div class="inner-box">
+                <span class="text">Number of characters:</span>
+                <span>500</span>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
