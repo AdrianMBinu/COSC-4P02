@@ -46,4 +46,16 @@ Jan 30
 | Michael     | Present     | 
 | Brett       | Present     | 
 
+Feb 6
+|Name        | Attendance  |
+| ----------- | ----------- |
+| Maulik      | Present     | 
+| Adrian      | Present     | 
+| Deevan      | Present     | 
+| Jason       | Present     | 
+| Thanushan   | Present     | 
+| Vishant     | Present     | 
+| Michael     | Present     | 
+| Brett       | Present     | 
+
 
