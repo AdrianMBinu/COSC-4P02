@@ -142,3 +142,97 @@
     margin-top: 12px;
     font-size: 14px;
   }
+  .text {
+    font-family: Raleway, sans-serif;
+    text-decoration: none;
+}
+.text.small {
+    font-size: 14px;
+}
+.text.medium {
+    font-size: 22px;
+}
+.text.large {
+    font-size: 32px;
+}
+.text.xlarge {
+    font-size: 72px;
+}
+.text.xxlarge {
+    font-size: 96px;
+}
+.text.left {
+    text-align: left;
+}
+.text.center {
+    text-align: center;
+}
+.text.right {
+    text-align: right;
+}
+.text.light {
+    color: #eee;
+}
+.text.light::placeholder {
+    color: #eee;
+    opacity: 1;
+}
+.page-title {
+  float: left;
+  margin-left: 60px;
+  margin-top: 10px;
+}
+  .navbar,
+.navbar li,
+.navbar li a {
+    transition: 0.4s;
+}
+#page-container,
+.navbar li,
+.navbar li a,
+.navbar ul {
+    min-height: 100%;
+}
+.navbar li a.selected,
+.navbar li a:hover {
+    opacity: 0.9;
+}
+.navbar li a,
+.navbar a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+.navbar {
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    margin-bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+}
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background: 0 0;
+}
+.navbar li {
+    float: right;
+    display: inline;
+}
+.navbar li a {
+    display: block;
+    text-align: center;
+    padding: 13px 32px;
+    text-transform: uppercase;
+    opacity: 0.35;
+}
+.navbar-logo {
+    float: left;
+    display: inline;
+    position: absolute;
+    padding: 3px 0 10px;
+    left: 1vw;
+    top: 1vh;
+}
