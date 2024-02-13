@@ -58,4 +58,16 @@ Feb 6
 | Michael     | Present     | 
 | Brett       | Present     | 
 
+Feb 13
+| Name        | Attendance  |
+| ----------- | ----------- |
+| Maulik      | Present     | 
+| Adrian      | Present     | 
+| Deevan      | Present     | 
+| Jason       | Present     | 
+| Thanushan   | Present     | 
+| Vishant     | Present     | 
+| Michael     | Present     | 
+| Brett       | Present     | 
+
 
