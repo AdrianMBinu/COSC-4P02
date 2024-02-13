@@ -12,6 +12,7 @@
     background-size: cover;
     margin: 0;
     padding: 0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   }
   
   #namer{
@@ -59,6 +60,7 @@
   .saveButton h2{
     margin-top: auto;
     margin-bottom: auto;
+    font-size: 14px;
   }
   .saveButton:hover{
     background-color: #a37c7c6f;
@@ -137,5 +139,6 @@
     justify-content:center;
   }
   .counter h2{
-    margin-top: 8px;
+    margin-top: 12px;
+    font-size: 14px;
   }
