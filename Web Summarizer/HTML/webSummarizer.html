@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Website</title>
+    <title>Summarizer</title>
     <style>
         body{
     overflow: hidden;
@@ -16,85 +16,54 @@
     margin: 0;
     padding: 0;
   }
-
-        header {
-            text-align: center;
-            padding: 50px 0;
-            
-        }
-
         main {
             text-align: center;
             padding: 50px 0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            background-color: rgba(255, 255, 255, 0.7); /* Adds a semi-transparent white background to footer */
-        }
-
-        /* Style for the search form */
-        form {
-            margin-top: 20px;
-	
-        }
-        
-        input[type="text"] {
-            padding: 10px;
-            width: 200px;
-        }
-        
-        input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
         }
 
         /* Style for rectangular boxes */
         .outer-box {
             border: 2px solid white;
             padding: 20px;
-            margin-top: 20px;
-	    display: inline-block
-            
+            margin-top: 5dvh;
+            height: auto;
+            width: auto;
+	        display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .inner-box {
             border: 1px solid white;
             padding: 10px;
             margin-top: 10px;
-            display: inline-block;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         /* Style for text inside boxes */
-        .text {
+        span{
             font-weight: bold;
             color: white;
         }
-        .toptext{
- 	 color: white;
-	}
-  .URLResult{
+
+.URLResult{
     width:80dvw;
     height: 45px; 
     background-color: white;
     border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    justify-content:flex-end ;
     overflow-x: auto;
-    display: flex;
-    justify-content: left;
-    margin: 0 auto;
+    margin: 0;
+    color: black;
+    font-size: 20px;
   }
         .logo{
-            width: 20%;
-            height: 20%;
+            width: 30%;
+            height: 30%;
         }
-	    .text {
+.text {
     font-family: Raleway, sans-serif;
     text-decoration: none;
 }
@@ -188,6 +157,46 @@
     left: 1vw;
     top: 1vh;
 }
+.container{
+    display: flex;
+    justify-content:center;
+}
+.container img{
+    padding: 0;
+    margin-left: 20px;
+    filter: invert(80%) hue-rotate(86deg);
+}
+.container img:hover{
+    filter: invert(100%) hue-rotate(86deg);
+}
+.outerbox{
+    display: flex;
+    justify-self:center;
+}
+.middleLogo{
+    width: 100dvw;
+    display: flex;
+    justify-content: center;
+}
+.thirdBox{
+    display: flex;
+    justify-content: center;
+}
+.selection{
+    background-color: transparent;
+    color:#eee;
+    margin-left: 5px;
+}
+.characterCount{
+    width: 5dvw;
+    background-color: white;
+    border-radius: 20px;
+    overflow-x: auto;
+    margin: 0;
+    color: black;
+    font-size: 20px;
+    overflow-x: auto;
+}
     </style>
 </head>
 <body>
@@ -202,31 +211,38 @@
         </ul>
       </nav>
     <header>
-        <h1 class="toptext">This is the web summarizer</h1>
 	<div class="dark-mode-switch">
             <input type="checkbox" id="dark-mode-toggle">
             <label for="dark-mode-toggle"></label>
         </div>
     </header>
 
-    <main>
-        <img class="logo" src="../images/logo.png"  alt="Logo Image">
-        <!-- Search form -->
-        
-	<input class="URLResult" placeholder="paste link here">
-                        
-                    </input>
-        
-        <!-- Rectangular boxes -->
-        <div class="outer-box">
-            <div class="inner-box">
-                <span class="text">Sentiment(tone)</span>
-            </div>
-            <div class="inner-box">
-                <span class="text">Number of characters:</span>
-                <span>500</span>
+    <div class="body">
+        <div class="middleLogo">
+            <img class="logo" src="../images/logo.png" alt="Logo Image">
+        </div>
+        <div class="container">
+	        <input class="URLResult" placeholder="paste link here">
+                <img class="enter" src="../images/search.png" alt="Image not found" onclick="">
+            </input>
+        </div>
+        <div class="thirdBox">
+            <div class="outer-box">
+                <div class="inner-box">
+                    <span class="text">Sentiment(tone):</span>
+                    <select class="selection" id="tone">
+                        <option value="none">None</option>
+                        <option value="sad">Sad</option>
+                        <option value="pro">Proffesional</option>
+                        <option value="mean">Mean</option>
+                    </select>
+                </div>
+                <div class="inner-box">
+                    <span class="text">Number of characters:</span>
+                    <input class="characterCount">
+                </div>
             </div>
         </div>
-    </main>
+    </div>
 </body>
 </html>
