@@ -23,25 +23,27 @@
         </ul>
       </nav>
           <div class="body">
-            <div class="renameSection">
-              <input id="namer" name="namer" placeholder="untitled">
-              <div class="saveButton" id="saved"><h2>Save</h2></div>
-            </div>
-            <div class="shortSecCon">
-                <h1 class="shortSecConh1">Shortened URL:</h1>
-                <div class="shortResultDiv">
-                    <div class="URLResult">
-                        <h3 id="ShortResultText">Sample URL</h3>
+            <div class="resultBody">
+                <div class="renameSection">
+                  <input id="namer" name="namer" placeholder="untitled">
+                  <div class="saveButton" id="saved"><h2>Save</h2></div>
+                </div>
+                <div class="shortSecCon">
+                    <h1 class="shortSecConh1">Shortened URL:</h1>
+                    <div class="shortResultDiv">
+                        <div class="URLResult">
+                            <h3 id="ShortResultText">Sample URL</h3>
+                        </div>
+                        <img onclick="copyToClipboard()" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="40px">
                     </div>
-                    <img onclick="copyToClipboard()" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="40px">
                 </div>
-            </div>
-            <div class="shortThirdCon">
-                <h1 class="shortSecConh1">Number of Uses:</h1>
-                <div class="counter">
-                    <h2 id="counter">0000</h2>
+                <div class="shortThirdCon">
+                    <h1 class="shortSecConh1">Number of Uses:</h1>
+                    <div class="counter">
+                        <h2 id="counter">0000</h2>
+                    </div>
                 </div>
-            </div>
+              </div>
           </div>
     </body>
 </html>
