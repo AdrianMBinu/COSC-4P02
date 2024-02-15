@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500,900" rel="stylesheet">
+    <meta charset="utf-8">
+    <link href="../css/resultPages.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../js/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     <title>URL Shortener</title>
     <style>
-    body{
-    overflow: auto;
-    width: 100dvw;
-    height: 100dvh;
-    background: url("../images/landing-sky.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    margin: 0;
-    padding: 0;
-  }
-
-  .URLResult{
+  .URLLink{
     width:80dvw;
     height: 45px; 
     background-color: white;
@@ -32,99 +25,10 @@
     width: 30%;
     height: 30%;
 }
-.text {
-    font-family: Raleway, sans-serif;
-    text-decoration: none;
-}
-.text.small {
-    font-size: 14px;
-}
-.text.medium {
-    font-size: 22px;
-}
-.text.large {
-    font-size: 32px;
-}
-.text.xlarge {
-    font-size: 72px;
-}
-.text.xxlarge {
-    font-size: 96px;
-}
-.text.left {
-    text-align: left;
-}
-.text.center {
-    text-align: center;
-}
-.text.right {
-    text-align: right;
-}
-.text.light {
-    color: #eee;
-}
-.text.light::placeholder {
-    color: #eee;
-    opacity: 1;
-}
-.page-title {
-  float: left;
-  margin-left: 60px;
-  margin-top: 10px;
-}
-  .navbar,
-.navbar li,
-.navbar li a {
-    transition: 0.4s;
-}
-#page-container,
-.navbar li,
-.navbar li a,
-.navbar ul {
-    min-height: 100%;
-}
-.navbar li a.selected,
-.navbar li a:hover {
-    opacity: 0.9;
-}
-.navbar li a,
-.navbar a:hover {
-    color: #fff;
-    text-decoration: none;
-}
-.navbar {
-    top: 0;
-    left: 0;
-    width: 100%;
-    position: fixed;
-    margin-bottom: 0;
-    background: rgba(0, 0, 0, 0.25);
-    z-index: 1000;
-}
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background: 0 0;
-}
-.navbar li {
-    float: right;
-    display: inline;
-}
-.navbar li a {
-    display: block;
-    text-align: center;
-    padding: 13px 32px;
-    text-transform: uppercase;
-    opacity: 0.35;
-}
-.navbar-logo {
-    float: left;
-    display: inline;
-    position: absolute;
-    padding: 3px 0 10px;
-    left: 1vw;
-    top: 1vh;
+.middleLogo{
+    width: 100dvw;
+    display: flex;
+    justify-content: center;
 }
 .container{
     display: flex;
@@ -136,16 +40,7 @@
     filter: invert(80%) hue-rotate(86deg);
 }
 .container img:hover{
-    filter: invert(100%) hue-rotate(86deg);
-}
-.outerbox{
-    display: flex;
-    justify-self:center;
-}
-.middleLogo{
-    width: 100dvw;
-    display: flex;
-    justify-content: center;
+    filter: invert(0%) hue-rotate(86deg);
 }
     </style>
 </head>
@@ -155,22 +50,45 @@
         <p class="text light medium page-title">URL Shortener</p>
         <ul>
             <li><a href="login.html" class="navbar-link">Login</a></li>
-            <li><a href="urlShortener.html" class="navbar-link">Video Summarizer</a></li>
-            <li><a href="webSummarizer.html" class="navbar-link">Text Summarizer</a></li>
+            <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
+            <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
             <li><a href="../index.html" class="navbar-link">Landing</a></li>
         </ul>
       </nav>
 
     <div class="body">
-        <div class="middleLogo">
-            <img class="logo" src="../images/logo.png" alt="Logo Image">
+        <div id="mainURLCon" style="display: block;">
+            <div class="middleLogo">
+                <img class="logo" src="../images/logo.png" alt="Logo Image">
+            </div>
+            <div class="container">
+                <input class="URLLink" placeholder="paste link here">
+                    <img class="enter" src="../images/search.png" alt="Image not found" onclick="urlResult()">
+                </input>
+            </div>
         </div>
-        <div class="container">
-	        <input class="URLResult" placeholder="paste link here">
-                <img class="enter" src="../images/search.png" alt="Image not found" onclick="">
-            </input>
-        </div>
-        
+
+        <div class="resultBody" id='urlBody' style="display: none;">
+            <div class="renameSection">
+              <input id="namer" name="namer" placeholder="untitled">
+              <div class="saveButton" id="saved"><h2>Save</h2></div>
+            </div>
+            <div class="shortSecCon">
+                <h1 class="shortSecConh1">Shortened URL:</h1>
+                <div class="shortResultDiv">
+                    <div class="URLResult">
+                        <h3 id="ShortResultText">Sample URL</h3>
+                    </div>
+                    <img onclick="copyToClipboard()" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="40px">
+                </div>
+            </div>
+            <div class="shortThirdCon">
+                <h1 class="shortSecConh1">Number of Uses:</h1>
+                <div class="counter">
+                    <h2 id="counter">0000</h2>
+                </div>
+            </div>
+          </div>
     </div>
 </body>
 </html>

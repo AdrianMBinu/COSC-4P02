@@ -44,3 +44,29 @@ function speakText() {
         alert("Your browser does not support the SpeechSynthesis API.");
     }
 }
+//Switches summarery page from main to result page
+function sumResult(){
+    var resultBody = document.getElementById("sumBody");
+    var mainPage = document.getElementById("mainCon");
+
+    if (resultBody.style.display !== "none") {
+        resultBody.style.display = "none";
+        mainPage.style.display = "block"; 
+    } else {
+        mainPage.style.display = "none";
+        resultBody.style.display = "block";
+    }
+}
+//Switches url page from main to result page
+function urlResult(){
+    var resultBody = document.getElementById("urlBody");
+    var mainPage = document.getElementById("mainURLCon");
+
+    if (resultBody.style.display !== "none") {
+        resultBody.style.display = "none";
+        mainPage.style.display = "block"; 
+    } else {
+        mainPage.style.display = "none";
+        resultBody.style.display = "block";
+    }
+}

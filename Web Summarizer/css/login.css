@@ -63,7 +63,7 @@
     color: #ffffff;
     margin: 0%;
   }
-  .pro li{
+  .pro li, .free li{
     margin: 5px;
     font-size: large;
   }
