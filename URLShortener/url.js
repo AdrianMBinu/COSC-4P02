@@ -1,7 +1,7 @@
 function shortenUrl() {
     const longUrl = document.getElementById('longUrl').value;
 
-    fetch('http://localhost:3000/shorten', {
+    fetch('https://cosc4p02.tpgc.me/shorten', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
