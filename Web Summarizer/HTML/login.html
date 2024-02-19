@@ -7,8 +7,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <meta name="google-signin-client_id" content="154683893503-4kl342nrqrc358it9epf4dqip0pckf4d.apps.googleusercontent.com">
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
 		<title>Login Page</title>
     </head>
     
@@ -48,8 +47,12 @@
             </div>
             <div class="logContainer">
                 <div class="loginCon">
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                    <a href="#" onclick="signOut();">Sign out</a>
+                    <div id="g_id_onload"
+                        data-client_id="154683893503-4kl342nrqrc358it9epf4dqip0pckf4d.apps.googleusercontent.com"
+                        data-callback="onSignIn">
+                     </div>
+                        <div class="g_id_signin" data-type="standard"></div>
+                    <!-- <a href="#" onclick="signOut();">Sign out</a> -->
                 </div>
             </div>  
             <div class="loginPrompt">
