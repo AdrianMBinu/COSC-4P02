@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <style>
+        #clickCount {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>URL Shortener</h2>
+<form id="shortenForm">
+    <label for="longUrl">Enter Long URL:</label>
+    <input type="text" id="longUrl" name="longUrl" placeholder="https://example.com" required>
+    <button type="button" onclick="shortenUrl()">Shorten URL</button>
+</form>
+
+<div id="shortUrl"></div>
+<div id="clickCount"></div>
+
+<script src="../../URLShortener/url.js"></script>
+</body>
+</html>
