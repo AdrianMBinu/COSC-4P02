@@ -48,15 +48,14 @@
             </div>
             <div class="logContainer">
                 <div class="loginCon">
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    <a href="#" onclick="signOut();">Sign out</a>
                 </div>
             </div>  
             <div class="loginPrompt">
                 <h2>Login for Pro Features</h2>
             </div>
         </div>
-                <h2 class="alert alert-primary">Sign In</h2>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        <a href="#" onclick="signOut();">Sign out</a>
         <script>
             function signOut() {
                 var auth2 = gapi.auth2.getAuthInstance();
