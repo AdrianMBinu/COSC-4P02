@@ -1,7 +1,7 @@
 function shortenUrl() {
     const longUrl = document.getElementById('longUrl').value;
 
-    fetch('https://cosc4p02.tpgc.me/shorten', {
+    fetch('https://test/shorten', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
