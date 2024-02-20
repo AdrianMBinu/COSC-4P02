@@ -1,7 +1,7 @@
 function shortenUrl() {
     const longUrl = document.getElementById('longUrl').value;
 
-    fetch('https://test/shorten', {
+    fetch('http://localhost:3000/shorten', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -1,89 +1,91 @@
 const express = require('express');
 const cors = require('cors');
 const shortid = require('shortid');
-const mariadb = require('mariadb');
+const sqlite3 = require('sqlite3');
 
 const app = express();
 const PORT = 3000;
-const HOST = 'cosc4p02.tpgc.me';
 
 app.use(cors());
 app.use(express.json());
 
-// Create a pool of database connections
-const pool = mariadb.createPool({
-    host: 'sc.on.underlying.skynet.tpgc.me',
-    user: 'cosc4p02',
-    password: 'summarizeme',
-    database: '4P02Test',
-    connectionLimit: 5 // Adjust according to your needs
-});
+// Create and connect to the SQLite database
+const db = new sqlite3.Database('url_shortener.db');
+
+// Create the 'urls' table if it doesn't already exist
+db.run(`
+  CREATE TABLE IF NOT EXISTS urls (
+    id INTEGER PRIMARY KEY,
+    shortCode TEXT UNIQUE,
+    longUrl TEXT UNIQUE,
+    clickCount INTEGER DEFAULT 0 
+  )
+`);
 
 // Endpoint to create a short URL
-app.post('/shorten', async (req, res) => {
+app.post('/shorten', (req, res) => {
     const { longUrl } = req.body;
 
     if (!longUrl) {
         return res.status(400).json({ error: 'Long URL is required' });
     }
 
-    let conn;
-    try {
-        conn = await pool.getConnection();
+    // Check if the long URL already exists in the database
+    db.get('SELECT shortCode, clickCount FROM urls WHERE longUrl = ?', [longUrl], (err, row) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
 
-        // Check if the long URL already exists in the database
-        const rows = await conn.query('SELECT shortCode, clickCount FROM urls WHERE longUrl = ?', [longUrl]);
-
-        if (rows.length > 0) {
+        if (row) {
             // If the long URL exists, return the existing short URL and click count
-            const shortUrl = `http://yourdomain.com/${rows[0].shortCode}`;
-            res.json({ shortUrl, clickCount: rows[0].clickCount });
+            const shortUrl = `http://localhost:${PORT}/${row.shortCode}`;
+            res.json({ shortUrl, clickCount: row.clickCount });
         } else {
             // Generate a unique short code using shortid
             const shortCode = shortid.generate();
 
             // Insert the new URL into the database with click count initialized to 1
-            await conn.query('INSERT INTO urls (shortCode, longUrl, clickCount) VALUES (?, ?, 1)', [shortCode, longUrl]);
+            db.run('INSERT INTO urls (shortCode, longUrl, clickCount) VALUES (?, ?, 1)', [shortCode, longUrl], (err) => {
+                if (err) {
+                    console.error('Database error:', err);
+                    return res.status(500).json({ error: 'Internal Server Error' });
+                }
 
-            const shortUrl = `http://yourdomain.com/${shortCode}`;
-            res.json({ shortUrl, clickCount: 1 });
+                const shortUrl = `http://localhost:${PORT}/${shortCode}`;
+                res.json({ shortUrl, clickCount: 1 });
+            });
         }
-    } catch (err) {
-        console.error('Database error:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-    } finally {
-        if (conn) conn.release(); // release connection back to pool
-    }
+    });
 });
 
 // Endpoint to redirect to the original URL
-app.get('/:shortCode', async (req, res) => {
+app.get('/:shortCode', (req, res) => {
     const { shortCode } = req.params;
 
-    let conn;
-    try {
-        conn = await pool.getConnection();
+    // Increment click count when redirecting
+    db.run('UPDATE urls SET clickCount = clickCount + 1 WHERE shortCode = ?', [shortCode], (err) => {
+        if (err) {
+            console.error('Database error:', err);
+        }
+    });
 
-        // Increment click count when redirecting
-        await conn.query('UPDATE urls SET clickCount = clickCount + 1 WHERE shortCode = ?', [shortCode]);
+    // Retrieve the long URL and perform the redirect
+    db.get('SELECT longUrl FROM urls WHERE shortCode = ?', [shortCode], (err, row) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
 
-        // Retrieve the long URL and perform the redirect
-        const rows = await conn.query('SELECT longUrl FROM urls WHERE shortCode = ?', [shortCode]);
-
-        if (rows.length === 0) {
+        if (!row) {
             return res.status(404).json({ error: 'Short URL not found' });
         }
 
-        res.redirect(rows[0].longUrl);
-    } catch (err) {
-        console.error('Database error:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-    } finally {
-        if (conn) conn.release(); // release connection back to pool
-    }
+        res.redirect(row.longUrl);
+    });
 });
 
 // Start the server
-app.listen(PORT, HOST, () => {
-    console.log(`Server is running on https://${HOST}:${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
