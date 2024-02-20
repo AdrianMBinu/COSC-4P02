@@ -5,6 +5,7 @@ const mariadb = require('mariadb');
 
 const app = express();
 const PORT = 3000;
+const HOST = 'cosc4p02.tpgc.me'; // Specify the host here
 
 app.use(cors());
 app.use(express.json());
@@ -83,6 +84,6 @@ app.get('/:shortCode', async (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running on http://0.0.0.0:${PORT}`);
+app.listen(PORT, HOST, () => {
+    console.log(`Server is running on https://${HOST}:${PORT}`);
 });
