@@ -3,7 +3,7 @@
 const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
-    host: 'cosc4p02@sc.on.underlying.skynet.tpgc.me',
+    host: 'sc.on.underlying.skynet.tpgc.me',
     user: 'cosc4p02',
     password: 'summarizeme',
     database: '4P02Test',
