@@ -5,7 +5,7 @@ const mariadb = require('mariadb');
 
 const app = express();
 const PORT = 3000;
-const HOST = 'cosc4p02.tpgc.me'; // Specify the host here
+const HOST = 'cosc4p02.tpgc.me';
 
 app.use(cors());
 app.use(express.json());
