@@ -1,5 +1,6 @@
-// URL shortening logic, redirection handling, and database operations in url.js
 
+
+const { storeUrl, getLongUrl } = require('./db');
 // Function to shorten URL
 async function shortenUrl() {
     const longUrl = document.getElementById('longUrl').value;
