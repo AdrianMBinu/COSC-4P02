@@ -24,7 +24,7 @@ async function shortenUrl() {
 
 // Function to generate short URL
 async function generateShortUrl(longUrl) {
-    const response = await fetch('http://localhost:3000/shorten', {
+    const response = await fetch('https://cosc4p02.tpgc.me/HTML/shorten', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ function displayShortenedUrl(shortUrl, clickCount) {
 
 // Function to handle redirection
 async function redirectToLongUrl(shortCode) {
-    const response = await fetch(`http://localhost:3000/${shortCode}`);
+    const response = await fetch(`https://cosc4p02.tpgc.me/HTML/${shortCode}`);
     if (response.ok) {
         const longUrl = await response.text();
         window.location.href = longUrl;
