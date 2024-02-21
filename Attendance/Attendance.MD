@@ -70,4 +70,16 @@ Feb 13
 | Michael     | Present     | 
 | Brett       | Present     | 
 
+Feb 13
+| Name        | Attendance      |
+| ----------- | -----------     |
+| Maulik      | Present         | 
+| Adrian      | Present         | 
+| Deevan      | Not Present     | 
+| Jason       | Not Present     | 
+| Thanushan   | Present         | 
+| Vishant     | Present         | 
+| Michael     | Present         | 
+| Brett       | Present         | 
+
 
