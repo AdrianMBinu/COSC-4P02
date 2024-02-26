@@ -65,10 +65,20 @@
                 auth2.signOut().then(function () {
                     console.log('User signed out.');
                 });
+                var elements = document.querySelectorAll(".Proffesional");
+
+                elements.forEach(function(element) {
+                    element.style.display = "none";
+                });
             }
         </script>
         <script>
             function onSignIn(googleUser) {
+                var elements = document.querySelectorAll(".Proffesional");
+
+                elements.forEach(function(element) {
+                    element.style.display = "flex";
+                });
                 window.location.href = "https://cosc4p02.tpgc.me/HTML/Dashboard.html";
             }
         </script>
