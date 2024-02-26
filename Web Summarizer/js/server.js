@@ -7,7 +7,7 @@ const app = express();
 const PORT = 3000;
 app.use(cors());
 app.use(express.json());
-const baseUrl = `https://cosc4p02.tpgc.me`; 
+const baseUrl = `https://cosc4p02.tpgc.me:${PORT}`; 
 
 // Create and connect to the SQLite database
 const db = new sqlite3.Database('url_shortener.db');
