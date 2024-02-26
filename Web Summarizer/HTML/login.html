@@ -75,11 +75,12 @@
         <script>
             function onSignIn(googleUser) {
                 var elements = document.querySelectorAll(".Proffesional");
+                console.log("Number of elements:", elements.length);
 
                 elements.forEach(function(element) {
                     element.style.display = "flex";
                 });
-                window.location.href = "https://cosc4p02.tpgc.me/HTML/Dashboard.html";
+                window.location.href = "https://cosc4p02.tpgc.me/index.html";
             }
         </script>
     </body>
