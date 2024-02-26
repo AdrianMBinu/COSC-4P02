@@ -85,6 +85,9 @@ app.get('/:shortCode', (req, res) => {
 });
 
 // Start the server
+// Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    const baseUrl = `https://cosc4p02.tpgc.me:${PORT}`; // Replace this with your actual server hostname
+    console.log(`Server is running on ${baseUrl}`);
 });
+
