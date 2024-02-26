@@ -38,7 +38,7 @@ app.post('/shorten', (req, res) => {
 
         if (row) {
             // If the long URL exists, return the existing short URL and click count
-            const shortUrl = `http://localhost:${PORT}/${row.shortCode}`;
+            const shortUrl = `${baseUrl}/${row.shortCode}`;
             res.json({ shortUrl, clickCount: row.clickCount });
         } else {
             // Generate a unique short code using shortid
@@ -51,7 +51,7 @@ app.post('/shorten', (req, res) => {
                     return res.status(500).json({ error: 'Internal Server Error' });
                 }
 
-                const shortUrl = `http://localhost:${PORT}/${shortCode}`;
+                const shortUrl = `${baseUrl}/${shortCode}`;
                 res.json({ shortUrl, clickCount: 1 });
             });
         }
