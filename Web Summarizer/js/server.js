@@ -7,7 +7,7 @@ const app = express();
 const PORT = 3000;
 app.use(cors());
 app.use(express.json());
-const baseUrl = `https://cosc4p02.tpgc.me:${PORT}`; 
+const baseUrl = `https://cosc4p02.tpgc.me`; 
 
 // Create and connect to the SQLite database
 const db = new sqlite3.Database('url_shortener.db');
@@ -23,7 +23,7 @@ db.run(`
 `);
 
 // Endpoint to create a short URL
-app.post('/shorten', (req, res) => {
+app.post('/u/shorten', (req, res) => { // Modified route to handle requests relative to /u/
     const { longUrl } = req.body;
 
     if (!longUrl) {
@@ -39,7 +39,7 @@ app.post('/shorten', (req, res) => {
 
         if (row) {
             // If the long URL exists, return the existing short URL and click count
-            const shortUrl = `${baseUrl}/${row.shortCode}`;
+            const shortUrl = `${baseUrl}/u/${row.shortCode}`; // Updated to reflect /u/ prefix
             res.json({ shortUrl, clickCount: row.clickCount });
         } else {
             // Generate a unique short code using shortid
@@ -52,7 +52,7 @@ app.post('/shorten', (req, res) => {
                     return res.status(500).json({ error: 'Internal Server Error' });
                 }
 
-                const shortUrl = `${baseUrl}/${shortCode}`;
+                const shortUrl = `${baseUrl}/u/${shortCode}`; // Updated to reflect /u/ prefix
                 res.json({ shortUrl, clickCount: 1 });
             });
         }
@@ -60,7 +60,7 @@ app.post('/shorten', (req, res) => {
 });
 
 // Endpoint to redirect to the original URL
-app.get('/:shortCode', (req, res) => {
+app.get('/u/:shortCode', (req, res) => { // Modified route to handle requests relative to /u/
     const { shortCode } = req.params;
 
     // Increment click count when redirecting
@@ -88,4 +88,3 @@ app.get('/:shortCode', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on ${baseUrl}`);
 });
-
