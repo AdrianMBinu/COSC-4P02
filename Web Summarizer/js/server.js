@@ -4,10 +4,9 @@ const shortid = require('shortid');
 const sqlite3 = require('sqlite3');
 
 const app = express();
-const PORT = 3000;
 app.use(cors());
 app.use(express.json());
-const baseUrl = `https://cosc4p02.tpgc.me:${PORT}`; 
+const baseUrl = `https://cosc4p02.tpgc.me`; 
 
 // Create and connect to the SQLite database
 const db = new sqlite3.Database('url_shortener.db');
@@ -85,6 +84,6 @@ app.get('/u/:shortCode', (req, res) => { // Modified route to handle requests re
     });
 });
 
-app.listen(PORT, () => {
+app.listen(() => {
     console.log(`Server is running on ${baseUrl}`);
 });
