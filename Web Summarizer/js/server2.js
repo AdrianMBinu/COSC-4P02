@@ -63,15 +63,8 @@ app.post('/shorten', (req, res) => {
 app.get('/:shortCode', (req, res) => {
     const { shortCode } = req.params;
 
-    // Increment click count when redirecting
-    db.run('UPDATE urls SET clickCount = clickCount + 1 WHERE shortCode = ?', [shortCode], (err) => {
-        if (err) {
-            console.error('Database error:', err);
-        }
-    });
-
-    // Retrieve the long URL and perform the redirect
-    db.get('SELECT longUrl FROM urls WHERE shortCode = ?', [shortCode], (err, row) => {
+    // Retrieve the long URL and increment click count
+    db.get('SELECT longUrl, clickCount FROM urls WHERE shortCode = ?', [shortCode], (err, row) => {
         if (err) {
             console.error('Database error:', err);
             return res.status(500).json({ error: 'Internal Server Error' });
@@ -81,6 +74,15 @@ app.get('/:shortCode', (req, res) => {
             return res.status(404).json({ error: 'Short URL not found' });
         }
 
+        // Increment click count
+        const updatedClickCount = row.clickCount + 1;
+        db.run('UPDATE urls SET clickCount = ? WHERE shortCode = ?', [updatedClickCount, shortCode], (err) => {
+            if (err) {
+                console.error('Database error:', err);
+            }
+        });
+
+        // Redirect to the original URL
         res.redirect(row.longUrl);
     });
 });
