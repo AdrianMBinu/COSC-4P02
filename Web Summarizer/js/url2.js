@@ -10,8 +10,8 @@ function shortenUrl() {
     })
         .then(response => response.json())
         .then(data => {
-            document.getElementById('ShortResultText').innerHTML = `Shortened URL: <a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
-            document.getElementById('counter').innerHTML = `Click Count: ${data.clickCount}`;
+            document.getElementById('ShortResultText').innerHTML = `<a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
+            document.getElementById('counter').innerHTML = `${data.clickCount}`;
         })
         .catch(error => {
             console.error('Error:', error);
