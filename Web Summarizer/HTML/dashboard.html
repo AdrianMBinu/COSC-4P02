@@ -22,20 +22,93 @@
       color: #fff;
       padding: 20px;
       text-align: center;
+      width: 1000px; /* 2000 */
+      height: 400px; /* 1000 */
     }
     .category {
       margin-bottom: 15px;
+      text-align: center;
     }
     .subcategory {
-      margin-left: 20px;
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .category h2 {
+      display: inline-block;
       border-bottom: 2px solid #fff; /* Added a white bottom border */
       padding-bottom: 5px; /* Added some padding for better spacing */
     }
+
+.navbar,
+.navbar li,
+.navbar li a {
+    transition: 0.4s;
+}
+#page-container,
+.navbar li,
+.navbar li a,
+.navbar ul {
+    min-height: 100%;
+}
+.navbar li a.selected,
+.navbar li a:hover {
+    opacity: 0.9;
+}
+.navbar li a,
+.navbar a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+.navbar {
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    margin-bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+}
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background: 0 0;
+}
+.navbar li {
+    float: right;
+    display: inline;
+}
+.navbar li a {
+    display: block;
+    text-align: center;
+    padding: 13px 32px;
+    text-transform: uppercase;
+    opacity: 0.35;
+}
+.navbar-logo {
+    float: left;
+    display: inline;
+    position: absolute;
+    padding: 3px 0 10px;
+    left: 1vw;
+    top: 1vh;
+}
   </style>
 </head>
 <body>
+	<nav class="navbar">
+        <a href="landing"><img class="navbar-logo" src="images/x.png" alt="Image failed to load" width="28px"></a>
+        <p class="text light medium page-title">Results</p>
+        <ul>
+          <li><a href="login" class="navbar-link">Login</a></li>
+          <li><a href="urlShortener" class="navbar-link">Video Summarizer</a></li>
+          <li><a href="webSummarizer" class="navbar-link">Text Summarizer</a></li>
+          <li><a href="landing" class="navbar-link">Landing</a></li>
+        </ul>
+      </nav>
+  <h1>Acc Holder</h1>
   <div class="dashboard">
     <h1>Dashboard</h1>
     <div class="category">
