@@ -4,9 +4,10 @@ const shortid = require('shortid');
 const sqlite3 = require('sqlite3');
 
 const app = express();
+const PORT = 3000; // Assuming you still need this for local development
+
 app.use(cors());
 app.use(express.json());
-const baseUrl = `https://cosc4p02.tpgc.me`; 
 
 // Create and connect to the SQLite database
 const db = new sqlite3.Database('url_shortener.db');
@@ -22,7 +23,7 @@ db.run(`
 `);
 
 // Endpoint to create a short URL
-app.post('/u/shorten', (req, res) => { // Modified route to handle requests relative to /u/
+app.post('/shorten', (req, res) => {
     const { longUrl } = req.body;
 
     if (!longUrl) {
@@ -38,7 +39,7 @@ app.post('/u/shorten', (req, res) => { // Modified route to handle requests rela
 
         if (row) {
             // If the long URL exists, return the existing short URL and click count
-            const shortUrl = `${baseUrl}/u/${row.shortCode}`; // Updated to reflect /u/ prefix
+            const shortUrl = `https://cosc4p02.tpgc.me/u/${row.shortCode}`; // Updated base URL
             res.json({ shortUrl, clickCount: row.clickCount });
         } else {
             // Generate a unique short code using shortid
@@ -51,7 +52,7 @@ app.post('/u/shorten', (req, res) => { // Modified route to handle requests rela
                     return res.status(500).json({ error: 'Internal Server Error' });
                 }
 
-                const shortUrl = `${baseUrl}/u/${shortCode}`; // Updated to reflect /u/ prefix
+                const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`; // Updated base URL
                 res.json({ shortUrl, clickCount: 1 });
             });
         }
@@ -59,18 +60,11 @@ app.post('/u/shorten', (req, res) => { // Modified route to handle requests rela
 });
 
 // Endpoint to redirect to the original URL
-app.get('/u/:shortCode', (req, res) => { // Modified route to handle requests relative to /u/
+app.get('/:shortCode', (req, res) => {
     const { shortCode } = req.params;
 
-    // Increment click count when redirecting
-    db.run('UPDATE urls SET clickCount = clickCount + 1 WHERE shortCode = ?', [shortCode], (err) => {
-        if (err) {
-            console.error('Database error:', err);
-        }
-    });
-
-    // Retrieve the long URL and perform the redirect
-    db.get('SELECT longUrl FROM urls WHERE shortCode = ?', [shortCode], (err, row) => {
+    // Retrieve the long URL and increment click count
+    db.get('SELECT longUrl, clickCount FROM urls WHERE shortCode = ?', [shortCode], (err, row) => {
         if (err) {
             console.error('Database error:', err);
             return res.status(500).json({ error: 'Internal Server Error' });
@@ -80,10 +74,20 @@ app.get('/u/:shortCode', (req, res) => { // Modified route to handle requests re
             return res.status(404).json({ error: 'Short URL not found' });
         }
 
+        // Increment click count
+        const updatedClickCount = row.clickCount + 1;
+        db.run('UPDATE urls SET clickCount = ? WHERE shortCode = ?', [updatedClickCount, shortCode], (err) => {
+            if (err) {
+                console.error('Database error:', err);
+            }
+        });
+
+        // Redirect to the original URL
         res.redirect(row.longUrl);
     });
 });
 
-app.listen(() => {
-    console.log(`Server is running on ${baseUrl}`);
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
