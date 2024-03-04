@@ -89,5 +89,5 @@ app.get('/:shortCode', (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running `);
 });
