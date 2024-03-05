@@ -1,21 +1,27 @@
 document.addEventListener("DOMContentLoaded", function() {
     var cachedToken = localStorage.getItem('authToken');
+    var elements = document.querySelectorAll(".Proffesional");
+    var logButton = document.querySelectorAll(".loginButton");
 
     if (cachedToken === null) {
-        console.log('Token is not cached.');
-        var elements = document.querySelectorAll(".Proffesional");
+        console.log('Signout');
 
         elements.forEach(function(element) {
             element.style.display = "none";
         });
+        logButton.forEach(function(log) {
+            log.textContent = 'LOGIN';
+        });
     } else {
-        console.log('Loggedin');
-        var elements = document.querySelectorAll(".Proffesional");
 
         elements.forEach(function(element) {
             element.style.display = "flex";
         });
-    }
+        logButton.forEach(function(log) {
+            log.textContent = 'SIGNOUT';
+        });
+    }//Restrict Pro features and Chnage login/signout button
+    
 });
 function copyToClipboard() {
     var textToCopy = document.getElementById("ShortResultText").innerText;
