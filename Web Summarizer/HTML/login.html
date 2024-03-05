@@ -8,6 +8,7 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="../js/login.js"></script>
 		<title>Login Page</title>
     </head>
     
@@ -16,14 +17,14 @@
             <a href="landing"><img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="40px"></a>
             <p class="text light medium page-title">Login</p>
             <ul>
-              <li><a href="login.html" class="navbar-link">Login</a></li>
+              <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
               <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
               <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
               <li><a href="../index.html" class="navbar-link">Home</a></li>
             </ul>
           </nav>
           <div class="body">
-            <div class="infoCon">
+            <div class="infoCon signoutPage">
                 <div class="free">
                     <h1 class="title">Basic Version</h1>
                     <ul>
@@ -46,7 +47,7 @@
                 </div>
             </div>
             <div class="logContainer">
-                <div class="loginCon">
+                <div class="loginCon signoutPage">
                     <div id="g_id_onload"
                         data-client_id="154683893503-4kl342nrqrc358it9epf4dqip0pckf4d.apps.googleusercontent.com"
                         data-callback="onSignIn">
@@ -54,9 +55,16 @@
                         <div class="g_id_signin" data-type="standard"></div>
                     <!-- <a href="#" onclick="signOut();">Sign out</a> -->
                 </div>
+                <div class="confirmation">
+                    <h1 class="title">Are you sure you want to signout?</h1>
+                    <div class="confirmationCon">
+                        <a onclick="signOut()" href="../index.html">Yes</a>
+                        <a href="../index.html">No</a>
+                    </div>
+                </div>
             </div>  
-            <div class="loginPrompt">
-                <h2>Login for Pro Features</h2>
+            <div class="loginPrompt signoutPage">
+                <h2 id="LoginText">Login for Pro Features</h2>
             </div>
         </div>
         <script>

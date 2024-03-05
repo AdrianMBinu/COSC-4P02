@@ -168,3 +168,32 @@
     left: 1vw;
     top: 1vh;
 }
+.confirmation{
+  background-color: #A37C7C;
+  width: 35vw;
+  height: 40dvh;
+  border-radius: 20px;
+  margin: 15px;
+  background: linear-gradient(to bottom, #A37C7C, #a37c7cd0);
+  text-align: left;
+  padding: 10px;
+  color: #ffffff;
+  display: none;
+
+}
+.confirmationCon{
+  height: 20dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.confirmationCon a{
+  text-decoration:none;
+  font-size: 40px;
+  margin: 20px;
+  color:#eee;
+}
+.confirmation a:hover{
+  text-decoration: none;
+  color: #ffffff;
+}
