@@ -3,6 +3,10 @@ function checkSignInStatus() {
     if (auth2.isSignedIn.get()) {
         console.log('User is signed in.');
         var profile = auth2.currentUser.get().getBasicProfile();
+        // Display greeting message with user's name
+        document.getElementById('greeting').innerText = "Hello, " + profile.getName() + "!";
+        // Show the hidden div
+        document.getElementById('loggedInDiv').style.display = "block";
     } else {
         console.log('User is not signed in.');
     }
@@ -21,4 +25,4 @@ function onLoad() {
     });
 }
 // Load the Google Sign-In API on load
-//onLoad();
+onLoad();
