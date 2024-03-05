@@ -4,7 +4,7 @@ const shortid = require('shortid');
 const sqlite3 = require('sqlite3');
 
 const app = express();
-const PORT = 3000; // Assuming you still need this for local development
+const PORT = 3000; 
 
 app.use(cors());
 app.use(express.json());
