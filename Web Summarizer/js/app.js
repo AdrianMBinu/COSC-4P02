@@ -1,3 +1,22 @@
+document.addEventListener("DOMContentLoaded", function() {
+    var cachedToken = localStorage.getItem('authToken');
+
+    if (cachedToken === null) {
+        console.log('Token is not cached.');
+        var elements = document.querySelectorAll(".Proffesional");
+
+        elements.forEach(function(element) {
+            element.style.display = "none";
+        });
+    } else {
+        console.log('Loggedin');
+        var elements = document.querySelectorAll(".Proffesional");
+
+        elements.forEach(function(element) {
+            element.style.display = "flex";
+        });
+    }
+});
 function copyToClipboard() {
     var textToCopy = document.getElementById("ShortResultText").innerText;
 
