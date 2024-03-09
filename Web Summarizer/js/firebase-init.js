@@ -12,8 +12,8 @@ const firebaseConfig = {
   projectId: "cosc4p02",
   storageBucket: "cosc4p02.appspot.com",
   messagingSenderId: "507870719627",
-  appId: "1:507870719627:web:af1cb6e9cfb5d17234ee8e",
-  measurementId: "G-YKKHVE42KK"
+  appId: "1:507870719627:web:66bfe94b37c062fd34ee8e",
+  measurementId: "G-RTD2M2LPFJ"
 };
 
 // Initialize Firebase

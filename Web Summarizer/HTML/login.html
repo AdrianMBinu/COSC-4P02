@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
         <script src="firebase-init.js"></script>
 		<title>Login Page</title>
     </head>
@@ -50,10 +50,11 @@
             </div>
             <div class="logContainer">
                 <div class="loginCon">
-                    <div id="g_id_onload"
+                    <!-- <div id="g_id_onload"
                         data-client_id="154683893503-4kl342nrqrc358it9epf4dqip0pckf4d.apps.googleusercontent.com"
                         data-callback="onSignIn">
-                     </div>
+                     </div> -->
+                     <button onclick="signInWithGoogle()">Sign in with Google</button>
                         <div class="g_id_signin" data-type="standard"></div>
                     <!-- <a href="#" onclick="signOut();">Sign out</a> -->
                 </div>
@@ -73,8 +74,6 @@
                     element.style.display = "none";
                 });
             }
-        </script>
-        <script>
             function onSignIn(googleUser) {
                 var elements = document.querySelectorAll(".Proffesional");
                 console.log("Number of elements:", elements.length);
@@ -83,6 +82,22 @@
                 });
                 window.location.href = "https://cosc4p02.tpgc.me/index.html";
             }
+
+            function signInWithGoogle() {
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+    .then((result) => {
+      // Signed in successfully, get user data
+      var user = result.user;
+      console.log(user);
+    })
+    .catch((error) => {
+      // Handle errors
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.error(errorCode, errorMessage);
+    });
+}
         </script>
     </body>
 </html>
