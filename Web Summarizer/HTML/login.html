@@ -8,6 +8,9 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
         <!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
+        <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
+        <script src="firebase-init.js"></script>
         <script src="../js/firebase-init.js"></script>
 		<title>Login Page</title>
     </head>
@@ -54,7 +57,7 @@
                         data-client_id="154683893503-4kl342nrqrc358it9epf4dqip0pckf4d.apps.googleusercontent.com"
                         data-callback="onSignIn">
                      </div> -->
-                     <button onclick="signInWithPopup()">Sign in with Google</button>
+                     <button id="sign-in-button">Sign in with Google</button>
                         <div class="g_id_signin" data-type="standard"></div>
                     <!-- <a href="#" onclick="signOut();">Sign out</a> -->
                 </div>
@@ -84,5 +87,39 @@
             }
 
         </script>
+
+<script>
+    // Get a reference to the sign-in button element
+    const signInButton = document.getElementById('sign-in-button');
+
+    // Attach a click event listener to the sign-in button
+    signInButton.addEventListener('click', () => {
+        // Trigger the Google sign-in popup
+        signInWithGooglePopup();
+    });
+
+    // Function to handle sign-in with Google
+    function signInWithGooglePopup() {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                // IdP data available using getAdditionalUserInfo(result)
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+            });
+    }
+</script>
     </body>
 </html>
