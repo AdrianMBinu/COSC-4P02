@@ -8,10 +8,29 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
         <!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
-        <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
-        <script src="../js/firebase-init.js" defer type='module'></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js"></script>
 		<title>Login Page</title>
+
+        <script>
+            import { initializeApp } from "firebase/app";
+            import { getAnalytics } from "firebase/analytics";
+
+            const firebaseConfig = {
+            apiKey: "AIzaSyC6S2JvQ-nt-5truY1-WZXs4vyIBqlccTE",
+            authDomain: "cosc4p02.firebaseapp.com",
+            projectId: "cosc4p02",
+            storageBucket: "cosc4p02.appspot.com",
+            messagingSenderId: "507870719627",
+            appId: "1:507870719627:web:66bfe94b37c062fd34ee8e",
+            measurementId: "G-RTD2M2LPFJ"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+        </script>
     </head>
 
     <body>
@@ -56,7 +75,7 @@
                         data-client_id="154683893503-4kl342nrqrc358it9epf4dqip0pckf4d.apps.googleusercontent.com"
                         data-callback="onSignIn">
                      </div> -->
-                     <button id="sign-in-button">Sign in with Google</button>
+                     <button onclick="signInWithGoogle()">Sign in with Google</button>
                         <div class="g_id_signin" data-type="standard"></div>
                     <!-- <a href="#" onclick="signOut();">Sign out</a> -->
                 </div>
@@ -86,6 +105,31 @@
             }
 
         </script>
+
+<script>
+    function signInWithGoogle() {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // Redirect to another page or do something else after successful login
+                window.location.href = "welcome.html";
+            })
+            .catch((error) => {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+            });
+    }
+</script>
 
     </body>
 </html>
