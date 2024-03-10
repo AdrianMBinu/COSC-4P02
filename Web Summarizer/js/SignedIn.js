@@ -1,7 +1,6 @@
 import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-import { auth } from './firebase-init.js';
-
-function signedIn() {
+  import { auth } from './js/firebase-init.js';
+  window.onload = function() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
