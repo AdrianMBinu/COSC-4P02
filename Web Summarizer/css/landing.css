@@ -132,3 +132,10 @@ input[type="submit"]:hover{
     background: #EEE;
     color: #333;
 }
+
+.greeting{
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
