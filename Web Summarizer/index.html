@@ -44,7 +44,7 @@
 </body>
 <script type="module">
   import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-  import { auth } from 'js/firebase-init.js';
+  import { auth } from './js/firebase-init.js';
   function signedIn() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
