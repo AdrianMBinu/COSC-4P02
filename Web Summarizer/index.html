@@ -13,7 +13,8 @@
     <script src="js/LoggedIn.js" type="module"></script>
 
 </head>
-<body onload="checkIfUserSignedIn()">
+<body>
+  
   <nav class="navbar">
     <a href="landing"><img class="navbar-logo" src="images/logo.png" alt="Image failed to load" width="40px"></a>
     <p class="text light medium page-title">Home</p>
@@ -41,4 +42,11 @@
 </div>
 </div>
 </body>
+<script type="module">
+  // Add event listener for DOMContentLoaded event
+  window.addEventListener("DOMContentLoaded", () => {
+    // Call the function after the DOM content has been loaded
+    checkIfUserSignedIn();
+  });
+</script>
 </html>
