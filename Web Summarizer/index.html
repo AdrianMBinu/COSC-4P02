@@ -13,7 +13,7 @@
     <!-- <script src="js/SignedIn.js" type="module"></script> -->
 
 </head>
-<body onload="signedIn()">
+<body>
   
   <nav class="navbar">
     <a href="landing"><img class="navbar-logo" src="images/logo.png" alt="Image failed to load" width="40px"></a>
@@ -45,7 +45,7 @@
 <script type="module">
   import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
   import { auth } from './js/firebase-init.js';
-  function signedIn() {
+  window.onload = function() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             const uid = user.uid;
