@@ -40,3 +40,6 @@ signInWithPopup(auth, provider)
     // ...
   });
 })
+
+
+export { app, auth, provider };
