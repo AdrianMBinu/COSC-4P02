@@ -11,7 +11,6 @@ googleLogin.addEventListener("click", function(){
         // The signed-in user info.
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
-        setTimeout(redirect, 2000);
         // ...
       }).catch((error) => {
         // Handle Errors here.
@@ -25,7 +24,4 @@ googleLogin.addEventListener("click", function(){
       });
     })
 
-    function redirect(){
-      window.location.href = "https://cosc4p02.tpgc.me/index.html";
-  }
     
