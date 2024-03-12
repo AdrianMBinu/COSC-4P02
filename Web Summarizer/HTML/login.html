@@ -54,7 +54,8 @@
                         <img src="../images/google2.png" alt="Google Logo">
                         <span>Sign in with Google</span>
                      </button>
-                     
+                     <button style="padding: 10px 20px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;"
+        onclick="signOutUser()">Sign Out</button>
 
                 </div>
             </div>  
@@ -65,4 +66,17 @@
     
 
     </body>
+
+    <script>
+        import { signOut } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+        import {auth} from './firebase-init.js';
+
+        function signOutUser() {
+        signOut(auth).then(() => {
+        // Sign-out successful.
+        }).catch((error) => {
+        // An error happened.
+        });
+    }
+    </script>
 </html>
