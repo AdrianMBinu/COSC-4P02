@@ -12,7 +12,7 @@ googleLogin.addEventListener("click", function(){
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
 
-        window.location.href ="https://cosc4p02.tpgc.me/index.html";
+        redirect();
         // ...
       }).catch((error) => {
         // Handle Errors here.
@@ -25,4 +25,8 @@ googleLogin.addEventListener("click", function(){
         // ...
       });
     })
+
+    function redirect(){
+      window.location.href = "https://cosc4p02.tpgc.me/index.html";
+  }
     
