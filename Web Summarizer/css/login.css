@@ -259,7 +259,7 @@
       transform: translateX(26px);
     }
     .dark-theme {
-      background-image: url('dark_background.jpg'); /* Dark theme background image */
+      background-image: url('../images/dark_background.jpg'); /* Dark theme background image */
     }
     .switchClass{
         margin-top: 7px;
