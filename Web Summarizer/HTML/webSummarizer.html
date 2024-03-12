@@ -112,16 +112,13 @@ span{
 .Proffesional{
   display: none;
 }
+.switchClass{
+  margin-top: 7px;
+}
     </style>
 </head>
 <body>
 	<nav class="navbar">
-        <div class="container">
-            <label class="switch">
-              <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
-              <span class="slider"></span>
-            </label><!--this is the switch-->
-          </div>
         <a href="landing"><img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="40px"></a>
         <p class="text light medium page-title">Web Summarizer</p>
         <ul>
@@ -129,6 +126,12 @@ span{
             <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
             <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
             <li><a href="../index.html" class="navbar-link">Home</a></li>
+		<li class= "switchClass">
+          <label class="switch">
+            <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+          <span class="slider"></span>
+          </label><!--this is the switch-->
+    </li>
         </ul>
       </nav>
 
