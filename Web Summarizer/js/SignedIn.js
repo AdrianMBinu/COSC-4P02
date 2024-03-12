@@ -5,9 +5,6 @@ import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/fire
         var elements = document.querySelectorAll(".Proffesional");
         var logButton = document.querySelectorAll(".loginButton");
         if (user) {
-            const uid = user.uid;
-            document.getElementById("greeting").innerText = `Hello, ${user.displayName || 'User'}`;
-            
             elements.forEach(function(element) {
                 element.style.display = "flex";
             });

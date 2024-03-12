@@ -45,9 +45,20 @@
         if (user) {
             const uid = user.uid;
             document.getElementById("greeting").innerText = `Hello, ${user.displayName || 'User'}`;
-            // ...
+            elements.forEach(function(element) {
+                element.style.display = "flex";
+            });
+            logButton.forEach(function(log) {
+                log.textContent = 'SIGNOUT';
+            });
         } else {
           document.getElementById("greeting").innerText = "";
+          elements.forEach(function(element) {
+                element.style.display = "none";
+            });
+            logButton.forEach(function(log) {
+                log.textContent = 'LOGIN';
+            });
         }
     });
 };
