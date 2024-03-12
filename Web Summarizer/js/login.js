@@ -11,8 +11,7 @@ googleLogin.addEventListener("click", function(){
         // The signed-in user info.
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
-
-        redirect();
+        setTimeout(redirect, 2000);
         // ...
       }).catch((error) => {
         // Handle Errors here.
