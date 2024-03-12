@@ -10,7 +10,9 @@ app.use(cors());
 app.use(express.json());
 
 // Create and connect to the SQLite database
-const db = new sqlite3.Database('url_shortener.db');
+const path = require('path');
+const dbPath = path.resolve(__dirname, 'url_shortener.db');
+const db = new sqlite3.Database(dbPath);
 
 // Create the 'urls' table if it doesn't already exist
 db.run(`
