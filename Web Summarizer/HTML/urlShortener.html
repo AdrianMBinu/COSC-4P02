@@ -10,7 +10,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="../js/url.js"></script>
+    <script src="../js/SignedIn.js" type="module"></script>
     <title>URL Shortener</title>
+    <script>
+        function submitForm() {
+
+            var inputElement = document.getElementById('longUrl').value;
+            if (inputElement !== '') {
+                shortenUrl(); 
+                urlResult();
+            } else {
+                alert('Please enter a URL.');
+            }
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                submitForm();
+            }
+        }
+    </script>
     <style>
   .URLLink{
     width:80dvw;
@@ -65,8 +83,8 @@
                 <img class="logo" src="../images/logo.png" alt="Logo Image">
             </div>
             <div class="container">
-                <input class="URLLink" id="longUrl" name="longUrl" placeholder="paste link here" required>
-                    <img class="enter" type="button" src="../images/search.png" alt="Image not found" onclick="shortenUrl(); urlResult();">
+                <input class="URLLink" id="longUrl" name="longUrl" placeholder="paste link here" onkeypress="handleKeyPress(event)" required>
+                    <img class="enter" type="button" src="../images/search.png" alt="Image not found" onclick="submitForm()">
                 </input>
             </div>
         </div>
