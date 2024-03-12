@@ -261,3 +261,6 @@
     .dark-theme {
       background-image: url('dark_background.jpg'); /* Dark theme background image */
     }
+    .switchClass{
+        margin-top: 7px;
+    }
