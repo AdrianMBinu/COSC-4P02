@@ -95,3 +95,27 @@ function urlResult(){
         resultBody.style.display = "block";
     }
 }
+
+    // Check if dark mode preference is stored
+    var urlParams = new URLSearchParams(window.location.search);
+    var theme = urlParams.get('theme');
+
+    if (theme === 'dark') {
+      document.body.classList.add('dark-theme');
+      document.getElementById('darkModeToggle').checked = true;
+    } else {
+      document.body.classList.remove('dark-theme');
+      document.getElementById('darkModeToggle').checked = false;
+    }
+
+    function toggleDarkMode() {
+      var darkModeToggle = document.getElementById('darkModeToggle');
+      if (darkModeToggle.checked) {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'true'); // Store dark mode preference
+      } else {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'false'); // Remove dark mode preference
+      }
+    }
+
