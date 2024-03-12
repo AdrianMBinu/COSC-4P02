@@ -1,28 +1,13 @@
-// document.addEventListener("DOMContentLoaded", function() {
-//     var cachedToken = localStorage.getItem('authToken');
-//     var elements = document.querySelectorAll(".Proffesional");
-//     var logButton = document.querySelectorAll(".loginButton");
-
-//     if (cachedToken === null) {
-//         console.log('Signout');
-
-//         elements.forEach(function(element) {
-//             element.style.display = "none";
-//         });
-//         logButton.forEach(function(log) {
-//             log.textContent = 'LOGIN';
-//         });
-//     } else {
-
-//         elements.forEach(function(element) {
-//             element.style.display = "flex";
-//         });
-//         logButton.forEach(function(log) {
-//             log.textContent = 'SIGNOUT';
-//         });
-//     }//Restrict Pro features and Chnage login/signout button
-    
-// });//moved to seperate Signedin file
+document.addEventListener("DOMContentLoaded", function() {
+    var theme = localStorage.getItem('darkModeEnabled');
+    if (theme === 'true') {
+        // If the theme is 'dark', add the 'dark-theme' class to the body
+        document.body.classList.add('dark-theme');
+    } else {
+        // If the theme is not 'dark', remove the 'dark-theme' class from the body
+        document.body.classList.remove('dark-theme');
+    }
+});//moved to seperate Signedin file
 function copyToClipboard() {
     var textToCopy = document.getElementById("ShortResultText").innerText;
 
@@ -95,18 +80,6 @@ function urlResult(){
         resultBody.style.display = "block";
     }
 }
-
-    // Check if dark mode preference is stored
-    var urlParams = new URLSearchParams(window.location.search);
-    var theme = urlParams.get('theme');
-
-    if (theme === 'dark') {
-      document.body.classList.add('dark-theme');
-      document.getElementById('darkModeToggle').checked = true;
-    } else {
-      document.body.classList.remove('dark-theme');
-      document.getElementById('darkModeToggle').checked = false;
-    }
 
     function toggleDarkMode() {
       var darkModeToggle = document.getElementById('darkModeToggle');
