@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<link href="https://fonts.googleapis.com/css?family=Raleway:500,900" rel="stylesheet">
+    	<meta charset="utf-8">
+    	<link href="../css/login.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="../js/login.js"></script>
+		<title>Login Page</title>
+    </head>
+    
+    <body>
+        <nav class="navbar">
+            <a href="landing"><img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="40px"></a>
+            <p class="text light medium page-title">Login</p>
+            <ul>
+              <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
+              <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
+              <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
+              <li><a href="../index.html" class="navbar-link">Home</a></li>
+            </ul>
+          </nav>
+          <div class="body">
+            <div class="infoCon signoutPage">
+                <div class="free">
+                    <h1 class="title">Basic Version</h1>
+                    <ul>
+                        <li>Summarize videos</li>
+                        <li>Summarize web pages</li>
+                        <li>Shorten URLs</li>
+                        <li>Text to Speech</li>
+                        <li>Dark mode</li>
+                    </ul>
+                </div>
+                <div class="pro">
+                    <h1 class="title">Pro Version</h1>
+                    <ul>
+                        <li>Control the character count of summarizations</li>
+                        <li>Control the sentiment/tone of summarizations</li>
+                        <li>Save summarizations and shortened URLs</li>
+                        <li>Access saved files in the dashboard </li>
+                        <li>See the number of times a shortened link has been used</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="logContainer">
+                <div class="loginCon signoutPage">
+                    <div id="g_id_onload"
+                        data-client_id="154683893503-4kl342nrqrc358it9epf4dqip0pckf4d.apps.googleusercontent.com"
+                        data-callback="onSignIn">
+                     </div>
+                        <div class="g_id_signin" data-type="standard"></div>
+                    <!-- <a href="#" onclick="signOut();">Sign out</a> -->
+                </div>
+                <div class="confirmation">
+                    <h1 class="title">Are you sure you want to signout?</h1>
+                    <div class="confirmationCon">
+                        <!-- <a onclick="signOut()" href="../index.html">Yes</a> -->
+                        <a href="#" onclick="signOut();">Sign out</a>
+                        <a href="../index.html">No</a>
+                    </div>
+                </div>
+            </div>  
+            <div class="loginPrompt signoutPage">
+                <h2 id="LoginText">Login for Pro Features</h2>
+            </div>
+        </div>
+        <script>
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                localStorage.removeItem('authToken');
+
+                auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                });
+            }
+        </script>
+        <script>
+            function onSignIn(googleUser) {
+                localStorage.setItem('authToken', 'Loggedin');
+                window.location.href = "https://cosc4p02.tpgc.me/index.html";
+            }
+        </script>
+    </body>
+</html>

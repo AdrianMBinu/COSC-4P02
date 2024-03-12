@@ -9,8 +9,24 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-
+    <script src="../js/SignedIn.js" type="module"></script>
     <title>Summarizer</title>
+    <script>
+        function submitForm() {
+
+            var inputElement = document.getElementById('longUrl').value;
+            if (inputElement !== '') {
+                //DO SOmethine=g
+            } else {
+                alert('Please enter a URL.');
+            }
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                submitForm();
+            }
+        }
+    </script>
     <style>
 .outer-box {
     border: 2px solid white;
@@ -96,6 +112,9 @@ span{
 .Proffesional{
   display: none;
 }
+.switchClass{
+  margin-top: 7px;
+}
     </style>
 </head>
 <body>
@@ -107,6 +126,12 @@ span{
             <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
             <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
             <li><a href="../index.html" class="navbar-link">Home</a></li>
+		<li class= "switchClass">
+          <label class="switch">
+            <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+          <span class="slider"></span>
+          </label><!--this is the switch-->
+    </li>
         </ul>
       </nav>
 
@@ -116,8 +141,8 @@ span{
             <img class="logo" src="../images/logo.png" alt="Logo Image">
         </div>
         <div class="container">
-	        <input class="URLResult" placeholder="paste link here">
-                <img class="enter" src="../images/search.png" alt="Image not found" onclick="sumResult()">
+	        <input class="URLResult" id="lognURL" placeholder="paste link here"  onkeypress="handleKeyPress(event)" required>
+                <img class="enter" src="../images/search.png" alt="Image not found" onclick="submitForm()">
             </input>
         </div>
         <div class="thirdBox">
@@ -140,10 +165,6 @@ span{
         </div>
 
         <div class="resultBody" id="sumBody" style="display: none;">
-            <div class="renameSection Proffesional">
-              <input id="namer" name="namer" placeholder="untitled">
-              <div class="saveButton" id="saved"><h2>Save</h2></div>
-            </div>
             <div class="secondCon">
               <h1 class="title">Summary:</h1>
               <div>

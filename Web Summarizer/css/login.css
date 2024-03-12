@@ -52,12 +52,15 @@
     border-bottom: 1px solid #ffffff;
     width: 50dvw;
     height: 10dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .g_id_signin{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 50%;
     padding-top: 30px;
   }
   .logContainer{
@@ -197,3 +200,67 @@
   text-decoration: none;
   color: #ffffff;
 }
+.button {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #4285F4;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.button img {
+  width: 20px; 
+  height: auto; 
+}
+
+.button span {
+ margin-left: 10px; 
+}
+.switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #FF0000;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .dark-theme {
+      background-image: url('../images/dark_background.jpg'); /* Dark theme background image */
+    }
+    .switchClass{
+        margin-top: 7px;
+    }

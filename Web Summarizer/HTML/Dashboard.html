@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <title>Dashboard</title>
+  <title>User Dashboard</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,84 +18,125 @@
       background-size: cover;
       background-position: center;
     }
-    .dashboard {
-      background-color: rgba(0, 0, 0, 0.7); /* Added a slight transparency */
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      width: 1000px; /* 2000 */
-      height: 400px; /* 1000 */
-    }
-    .category {
-      margin-bottom: 15px;
-      text-align: center;
-    }
-    .subcategory {
-      list-style-type: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .category h2 {
-      display: inline-block;
-      border-bottom: 2px solid #fff; /* Added a white bottom border */
-      padding-bottom: 5px; /* Added some padding for better spacing */
-    }
 
-.navbar,
-.navbar li,
-.navbar li a {
-    transition: 0.4s;
-}
-#page-container,
-.navbar li,
-.navbar li a,
-.navbar ul {
-    min-height: 100%;
-}
-.navbar li a.selected,
-.navbar li a:hover {
-    opacity: 0.9;
-}
-.navbar li a,
-.navbar a:hover {
-    color: #fff;
-    text-decoration: none;
-}
-.navbar {
-    top: 0;
-    left: 0;
-    width: 100%;
-    position: fixed;
-    margin-bottom: 0;
-    background: rgba(0, 0, 0, 0.25);
-    z-index: 1000;
-}
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background: 0 0;
-}
-.navbar li {
-    float: right;
-    display: inline;
-}
-.navbar li a {
-    display: block;
-    text-align: center;
-    padding: 13px 32px;
-    text-transform: uppercase;
-    opacity: 0.35;
-}
-.navbar-logo {
-    float: left;
-    display: inline;
-    position: absolute;
-    padding: 3px 0 10px;
-    left: 1vw;
-    top: 1vh;
-}
+    .container {
+        max-width: 90vw;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent white background */
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;;
+        align-items: center;
+        flex-direction: column;
+        backdrop-filter: blur(4px);
+    }
+    .dashboard-section {
+        width: 100%;
+        flex-basis: calc(50% - 10px);
+        padding: 10px;
+    }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .summary-list, .link-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    .summary-item, .link-item {
+        border-bottom: 1px solid #BBB;
+        padding: 10px 0;
+        font-weight: 400;
+    }
+    .summary-item:last-child, .link-item:last-child {
+        border-bottom: none;
+    }
+    .summary-item a, .link-item a {
+        text-decoration: none;
+        color: #BBB;
+    }
+    .summary-item span, .link-item span {
+        font-size: 14px;
+        color: #999;
+    }
+    .dashboard-title-section {
+        flex-basis: 100%;
+        text-align: center;
+        order: -1;
+    }
+    .history-containers {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .title-containers {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .summary-title {
+        color: #ddd;
+        text-align: center;
+    }
+    .dashboard-title {
+      color: #ddd;
+    }
+    .navbar,
+    .navbar li,
+    .navbar li a {
+        transition: 0.4s;
+    }
+    #page-container,
+    .navbar li,
+    .navbar li a,
+    .navbar ul {
+        min-height: 100%;
+    }
+    .navbar li a.selected,
+    .navbar li a:hover {
+        opacity: 0.9;
+    }
+    .navbar li a,
+    .navbar a:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+    .navbar {
+        top: 0;
+        left: 0;
+        width: 100%;
+        position: fixed;
+        margin-bottom: 0;
+        background: rgba(0, 0, 0, 0.25);
+        z-index: 1000;
+    }
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background: 0 0;
+    }
+    .navbar li {
+        float: right;
+        display: inline;
+    }
+    .navbar li a {
+        display: block;
+        text-align: center;
+        padding: 13px 32px;
+        text-transform: uppercase;
+        opacity: 0.35;
+    }
+    .navbar-logo {
+        float: left;
+        display: inline;
+        position: absolute;
+        padding: 3px 0 10px;
+        left: 1vw;
+        top: 1vh;
+    }
   </style>
 </head>
 <body>
@@ -109,25 +150,47 @@
         <li><a href="../index.html" class="navbar-link">Home</a></li>
     </ul>
   </nav>
-  <h1>Acc Holder</h1>
-  <div class="dashboard">
-    <h1>Dashboard</h1>
-    <div class="category">
-      <h2>Shortened Links</h2>
-      <ul class="subcategory">
-        <li><a href="#">Untitled</a></li>
-        <li><a href="#">Untitled</a></li>
-        <li><a href="#">Untitled</a></li>
-      </ul>
+  <div class="container">
+    <div class="title-containers">
+        <div class="dashboard-title-section">
+            <h1 class="dashboard-title">Summarization History</h1>
+        </div>
+        <div class="dashboard-title-section">
+          <h1 class="dashboard-title">Shortened Links</h1>
+      </div>
     </div>
-    <div class="category">
-      <h2>Summarization</h2>
-      <ul class="subcategory">
-        <li><a href="#">Untitled</a></li>
-        <li><a href="#">Untitled</a></li>
-        <li><a href="#">Untitled</a></li>
-      </ul>
+    <div class="history-containers">
+        <div class="dashboard-section">
+            <ul class="summary-list">
+                <li class="summary-item">
+                    <a href="#">Title of Summarized Content 1</a>
+                    <br>
+                    <span>Date: January 25, 2024</span>
+                </li>
+                <li class="summary-item">
+                    <a href="#">Title of Summarized Content 2</a>
+                    <br>
+                    <span>Date: January 24, 2024</span>
+                </li>
+                <!-- Add more summarized content items here -->
+            </ul>
+        </div>
+        <div class="dashboard-section">
+            <ul class="link-list">
+                <li class="link-item">
+                    <a href="#">Shortened Link 1</a>
+                    <br>
+                    <span>Original URL: http://www.example.com</span>
+                </li>
+                <li class="link-item">
+                    <a href="#">Shortened Link 2</a>
+                    <br>
+                    <span>Original URL: http://www.example.org</span>
+                </li>
+                <!-- Add more shortened link items here -->
+            </ul>
+        </div>
     </div>
-  </div>
+</div>
 </body>
 </html>

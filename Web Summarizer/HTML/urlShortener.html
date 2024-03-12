@@ -10,7 +10,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="../js/url.js"></script>
+    <script src="../js/SignedIn.js" type="module"></script>
     <title>URL Shortener</title>
+    <script>
+        function submitForm() {
+
+            var inputElement = document.getElementById('longUrl').value;
+            if (inputElement !== '') {
+                shortenUrl(); 
+                // urlResult();
+            } else {
+                alert('Please enter a URL.');
+            }
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                submitForm();
+            }
+        }
+    </script>
     <style>
   .URLLink{
     width:80dvw;
@@ -26,9 +44,13 @@
 .logo{
     width: 30%;
     height: 30%;
+    margin-bottom: -15dvh;
+    margin-top: -15dvh;
+
+
 }
 .middleLogo{
-    width: 100dvw;
+    margin: 0px;
     display: flex;
     justify-content: center;
 }
@@ -44,6 +66,54 @@
 .container img:hover{
     filter: invert(0%) hue-rotate(86deg);
 }
+.switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #FF0000;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .dark-theme {
+      background-image: url('dark_background.jpg'); /* Dark theme background image */
+    }
+    .switchClass{
+        margin-top: 7px;
+    }
+    .switchClass{
+        margin-top: 7px;
+    }
     </style>
 
 </head>
@@ -51,34 +121,44 @@
 	<nav class="navbar">
         <a href="landing"><img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="40px"></a>
         <p class="text light medium page-title">URL Shortener</p>
-        <ul>
+        <li>
             <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
             <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
             <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
             <li><a href="../index.html" class="navbar-link">Home</a></li>
+            <li class= "switchClass">
+          <label class="switch">
+            <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+          <span class="slider"></span>
+          </label><!--this is the switch-->
+    </li>
         </ul>
       </nav>
 
     <div class="body">
-        <div id="mainURLCon" style="display: block;">
+        <!-- <div id="mainURLCon" style="display: block;">
             <div class="middleLogo">
                 <img class="logo" src="../images/logo.png" alt="Logo Image">
             </div>
             <div class="container">
-                <input class="URLLink" id="longUrl" name="longUrl" placeholder="paste link here" required>
-                    <img class="enter" type="button" src="../images/search.png" alt="Image not found" onclick="shortenUrl(); urlResult();">
+                <input class="URLLink" id="longUrl" name="longUrl" placeholder="paste link here" onkeypress="handleKeyPress(event)" required>
+                    <img class="enter" type="button" src="../images/search.png" alt="Image not found" onclick="submitForm()">
                 </input>
             </div>
-        </div>
-        <!-- <div id="shortUrl"></div>
-        <div id="clickCount"></div> -->
+        </div> -->
 
-        <div class="resultBody" id='urlBody' style="display: none;">
-            <div class="renameSection Proffesional">
-              <input id="namer" name="namer" placeholder="untitled">
-              <div class="saveButton" id="saved"><h2>Save</h2></div>
+
+        <div>
+            <div class="middleLogo">
+                <img class="logo" src="../images/logo.png" alt="Logo Image">
             </div>
             <div class="shortSecCon">
+                <h1 class="shortSecConh1">Input URL:</h1>
+                <div class="renameSection">
+                    <input class="URLLink" id="longUrl" name="longUrl" placeholder="paste link here" onkeypress="handleKeyPress(event)" required>
+                    <img class="enter" type="button" src="../images/search.png" alt="Image not found" onclick="submitForm()">
+                </input>
+                </div>
                 <h1 class="shortSecConh1">Shortened URL:</h1>
                 <div class="shortResultDiv">
                     <div class="URLResult">

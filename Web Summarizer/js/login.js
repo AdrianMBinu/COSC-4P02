@@ -1,32 +1,27 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var cachedToken = localStorage.getItem('authToken');
-    var elements = document.querySelectorAll(".signoutPage");
-    var signout = document.querySelectorAll(".confirmation");
-    var logButton = document.querySelectorAll(".loginButton");
+import {auth, provider} from './firebase-init.js';
+import {signInWithPopup} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 
-    if (cachedToken === null) {
-        console.log('Signout');
+const googleLogin=document.getElementById("google-login-btn");
+googleLogin.addEventListener("click", function(){
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+    })
 
-        elements.forEach(function(element) {
-            element.style.display = "flex";
-        });
-        signout.forEach(function(sign) {
-            sign.style.display = "none";
-        });
-        logButton.forEach(function(log) {
-            log.textContent = 'LOGIN';
-        });
-    } else {
-
-        elements.forEach(function(element) {
-            element.style.display = "none";
-        });
-        signout.forEach(function(sign) {
-            sign.style.display = "flex";
-        });
-        logButton.forEach(function(log) {
-            log.textContent = 'SIGNOUT';
-        });
-    }//Restrict Pro features and Chnage login/signout button
     
-});
