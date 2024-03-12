@@ -11,6 +11,22 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="../js/SignedIn.js" type="module"></script>
     <title>Summarizer</title>
+    <script>
+        function submitForm() {
+
+            var inputElement = document.getElementById('longUrl').value;
+            if (inputElement !== '') {
+                //DO SOmethine=g
+            } else {
+                alert('Please enter a URL.');
+            }
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                submitForm();
+            }
+        }
+    </script>
     <style>
 .outer-box {
     border: 2px solid white;
@@ -54,8 +70,8 @@ span{
 }
 
 .container{
-      display: flex;
-      justify-content: center;
+    display: flex;
+    justify-content:center;
 }
 .container img{
     padding: 0;
@@ -96,58 +112,10 @@ span{
 .Proffesional{
   display: none;
 }
-	        .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-    input:checked + .slider {
-      background-color: #FF0000;
-    }
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-    .dark-theme {
-      background-image: url('dark_background.jpg'); /* Dark theme background image */
-    }
     </style>
 </head>
 <body>
 	<nav class="navbar">
-		<div class="container">
-    <label class="switch">
-      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
-      <span class="slider"></span>
-    </label><!--this is the switch-->
-  </div>
         <a href="landing"><img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="40px"></a>
         <p class="text light medium page-title">Web Summarizer</p>
         <ul>
@@ -155,8 +123,13 @@ span{
             <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
             <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
             <li><a href="../index.html" class="navbar-link">Home</a></li>
-		
-	</ul>
+        </ul>
+		<div class="container">
+    <label class="switch">
+      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+      <span class="slider"></span>
+    </label><!--this is the switch-->
+  </div>
       </nav>
 
     <div class="body">
@@ -165,8 +138,8 @@ span{
             <img class="logo" src="../images/logo.png" alt="Logo Image">
         </div>
         <div class="container">
-	        <input class="URLResult" placeholder="paste link here">
-                <img class="enter" src="../images/search.png" alt="Image not found" onclick="sumResult()">
+	        <input class="URLResult" id="lognURL" placeholder="paste link here"  onkeypress="handleKeyPress(event)" required>
+                <img class="enter" src="../images/search.png" alt="Image not found" onclick="submitForm()">
             </input>
         </div>
         <div class="thirdBox">
@@ -189,10 +162,6 @@ span{
         </div>
 
         <div class="resultBody" id="sumBody" style="display: none;">
-            <div class="renameSection Proffesional">
-              <input id="namer" name="namer" placeholder="untitled">
-              <div class="saveButton" id="saved"><h2>Save</h2></div>
-            </div>
             <div class="secondCon">
               <h1 class="title">Summary:</h1>
               <div>
