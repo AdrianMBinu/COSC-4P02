@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const shortid = require('shortid');
 const sqlite3 = require('sqlite3');
-
+//test
 const app = express();
 const PORT = 3000; 
 
@@ -23,7 +23,6 @@ db.run(`
     clickCount INTEGER DEFAULT 0 
   )
 `);
-
 // Endpoint to create a short URL
 app.post('/shorten', (req, res) => {
     const { longUrl } = req.body;
