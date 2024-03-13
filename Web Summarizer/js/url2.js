@@ -1,5 +1,5 @@
-import { uid } from './user.js';
-export function shortenUrl() {
+
+ function shortenUrl() {
     const longUrl = document.getElementById('longUrl').value;
 
     const userId = uid; // Get the user ID from the global scope or wherever it's stored
