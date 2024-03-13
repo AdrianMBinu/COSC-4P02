@@ -1,4 +1,4 @@
-import { uid } from '../HTML/urlShortener';
+import { uid } from './user.js';
 function shortenUrl() {
     const longUrl = document.getElementById('longUrl').value;
 
