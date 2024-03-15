@@ -5,7 +5,7 @@ conn = sqlite3.connect('url_shortener.db')
 cursor = conn.cursor()
 
 # Execute a query to fetch all data from the table
-cursor.execute('SELECT * FROM your_table')
+cursor.execute('SELECT * FROM urls')
 rows = cursor.fetchall()
 
 # Close the cursor and connection
