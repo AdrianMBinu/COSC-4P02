@@ -83,4 +83,23 @@
         });
     }
     </script>
+    <script type="module">
+        import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+        import { auth } from './js/firebase-init.js';
+        window.onload = function() {
+          onAuthStateChanged(auth, (user) => {
+              var logButton = document.querySelectorAll(".loginButton");
+              if (user) {
+                  const uid = user.uid;
+                  logButton.forEach(function(log) {
+                      log.textContent = 'SIGNOUT';
+                  });
+              } else {
+                  logButton.forEach(function(log) {
+                      log.textContent = 'LOGIN';
+                  });
+              }
+          });
+      };
+      </script>
 </html>
