@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="../js/firebase-init.js" type="module"></script>
   <title>User Dashboard</title>
   <style>
     body {
@@ -195,7 +194,7 @@
 </body>
 <script type="module">
     import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-    import { auth } from './js/firebase-init.js';
+    import { auth } from '../js/firebase-init.js';
     window.onload = function() {
       onAuthStateChanged(auth, (user) => {
           var logButton = document.querySelectorAll(".loginButton");
