@@ -23,7 +23,7 @@ googleLogin.addEventListener("click", function(){
       });
       setTimeout(function() {
         window.location.href = "https://cosc4p02.tpgc.me/index.html";
-    }, 3000);
+    }, 2000);
     })
 
     
