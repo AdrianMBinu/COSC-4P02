@@ -1,7 +1,7 @@
 function shortenUrl() {
     const longUrl = document.getElementById('longUrl').value;
 
-    const userId = window.globalVariable; // Get the user ID from the global scope or wherever it's stored
+    const userId = window.globalVariable;
 
     fetch('https://cosc4p02.tpgc.me/u/shorten', {
         method: 'POST',
