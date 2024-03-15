@@ -7,6 +7,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+const PORT = 3000;
 
 const path = require('path');
 const dbPath = path.resolve(__dirname, 'url_shortener.db');
@@ -91,6 +92,6 @@ app.get('/urls', (req, res) => {
     });
 });
 
-app.listen(() => {
-    console.log(`Server is running`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
