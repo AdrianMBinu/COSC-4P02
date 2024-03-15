@@ -1,4 +1,4 @@
-import {auth, googleProvider, FacebookProvider} from './firebase-init.js';
+import {auth, googleProvider, twitterProvider} from './firebase-init.js';
 import {signInWithPopup} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 
 const googleLogin=document.getElementById("google-login-btn");
@@ -26,29 +26,28 @@ googleLogin.addEventListener("click", function(){
     }, 2000);
     })
 
-const faceBookLogin=document.getElementById("facebook-login-btn");
+const faceBookLogin=document.getElementById("twitter-login-btn");
 faceBookLogin.addEventListener("click", function(){
-signInWithPopup(auth, FacebookProvider)
+  signInWithPopup(auth, twitterProvider)
   .then((result) => {
+    // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+    // You can use these server side with your app's credentials to access the Twitter API.
+    const credential = TwitterAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const secret = credential.secret;
+
     // The signed-in user info.
     const user = result.user;
-
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
-
     // IdP data available using getAdditionalUserInfo(result)
     // ...
-  })
-  .catch((error) => {
+  }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
     // The email of the user's account used.
     const email = error.customData.email;
     // The AuthCredential type that was used.
-    const credential = FacebookAuthProvider.credentialFromError(error);
-
+    const credential = TwitterAuthProvider.credentialFromError(error);
     // ...
   });
 })
