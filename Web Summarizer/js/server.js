@@ -81,7 +81,7 @@ app.get('/:shortCode', (req, res) => {
 });
 
 
-app.get('https://cosc4p02.tpgc.me:3000/urls', (req, res) => {
+app.get('https://cosc4p02.tpgc.me/u/urls', (req, res) => {
     db.all('SELECT * FROM urls', (err, rows) => {
         if (err) {
             console.error('Database error:', err);
