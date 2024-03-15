@@ -78,7 +78,7 @@ signInWithPopup(auth, githubprovider)
   
 const yahooLogin=document.getElementById("yahoo-login-btn");
 yahooLogin.addEventListener("click", function(){
-signInWithPopup(auth, provider)
+signInWithPopup(auth, yahooProvider)
   .then((result) => {
     // IdP data available in result.additionalUserInfo.profile
     // ...
