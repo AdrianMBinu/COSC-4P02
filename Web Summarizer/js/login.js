@@ -10,7 +10,6 @@ googleLogin.addEventListener("click", function(){
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        window.location.href = "https://cosc4p02.tpgc.me/index.html";
 
       }).catch((error) => {
         // Handle Errors here.
@@ -22,6 +21,7 @@ googleLogin.addEventListener("click", function(){
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
+      window.location.href = "https://cosc4p02.tpgc.me/index.html";
     })
 
     
