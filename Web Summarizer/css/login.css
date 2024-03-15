@@ -215,6 +215,11 @@
   width: 20px; 
   height: auto; 
 }
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
 
 .button span {
  margin-left: 10px; 
