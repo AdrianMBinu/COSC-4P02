@@ -26,8 +26,8 @@ googleLogin.addEventListener("click", function(){
     }, 2000);
     })
 
-const faceBookLogin=document.getElementById("twitter-login-btn");
-faceBookLogin.addEventListener("click", function(){
+const twitterLogin=document.getElementById("twitter-login-btn");
+twitterLogin.addEventListener("click", function(){
   signInWithPopup(auth, twitterProvider)
   .then((result) => {
     // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
