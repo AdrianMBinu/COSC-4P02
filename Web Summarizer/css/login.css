@@ -65,7 +65,6 @@
   .logContainer{
     display: flex;
     justify-content: center;
-    margin: 20px;
   }
   .loginPrompt{
     display: flex;
@@ -205,10 +204,11 @@
   align-items: center;
   padding: 10px 20px;
   border-radius: 5px;
-  background-color: #4285F4;
+  background-color: #EEE;
   color: white;
   font-size: 14px;
   font-weight: bold;
+  width:20px
 }
 
 .button img {
