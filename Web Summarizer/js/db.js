@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     // Open a connection to the SQLite database
-    var db = openDatabase('url_shortener.db', '1.0', 'My Database', 2 * 1024 * 1024);
+    var db = openDatabase('Web Summarizer/js/url_shortener.db', '1.0', 'My Database', 2 * 1024 * 1024);
 
     // Check if the database was opened successfully
     if (!db) {
