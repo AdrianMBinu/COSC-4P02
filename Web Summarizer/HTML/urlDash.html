@@ -60,7 +60,7 @@
 
             // Filter and display URLs with matching userId
             urls.forEach(url => {
-                if (url.userId === window.globalVariable) {
+                //if (url.userId === window.globalVariable) {
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${url.longUrl}</td>
@@ -68,7 +68,7 @@
                         <td>${url.clickCount}</td>
                     `;
                     urlList.appendChild(row);
-                }
+                //}
             });
         })
         .catch(error => console.error('Error fetching URLs:', error));
