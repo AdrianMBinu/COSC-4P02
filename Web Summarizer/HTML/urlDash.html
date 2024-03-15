@@ -7,28 +7,43 @@
 </head>
 <body>
     <h1>URLs</h1>
-    <ul id="urlList"></ul>
+    <table id="urlTable">
+        <thead>
+            <tr>
+                <th>Long URL</th>
+                <th>Short URL</th>
+                <th>Click Count</th>
+            </tr>
+        </thead>
+        <tbody id="urlList">
+            <!-- URL records will be inserted here -->
+        </tbody>
+    </table>
 
     <script>
         // Fetch URLs from the server
         fetch('https://cosc4p02.tpgc.me/u/urls', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-            })
-            .then(response => response.json())
-            .then(urls => {
-                const urlList = document.getElementById('urlList');
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(urls => {
+            const urlList = document.getElementById('urlList');
 
-                // Iterate through the URLs and create list items to display them
-                urls.forEach(url => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `Long URL: ${url.longUrl}, Short URL: ${url.shortCode}, Click Count: ${url.clickCount}`;
-                    urlList.appendChild(listItem);
-                });
-            })
-            .catch(error => console.error('Error fetching URLs:', error));
+            // Iterate through the URLs and create table rows and cells
+            urls.forEach(url => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${url.longUrl}</td>
+                    <td><a href="${url.shortUrl}" target="_blank">${url.shortCode}</a></td>
+                    <td>${url.clickCount}</td>
+                `;
+                urlList.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching URLs:', error));
     </script>
 </body>
 </html>

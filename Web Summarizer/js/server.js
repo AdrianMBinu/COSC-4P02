@@ -86,8 +86,6 @@ app.post('/urls', (req, res) => {
             console.error('Database error:', err);
             return res.status(500).json({ error: 'Internal Server Error' });
         }
-
-        // Send the URLs as JSON response
         res.json(rows);
     });
 });
