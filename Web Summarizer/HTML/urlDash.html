@@ -31,7 +31,7 @@
     </ul>
     <script>
         // Fetch URLs from the server
-        fetch('/urls')
+        fetch('/u/urls') // Assuming '/u/urls' is the correct endpoint
             .then(response => response.json())
             .then(data => {
                 const urlList = document.getElementById('urlList');
