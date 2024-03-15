@@ -1,5 +1,5 @@
 import {auth, googleProvider, twitterProvider} from './firebase-init.js';
-import {signInWithPopup} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+import {signInWithPopup, TwitterAuthProvider} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 
 const googleLogin=document.getElementById("google-login-btn");
 googleLogin.addEventListener("click", function(){
