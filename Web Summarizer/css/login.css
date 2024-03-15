@@ -55,6 +55,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 30px;
   }
   .g_id_signin{
     display: flex;
@@ -67,7 +68,6 @@
     display: flex;
     justify-content: center;
     margin: 30px;
-    padding: 20px;
   }
   .loginPrompt{
     display: flex;
