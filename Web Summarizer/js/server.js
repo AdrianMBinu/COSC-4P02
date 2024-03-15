@@ -4,7 +4,6 @@ const shortid = require('shortid');
 const sqlite3 = require('sqlite3');
 
 const app = express();
-const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -80,6 +79,18 @@ app.get('/:shortCode', (req, res) => {
     });
 });
 
+app.get('/urls', (req, res) => {
+    db.all('SELECT * FROM urls', (err, rows) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
+        // Send the URLs as JSON response
+        res.json(rows);
+    });
+});
+
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running`);
 });
