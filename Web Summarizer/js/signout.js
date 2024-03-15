@@ -6,6 +6,6 @@ googleSignOut.addEventListener("click", function(){
 signOut(auth).then(() => {
   window.location.href = "https://cosc4p02.tpgc.me/index.html";
 }).catch((error) => {
-  // An error happened.
+  window.alert("AN ERROR OCCURED");
 });
 })

@@ -10,8 +10,8 @@ googleLogin.addEventListener("click", function(){
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
+        window.location.href = "https://cosc4p02.tpgc.me/index.html";
+
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
