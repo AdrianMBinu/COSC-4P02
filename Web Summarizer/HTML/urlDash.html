@@ -40,6 +40,7 @@
                 <th>Long URL</th>
                 <th>Short URL</th>
                 <th>Click Count</th>
+                <th>User ID</th>
             </tr>
         </thead>
         <tbody id="urlList">
@@ -69,7 +70,7 @@
                         <td>${url.longUrl}</td>
                         <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}" target="_blank">${url.shortCode}</a></td>
                         <td>${url.clickCount}</td>
-                        <td>${url.id}</td>
+                        <td>${url.userId}</td>
                     `;
                     urlList.appendChild(row);
                 //}
