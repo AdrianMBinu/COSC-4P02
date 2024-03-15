@@ -1,5 +1,5 @@
-import {auth, googleProvider, twitterProvider} from './firebase-init.js';
-import {signInWithPopup, TwitterAuthProvider} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+import {auth, githubprovider, googleProvider, twitterProvider} from './firebase-init.js';
+import {signInWithPopup, TwitterAuthProvider, GithubAuthProvider} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 
 const googleLogin=document.getElementById("google-login-btn");
 googleLogin.addEventListener("click", function(){
@@ -48,6 +48,30 @@ twitterLogin.addEventListener("click", function(){
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = TwitterAuthProvider.credentialFromError(error);
+    // ...
+  });
+})
+
+const gitLogin=document.getElementById("git-login-btn");
+gitLogin.addEventListener("click", function(){
+signInWithPopup(auth, githubprovider)
+  .then((result) => {
+    // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+    const credential = GithubAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GithubAuthProvider.credentialFromError(error);
     // ...
   });
 })

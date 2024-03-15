@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
-import { getAuth, GoogleAuthProvider, TwitterAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+import { getAuth, GoogleAuthProvider, TwitterAuthProvider, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC6S2JvQ-nt-5truY1-WZXs4vyIBqlccTE",
@@ -17,6 +17,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const twitterProvider = new TwitterAuthProvider();
+const githubprovider = new GithubAuthProvider();
 
 
-export {app, auth, googleProvider, twitterProvider};
+export {app, auth, googleProvider, twitterProvider, githubprovider};
