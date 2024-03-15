@@ -19,7 +19,7 @@
                 // Iterate through the URLs and create list items to display them
                 urls.forEach(url => {
                     const listItem = document.createElement('li');
-                    listItem.textContent = `Long URL: ${url.longUrl}, Short URL: ${url.shortUrl}, Click Count: ${url.clickCount}`;
+                    listItem.textContent = `Long URL: ${url.longUrl}, Short URL: ${url.shortCode}, Click Count: ${url.clickCount}`;
                     urlList.appendChild(listItem);
                 });
             })
