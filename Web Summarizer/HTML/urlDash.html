@@ -3,47 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of URLs</title>
+    <title>Database Table</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        table {
+            border-collapse: collapse;
+            width: 100%;
         }
-        h1 {
-            color: #333;
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        th {
+            background-color: #f2f2f2;
         }
-        li {
-            margin-bottom: 10px;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-    <h1>List of URLs</h1>
-    <ul id="urlList">
-        <!-- URLs will be inserted here dynamically -->
-    </ul>
-    <script>
-        // Fetch URLs from the server
-        fetch('https://cosc4p02.tpgc.me:3000/urls') 
-            .then(response => response.json())
-            .then(data => {
-                const urlList = document.getElementById('urlList');
-                data.forEach(url => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `Short URL: <a href="${url.shortCode}">${url.shortCode}</a> - Long URL: ${url.longUrl} - Click Count: ${url.clickCount}`;
-                    urlList.appendChild(li);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching URLs:', error);
-            });
-    </script>
+
+<h2>Database Table</h2>
+
+<div id="table-container"></div>
+
+<script>
+    // Fetch data from the server
+    fetch('output.html')
+        .then(response => response.text())
+        .then(html => {
+            // Inject HTML into the container
+            document.getElementById('table-container').innerHTML = html;
+        })
+        .catch(error => console.error('Error fetching data:', error));
+</script>
+
 </body>
 </html>
