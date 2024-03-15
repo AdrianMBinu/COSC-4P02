@@ -1,9 +1,9 @@
-import {auth, provider} from './firebase-init.js';
-import {signInWithPopup, FacebookAuthProvider} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+import {auth, googleProvider, FacebookProvider} from './firebase-init.js';
+import {signInWithPopup} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 
 const googleLogin=document.getElementById("google-login-btn");
 googleLogin.addEventListener("click", function(){
-    signInWithPopup(auth, provider)
+    signInWithPopup(auth, googleProvider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -28,7 +28,7 @@ googleLogin.addEventListener("click", function(){
 
 const faceBookLogin=document.getElementById("facebook-login-btn");
 faceBookLogin.addEventListener("click", function(){
-signInWithPopup(auth, provider)
+signInWithPopup(auth, FacebookProvider)
   .then((result) => {
     // The signed-in user info.
     const user = result.user;
