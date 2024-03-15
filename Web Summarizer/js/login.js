@@ -21,7 +21,9 @@ googleLogin.addEventListener("click", function(){
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
-      window.location.href = "https://cosc4p02.tpgc.me/index.html";
+      setTimeout(function() {
+        window.location.href = "https://cosc4p02.tpgc.me/index.html";
+    }, 3000);
     })
 
     
