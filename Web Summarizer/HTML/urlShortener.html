@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- <script src="../js/url2.js"></script> -->
+    <script src="../js/url2.js"></script>
     <title>URL Shortener</title>
     <script>
         function submitForm() {
@@ -178,10 +178,6 @@
 <script>
 </script>
 <script>
-    // Define a global variable in the window object
-</script>
-<script>
-    // Define a global variable in the window object
     window.globalVariable = 'Non';
 </script>
 
@@ -208,30 +204,5 @@ function setUid(user) {
   };
 
 
-  </script>
-  <script>
-    
-  function shortenUrl() {
-    const longUrl = document.getElementById('longUrl').value;
-
-    const userId = window.globalVariable; // Get the user ID from the global scope or wherever it's stored
-
-    fetch('https://cosc4p02.tpgc.me/u/shorten', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ longUrl, userId }), // Include userId in the request body
-    })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('ShortResultText').innerHTML = `<a href="${data.shortUrl}" target="_blank">${data.shortUrl}</a>`;
-            document.getElementById('counter').innerHTML = `${data.clickCount}`;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while shortening the URL. Please try again.');
-        });
-    }
   </script>
 </html>

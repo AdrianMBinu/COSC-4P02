@@ -1,8 +1,7 @@
-
- function shortenUrl() {
+function shortenUrl() {
     const longUrl = document.getElementById('longUrl').value;
 
-    const userId = uid; // Get the user ID from the global scope or wherever it's stored
+    const userId = window.globalVariable; // Get the user ID from the global scope or wherever it's stored
 
     fetch('https://cosc4p02.tpgc.me/u/shorten', {
         method: 'POST',
@@ -20,4 +19,4 @@
             console.error('Error:', error);
             alert('An error occurred while shortening the URL. Please try again.');
         });
-}
+    }
