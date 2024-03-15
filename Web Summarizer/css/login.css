@@ -67,6 +67,7 @@
     display: flex;
     justify-content: center;
     margin: 30px;
+    padding: 20px;
   }
   .loginPrompt{
     display: flex;
