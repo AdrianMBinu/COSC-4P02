@@ -80,18 +80,6 @@ app.get('/:shortCode', (req, res) => {
     });
 });
 
-app.get('/urls', (req, res) => {
-    db.all('SELECT * FROM urls', (err, rows) => {
-        if (err) {
-            console.error('Database error:', err);
-            return res.status(500).json({ error: 'Internal Server Error' });
-        }
-
-        // Send the URLs as JSON response
-        res.json(rows);
-    });
-});
-
 app.listen(PORT, () => {
     console.log(`Server is running`);
 });
