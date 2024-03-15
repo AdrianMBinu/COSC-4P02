@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var SQL = window.SQL;
 
     // Load the SQLite file
-    fetch('url_shortener.db') // Provide the correct path to your SQLite file
+    fetch('../js/url_shortener.db') // Provide the correct path to your SQLite file
         .then(response => response.arrayBuffer())
         .then(arrayBuffer => {
             // Create a Uint8Array from the array buffer
