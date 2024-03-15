@@ -10,20 +10,30 @@
     <ul id="urlList"></ul>
 
     <script>
-        // Fetch URLs from the server
-        fetch('https://cosc4p02.tpgc.me/u/urls')
-            .then(response => response.json())
-            .then(urls => {
-                const urlList = document.getElementById('urlList');
+       fetch('https://cosc4p02.tpgc.me/u/urls')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(urls => {
+        console.log('Response:', urls); // Log the response to see its structure
 
-                // Iterate through the URLs and create list items to display them
-                urls.forEach(url => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `Long URL: ${url.longUrl}, Short URL: ${url.shortCode}, Click Count: ${url.clickCount}`;
-                    urlList.appendChild(listItem);
-                });
-            })
-            .catch(error => console.error('Error fetching URLs:', error));
+        const urlList = document.getElementById('urlList');
+        // Check if the response is an array before using forEach
+        if (Array.isArray(urls)) {
+            urls.forEach(url => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Long URL: ${url.longUrl}, Short URL: ${url.shortCode}, Click Count: ${url.clickCount}`;
+                urlList.appendChild(listItem);
+            });
+        } else {
+            console.error('Response is not an array:', urls);
+        }
+    })
+    .catch(error => console.error('Error fetching URLs:', error));
+
     </script>
 </body>
 </html>
