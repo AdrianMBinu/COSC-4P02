@@ -87,9 +87,8 @@ app.get('/urls', (req, res) => {
             console.error('Database error:', err);
             return res.status(500).json({ error: 'Internal Server Error' });
         }
-
-        // Send the URLs as JSON response
-        res.json(rows);
+        // Send the HTML file as a response
+        res.sendFile(path.join(__dirname, 'urls.html'));
     });
 });
 
