@@ -13,7 +13,6 @@
             } else {
                 window.globalVariable = "Non";
             }
-            console.log(window.globalVariable)
         }
             import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
             import { auth } from '../js/firebase-init.js';
@@ -66,6 +65,7 @@
             urls.forEach(url => {
                 //if (url.userId === window.globalVariable) {
                     const row = document.createElement('tr');
+                    console.log(window.globalVariable)
                     row.innerHTML = `
                         <td>${url.longUrl}</td>
                         <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}" target="_blank">${url.shortCode}</a></td>
