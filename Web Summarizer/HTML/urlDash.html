@@ -39,7 +39,6 @@
                 <th>Long URL</th>
                 <th>Short URL</th>
                 <th>Click Count</th>
-                <th>User ID</th>
             </tr>
         </thead>
         <tbody id="urlList">
@@ -63,17 +62,16 @@
 
             // Filter and display URLs with matching userId
             urls.forEach(url => {
-                //if (url.userId === window.globalVariable) {
+                if (url.userId === window.globalVariable) {
                     const row = document.createElement('tr');
                     console.log(window.globalVariable)
                     row.innerHTML = `
                         <td>${url.longUrl}</td>
                         <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}" target="_blank">${url.shortCode}</a></td>
                         <td>${url.clickCount}</td>
-                        <td>${url.userId}</td>
                     `;
                     urlList.appendChild(row);
-                //}
+                }
             });
         })
         .catch(error => console.error('Error fetching URLs:', error));
