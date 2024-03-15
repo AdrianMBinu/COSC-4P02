@@ -28,7 +28,6 @@ googleLogin.addEventListener("click", function(){
 
 const faceBookLogin=document.getElementById("facebook-login-btn");
 faceBookLogin.addEventListener("click", function(){
-const auth = getAuth();
 signInWithPopup(auth, provider)
   .then((result) => {
     // The signed-in user info.
