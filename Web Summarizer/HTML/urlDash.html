@@ -13,6 +13,7 @@
             } else {
                 window.globalVariable = "Non";
             }
+            fetchUrls();
         }
             import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
             import { auth } from '../js/firebase-init.js';
@@ -24,7 +25,6 @@
                     setUid()
                   }
               });
-              fetchUrls();
           };
         
         
