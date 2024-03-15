@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connect to the database
-conn = sqlite3.connect('your_database.db')
+conn = sqlite3.connect('url_shortener.db')
 cursor = conn.cursor()
 
 # Execute a query to fetch all data from the table
