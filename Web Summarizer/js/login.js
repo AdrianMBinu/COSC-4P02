@@ -1,4 +1,4 @@
-import {auth, githubprovider, googleProvider, twitterProvider} from './firebase-init.js';
+import {auth, githubprovider, googleProvider, twitterProvider, yahooProvider} from './firebase-init.js';
 import {signInWithPopup, TwitterAuthProvider, GithubAuthProvider} from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
 
 const googleLogin=document.getElementById("google-login-btn");
@@ -75,4 +75,20 @@ signInWithPopup(auth, githubprovider)
     // ...
   });
 })
-    
+  
+const yahooLogin=document.getElementById("yahoo-login-btn");
+yahooLogin.addEventListener("click", function(){
+signInWithPopup(auth, provider)
+  .then((result) => {
+    // IdP data available in result.additionalUserInfo.profile
+    // ...
+
+    // Yahoo OAuth access token and ID token can be retrieved by calling:
+    const credential = OAuthProvider.credentialFromResult(result);
+    const accessToken = credential.accessToken;
+    const idToken = credential.idToken;
+  })
+  .catch((error) => {
+    // Handle error.
+  });
+})
