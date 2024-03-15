@@ -4,6 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URLs</title>
+
+    <script type="module">
+
+
+        function setUid(user) {
+            if (user) {
+                window.globalVariable = user.uid;
+            } else {
+                window.globalVariable = "Non";
+            }
+        }
+            import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+            import { auth } from '../js/firebase-init.js';
+            window.onload = function() {
+              onAuthStateChanged(auth, (user) => {
+                  if (user) {
+                       setUid(user)
+                  } else {
+                    setUid()
+                  }
+              });
+          };
+        
+        
+          </script>
+    </body>
 </head>
 <body>
     <h1>URLs</h1>
@@ -47,30 +73,4 @@
         })
         .catch(error => console.error('Error fetching URLs:', error));
     </script>
-
-<script type="module">
-
-
-    function setUid(user) {
-        if (user) {
-            window.globalVariable = user.uid;
-        } else {
-            window.globalVariable = "Non";
-        }
-    }
-        import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-        import { auth } from '../js/firebase-init.js';
-        window.onload = function() {
-          onAuthStateChanged(auth, (user) => {
-              if (user) {
-                   setUid(user)
-              } else {
-                setUid()
-              }
-          });
-      };
-    
-    
-      </script>
-</body>
 </html>
