@@ -19,7 +19,6 @@
   .infoCon{
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
   }
   .free{
     background-color: #A37C7C;
@@ -56,7 +55,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 30px;
   }
   .g_id_signin{
     display: flex;
@@ -68,6 +66,7 @@
   .logContainer{
     display: flex;
     justify-content: center;
+    margin: 30px;
   }
   .loginPrompt{
     display: flex;
