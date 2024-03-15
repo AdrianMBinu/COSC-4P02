@@ -19,6 +19,7 @@
   .infoCon{
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
   }
   .free{
     background-color: #A37C7C;
