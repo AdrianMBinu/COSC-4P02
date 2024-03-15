@@ -80,13 +80,14 @@ app.get('/:shortCode', (req, res) => {
     });
 });
 
-
-app.get('https://cosc4p02.tpgc.me/u/urls', (req, res) => {
+app.post('/urls', (req, res) => {
     db.all('SELECT * FROM urls', (err, rows) => {
         if (err) {
             console.error('Database error:', err);
             return res.status(500).json({ error: 'Internal Server Error' });
         }
+
+        // Send the URLs as JSON response
         res.json(rows);
     });
 });
