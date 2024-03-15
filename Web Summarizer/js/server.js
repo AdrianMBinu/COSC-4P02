@@ -91,6 +91,6 @@ app.get('/urls', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
+app.listen(() => {
     console.log(`Server is running`);
 });
