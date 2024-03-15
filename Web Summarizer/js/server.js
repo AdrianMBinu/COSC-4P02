@@ -80,7 +80,7 @@ app.get('/:shortCode', (req, res) => {
     });
 });
 
-app.get('/urls', (req, res) => {
+app.get('/u/urls', (req, res) => {
     db.all('SELECT * FROM urls', (err, rows) => {
         if (err) {
             console.error('Database error:', err);
