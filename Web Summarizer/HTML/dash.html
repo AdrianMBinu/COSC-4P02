@@ -57,9 +57,8 @@
     padding: 8px;
     border-bottom: 1px solid #ddd; 
     max-width: 200px;
-    /* word-wrap: break-word;  */
-    overflow: hidden;
-    text-overflow: ellipsis; 
+    /* overflow: hidden;
+    text-overflow: ellipsis;  */
 }
 
 /* Style alternate rows */
@@ -174,7 +173,7 @@
             var date = convertUTCToET(url.createdAt);
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td><a href="${url.longUrl}" target="_blank">${url.longUrl}</a></td>
+                <td><a style="overflow: hidden; text-overflow: ellipsis;"href="${url.longUrl}" target="_blank">${url.longUrl}</a></td>
                 <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}"  target="_blank">https://cosc4p02.tpgc.me/u/${url.shortCode}</a></td>
                 <td>${date}</td>
                 <td style="text-align: center;">${url.clickCount}</td>
