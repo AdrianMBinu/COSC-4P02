@@ -56,7 +56,7 @@
             </div>
             <div class="logContainer">
                 <div class="loginCon">
-                    <div class="button-grid">
+                    <div class="button-grid" id="button-grid">
                      <button class="button" id="google-login-btn" style="background-color: #4285F4;">
                         <img src="../images/google2.png" alt="Google Logo">
                         <span>Sign in with Google</span>
@@ -74,10 +74,10 @@
                         <span>Sign in with Yahoo</span>
                      </button>
                      </div>
-                     <!-- <button 
+                     <button 
                      id="google-signout-btn"
                      style="padding: 10px 20px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;"
-                        >Sign Out</button> -->
+                        >Sign Out</button>
                 </div>
             </div>  
             <div class="loginPrompt">
@@ -93,8 +93,12 @@
           onAuthStateChanged(auth, (user) => {
               if (user) {
                 document.getElementById("nav-login").innerText = "SIGNOUT";
+                document.getElementById("button-grid").style.display = "none";
+                document.getElementById("google-signout-btn").style.display = "block";
               } else {
                 document.getElementById("nav-login").innerText = "LOGIN";
+                document.getElementById("button-grid").style.display = "grid";
+                document.getElementById("google-signout-btn").style.display = "none";
               }
           });
       };
