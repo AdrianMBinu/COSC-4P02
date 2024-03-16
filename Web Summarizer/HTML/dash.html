@@ -163,7 +163,7 @@
         filteredUrls.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
         // Select the last 10 records
-        const lastTenUrls = filteredUrls.slice(0, 10);
+        const lastTenUrls = filteredUrls.slice(0, 5);
 
         const urlList = document.getElementById('urlList');
 
