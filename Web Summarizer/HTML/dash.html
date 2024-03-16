@@ -13,7 +13,7 @@
         .split-container {
         display: flex; /* Use flexbox for layout */
         width: 100%; /* Set width to 100% of the viewport */
-        height: 100vh; /* Set height to 100% of the viewport height */
+        height: 90vh; /* Set height to 100% of the viewport height */
         width: 90%;
         }
 
@@ -163,7 +163,7 @@
         filteredUrls.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
         // Select the last 10 records
-        const lastTenUrls = filteredUrls.slice(0, 5);
+        const lastTenUrls = filteredUrls.slice(0, 6);
 
         const urlList = document.getElementById('urlList');
 
