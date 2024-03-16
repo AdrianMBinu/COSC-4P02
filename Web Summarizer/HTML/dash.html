@@ -77,7 +77,7 @@
     <a href="landing"><img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="40px"></a>
     <p class="text light medium page-title">DashBoard</p>
     <ul>
-      <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
+      <li><a href="login.html" id="nav-login" class="navbar-link loginButton">Login</a></li>
       <li><a href="dash.html" id="dash" class="navbar-link" style="display: none;">DashBoard</a></li>
       <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
       <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
@@ -132,9 +132,11 @@
           onAuthStateChanged(auth, (user) => {
               if (user) {
                    setUid(user)
+                   document.getElementById("nav-login").innerText = "SIGNOUT";
                    document.getElementById("dash").style.display = "block";
               } else {
                 setUid()
+                document.getElementById("nav-login").innerText = "LOGIN";
                 window.location.href = "https://cosc4p02.tpgc.me/index.html"
                 document.getElementById("dash").style.display = "none";
               }
