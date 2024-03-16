@@ -42,9 +42,6 @@
 #urlTable {
     width: 100%; /* Make the table full width */
     border-collapse: collapse; /* Collapse table borders */
-    word-wrap: break-word; /* Allow text to wrap onto the next line */
-    overflow: hidden; /* Hide any overflow beyond the maximum width */
-    text-overflow: ellipsis; /* Show an ellipsis (...) if text overflows */
 }
 
 /* Style table headers */
@@ -164,7 +161,7 @@
                     console.log(window.globalVariable)
                     row.innerHTML = `
                         <td>${url.longUrl}</td>
-                        <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}" target="_blank">https://cosc4p02.tpgc.me/u/${url.shortCode}</a></td>
+                        <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}" target="_blank">cosc4p02.tpgc.me/u/${url.shortCode}</a></td>
                         <td>${url.createdAt}</td>
                         <td>${url.clickCount}</td>
                     `;
