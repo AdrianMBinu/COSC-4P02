@@ -100,7 +100,8 @@
                 <tr>
                     <th>Long URL</th>
                     <th>Short URL</th>
-                    <th>Click Count</th>
+                    <th>Created At</th>
+                    <th>Clicks</th>
                 </tr>
             </thead>
             <tbody id="urlList">
@@ -160,7 +161,8 @@
                     console.log(window.globalVariable)
                     row.innerHTML = `
                         <td>${url.longUrl}</td>
-                        <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}" target="_blank">"https://cosc4p02.tpgc.me/u/"${url.shortCode}</a></td>
+                        <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}" target="_blank">https://cosc4p02.tpgc.me/u/${url.shortCode}</a></td>
+                        <td>${url.createdAt}</td>
                         <td>${url.clickCount}</td>
                     `;
                     urlList.appendChild(row);
