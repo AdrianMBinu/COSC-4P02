@@ -181,14 +181,29 @@
         const utcHours = date.getUTCHours();
 
         // Adjust the hours for Eastern Time
-        const etHours = utcHours - 8; // Eastern Standard Time (EST) is 5 hours behind UTC
+        const etHours = utcHours - 8;
 
-        // Create a new Date object for Eastern Time
         const etDate = new Date(date);
         etDate.setHours(etHours);
 
         return etDate;
         }
+
     </script>
+
+<script type="module">
+    import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+    import { auth } from '../js/firebase-init.js';
+    window.onload = function() {
+      onAuthStateChanged(auth, (user) => {
+          if (user) {
+            document.getElementById("nav-login").innerText = "SIGNOUT";
+          } else {
+            document.getElementById("nav-login").innerText = "LOGIN";
+            window.location.href = "https://cosc4p02.tpgc.me/HTML/login.html"
+          }
+      });
+  };
+  </script>
 
 </html>
