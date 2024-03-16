@@ -21,9 +21,6 @@ googleLogin.addEventListener("click", function(){
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
       });
-      setTimeout(function() {
-        window.location.href = "https://cosc4p02.tpgc.me/index.html";
-    }, 2000);
     })
 
 const twitterLogin=document.getElementById("twitter-login-btn");
@@ -50,9 +47,6 @@ twitterLogin.addEventListener("click", function(){
     const credential = TwitterAuthProvider.credentialFromError(error);
     // ...
   });
-  setTimeout(function() {
-    window.location.href = "https://cosc4p02.tpgc.me/index.html";
-}, 2000);
 })
 
 const gitLogin=document.getElementById("git-login-btn");
@@ -77,9 +71,6 @@ signInWithPopup(auth, githubprovider)
     const credential = GithubAuthProvider.credentialFromError(error);
     // ...
   });
-  setTimeout(function() {
-    window.location.href = "https://cosc4p02.tpgc.me/index.html";
-}, 2000);
 })
   
 const yahooLogin=document.getElementById("yahoo-login-btn");
@@ -97,7 +88,4 @@ signInWithPopup(auth, yahooProvider)
   .catch((error) => {
     // Handle error.
   });
-  setTimeout(function() {
-    window.location.href = "https://cosc4p02.tpgc.me/index.html";
-}, 2000);
 })
