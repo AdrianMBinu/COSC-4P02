@@ -33,7 +33,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh; 
-    margin-top: 53px;
+    margin-top: 70px;
 }
 
     
@@ -63,12 +63,80 @@
         <!-- Content for the left side -->
     </div>
     <div class="Shortener">
-        <!-- Content for the right side -->
+        <table id="urlTable">
+            <thead>
+                <tr>
+                    <th>Long URL</th>
+                    <th>Short URL</th>
+                    <th>Click Count</th>
+                </tr>
+            </thead>
+            <tbody id="urlList">
+                <!-- URL records will be inserted here -->
+            </tbody>
+        </table>
     </div>
   </div>
 </div>
 
 
 </body>
+
+<script type="module">
+
+    function setUid(user) {
+        if (user) {
+            window.globalVariable = user.uid;
+        } else {
+            window.globalVariable = "Non";
+        }
+        fetchUrls();
+    }
+        import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+        import { auth } from '../js/firebase-init.js';
+        window.onload = function() {
+          onAuthStateChanged(auth, (user) => {
+              if (user) {
+                   setUid(user)
+              } else {
+                setUid()
+              }
+          });
+      };
+    
+    
+      </script>
+      
+<script>
+
+    function fetchUrls() {
+        // Fetch URLs from the server
+        fetch('https://cosc4p02.tpgc.me/u/urls', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(urls => {
+            const urlList = document.getElementById('urlList');
+
+            // Filter and display URLs with matching userId
+            urls.forEach(url => {
+                if (url.userId === window.globalVariable) {
+                    const row = document.createElement('tr');
+                    console.log(window.globalVariable)
+                    row.innerHTML = `
+                        <td>${url.longUrl}</td>
+                        <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}" target="_blank">${url.shortCode}</a></td>
+                        <td>${url.clickCount}</td>
+                    `;
+                    urlList.appendChild(row);
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching URLs:', error));
+    }
+    </script>
 
 </html>
