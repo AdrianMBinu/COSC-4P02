@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const shortid = require('shortid');
 const sqlite3 = require('sqlite3');
-const { DateTime } = require('luxon');
 
 const app = express();
 
@@ -43,21 +42,19 @@ app.post('/shorten', (req, res) => {
             res.json({ shortUrl, clickCount: row.clickCount });
         } else {
             const shortCode = shortid.generate();
-            const createdAt = DateTime.now().setZone('UTC').toFormat('yyyy-MM-dd HH:mm:ss'); // Set timezone and format
 
-            db.run('INSERT INTO urls (shortCode, longUrl, clickCount, userId, createdAt) VALUES (?, ?, 1, ?, ?)', [shortCode, longUrl, userId, createdAt], (err) => {
+            db.run('INSERT INTO urls (shortCode, longUrl, clickCount, userId) VALUES (?, ?, 1, ?)', [shortCode, longUrl, userId], (err) => {
                 if (err) {
                     console.error('Database error:', err);
                     return res.status(500).json({ error: 'Internal Server Error' });
                 }
 
                 const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
-                res.json({ shortUrl, clickCount: 1, createdAt });
+                res.json({ shortUrl, clickCount: 1 });
             });
         }
     });
 });
-
 
 app.get('/:shortCode', (req, res) => {
     const { shortCode } = req.params;
@@ -92,6 +89,7 @@ app.post('/urls', (req, res) => {
         res.json(rows);
     });
 });
+
 
 app.listen(PORT, () => {
     console.log(`Server is running`);
