@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const shortid = require('shortid');
 const sqlite3 = require('sqlite3');
+const { DateTime } = require('luxon');
 
 const app = express();
 
@@ -49,8 +50,9 @@ app.post('/shorten', (req, res) => {
                     return res.status(500).json({ error: 'Internal Server Error' });
                 }
 
+                const createdAt = DateTime.utc().toSQL(); // Get current UTC time
                 const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
-                res.json({ shortUrl, clickCount: 1 });
+                res.json({ shortUrl, clickCount: 1, createdAt });
             });
         }
     });
@@ -89,7 +91,6 @@ app.post('/urls', (req, res) => {
         res.json(rows);
     });
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server is running`);
