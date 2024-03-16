@@ -38,7 +38,6 @@ function copySummary() {
 
     tempTextArea.select();
     document.execCommand("copy");
-
     document.body.removeChild(tempTextArea);
 
 }
