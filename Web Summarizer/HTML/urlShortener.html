@@ -194,26 +194,15 @@ function setUid(user) {
       onAuthStateChanged(auth, (user) => {
           if (user) {
                setUid(user)
+               document.getElementById("nav-login").innerText = "SIGNOUT";
+                document.getElementById("dash").style.display = "block";
           } else {
             setUid()
-          }
-      });
-  };
-  </script>
-
-<script type="module">
-    import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-    import { auth } from '../js/firebase-init.js';
-    window.onload = function() {
-      onAuthStateChanged(auth, (user) => {
-          if (user) {
-            document.getElementById("nav-login").innerText = "SIGNOUT";
-            document.getElementById("dash").style.display = "block";
-          } else {
             document.getElementById("nav-login").innerText = "LOGIN";
             document.getElementById("dash").style.display = "block";
           }
       });
   };
   </script>
+
 </html>
