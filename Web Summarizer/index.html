@@ -60,7 +60,7 @@
             logButton.forEach(function(log) {
                 log.textContent = 'SIGNOUT';
             });
-            document.getElementById("google-signout-btn").style.display = "block";
+            document.getElementById("dash").style.display = "block";
         } else {
           document.getElementById("greeting").innerText = "";
           elements.forEach(function(element) {
@@ -69,7 +69,7 @@
             logButton.forEach(function(log) {
                 log.textContent = 'LOGIN';
             });
-            document.getElementById("google-signout-btn").style.display = "none";
+            document.getElementById("dash").style.display = "none";
         }
     });
 };
