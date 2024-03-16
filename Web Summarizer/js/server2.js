@@ -66,7 +66,7 @@ app.post('/shorten', (req, res) => {
 app.get('/:shortCode', (req, res) => {
   const { shortCode } = req.params;
 
-  const selectQuery = 'SELECT longUrl FROM urls WHERE shortCode = ?';
+  const selectQuery = 'SELECT longUrl, clickCount FROM urls WHERE shortCode = ?';
   const values = [shortCode];
 
   pool.query(selectQuery, values, (err, result) => {
@@ -80,7 +80,13 @@ app.get('/:shortCode', (req, res) => {
     }
 
     const longUrl = result[0].longUrl;
-    const updatedClickCount = result[0].clickCount + 1;
+    let clickCount = parseInt(result[0].clickCount); // Convert clickCount to integer
+
+    if (isNaN(clickCount)) {
+      clickCount = 0; // If clickCount is not a number, set it to 0
+    }
+
+    const updatedClickCount = clickCount + 1;
 
     const updateQuery = 'UPDATE urls SET clickCount = ? WHERE shortCode = ?';
     const updateValues = [updatedClickCount, shortCode];
@@ -91,10 +97,11 @@ app.get('/:shortCode', (req, res) => {
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 
-    res.redirect(longUrl);
+      res.redirect(longUrl);
+    });
   });
 });
-});
+
 
 // API endpoint to get all URLs
 app.post('/urls', (req, res) => {
