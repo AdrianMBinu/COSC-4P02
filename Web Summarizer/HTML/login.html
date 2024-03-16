@@ -21,6 +21,7 @@
             <p class="text light medium page-title">Login</p>
             <ul>
               <li><a href="login.html" id="nav-login" class="navbar-link">Login</a></li>
+              <li><a href="dash.html" id="dash" class="navbar-link" style="display: none;">DashBoard</a></li>
               <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
               <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
               <li><a href="../index.html" class="navbar-link">Home</a></li>
@@ -95,10 +96,12 @@
                 document.getElementById("nav-login").innerText = "SIGNOUT";
                 document.getElementById("button-grid").style.display = "none";
                 document.getElementById("google-signout-btn").style.display = "block";
+                document.getElementById("dash").style.display = "block";
               } else {
                 document.getElementById("nav-login").innerText = "LOGIN";
                 document.getElementById("button-grid").style.display = "grid";
                 document.getElementById("google-signout-btn").style.display = "none";
+                document.getElementById("dash").style.display = "none";
               }
           });
       };
