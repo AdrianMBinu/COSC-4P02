@@ -80,8 +80,20 @@ app.get('/:shortCode', (req, res) => {
     }
 
     const longUrl = result[0].longUrl;
+    const updatedClickCount = result[0].clickCount + 1;
+
+    const updateQuery = 'UPDATE urls SET clickCount = ? WHERE shortCode = ?';
+    const updateValues = [updatedClickCount, shortCode];
+
+    pool.query(updateQuery, updateValues, (updateErr) => {
+      if (updateErr) {
+        console.error('Database error:', updateErr);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
     res.redirect(longUrl);
   });
+});
 });
 
 // API endpoint to get all URLs
