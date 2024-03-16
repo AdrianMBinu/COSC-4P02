@@ -48,7 +48,7 @@ app.post('/shorten', (req, res) => {
 
   const shortCode = shortid.generate();
 
-  const insertQuery = 'INSERT INTO urls (shortCode, longUrl, clickCount, userId) VALUES (?, ?, 1, ?)';
+  const insertQuery = 'INSERT INTO urls (shortCode, longUrl, clickCount, userId) VALUES (?, ?, 0, ?)';
   const values = [shortCode, longUrl, userId];
 
   pool.query(insertQuery, values, (err, result) => {
@@ -58,7 +58,7 @@ app.post('/shorten', (req, res) => {
     }
 
     const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
-    res.json({ shortUrl, clickCount: -1 });
+    res.json({ shortUrl, clickCount: 0});
   });
 });
 
