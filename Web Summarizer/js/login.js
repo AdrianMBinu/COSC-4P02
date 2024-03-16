@@ -45,7 +45,7 @@ twitterLogin.addEventListener("click", function(){
     const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = TwitterAuthProvider.credentialFromError(error);
-    // ...
+
   });
 })
 
