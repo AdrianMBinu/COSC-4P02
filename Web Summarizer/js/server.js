@@ -58,7 +58,7 @@ app.post('/shorten', (req, res) => {
     }
 
     const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
-    res.json({ shortUrl, clickCount: 1 });
+    res.json({ shortUrl, clickCount: 0 });
   });
 });
 
