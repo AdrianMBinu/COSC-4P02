@@ -12,10 +12,10 @@ const PORT = 3000;
 // Create a MySQL connection pool
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: 'your_host',
-  user: 'your_username',
-  password: 'your_password',
-  database: 'your_database'
+  host: 'localhost',
+  user: 'cosc4p02',
+  password: 'summarizeme',
+  database: '4P02Test'
 });
 
 // Create the urls table if not exists
