@@ -36,6 +36,30 @@
     margin-top: 70px;
 }
 
+#urlTable {
+    width: 100%; /* Make the table full width */
+    border-collapse: collapse; /* Collapse table borders */
+}
+
+/* Style table headers */
+#urlTable th {
+    padding: 8px;
+    text-align: left;
+    background-color: #f2f2f2; /* Light gray background */
+    border-bottom: 1px solid #ddd; /* Bottom border */
+}
+
+/* Style table cells */
+#urlTable td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd; /* Bottom border */
+}
+
+/* Style alternate rows */
+#urlTable tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Lighter gray background for even rows */
+}
+
     
     </style>
 </head>
@@ -106,7 +130,7 @@
     
     
       </script>
-      
+
 <script>
 
     function fetchUrls() {
