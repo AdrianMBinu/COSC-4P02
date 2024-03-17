@@ -137,30 +137,30 @@ span{
 
     <div class="body">
         <div id="mainCon" style="display: block;">
-        <div class="middleLogo">
-            <img class="logo" src="../images/logo.png" alt="Logo Image">
-        </div>
-        <div class="container">
-	        <input class="URLResult" id="lognURL" placeholder="paste link here"  onkeypress="handleKeyPress(event)" required>
-                <img class="enter" src="../images/search.png" alt="Image not found" onclick="submitForm()">
-            </input>
-        </div>
-        <div class="thirdBox">
-            <div class="outer-box">
-                <div class="inner-box">
-                    <span class="text Proffesional">Sentiment(tone):</span>
-                    <select class="selection Proffesional" id="tone">
-                        <option value="none">None</option>
-                        <option value="sad">Sad</option>
-                        <option value="pro">Proffesional</option>
-                        <option value="mean">Mean</option>
-                    </select>
-                </div>
-                <div class="inner-box">
-                    <span class="text Proffesional">Number of characters:</span>
-                    <input class="characterCount Proffesional">
-                </div>
+            <div class="middleLogo">
+                <img class="logo" src="../images/logo.png" alt="Logo Image">
             </div>
+            <div class="container">
+                <input class="URLResult" id="lognURL" placeholder="paste link here"  onkeypress="handleKeyPress(event)" required>
+                    <img class="enter" src="../images/search.png" alt="Image not found" onclick="submitForm()">
+                </input>
+            </div>
+            <div class="thirdBox" id="proFeature">
+                <div class="outer-box">
+                    <div class="inner-box">
+                        <span class="text Proffesional">Sentiment(tone):</span>
+                        <select class="selection Proffesional" id="tone">
+                            <option value="none">None</option>
+                            <option value="sad">Sad</option>
+                            <option value="pro">Proffesional</option>
+                            <option value="mean">Mean</option>
+                        </select>
+                    </div>
+                    <div class="inner-box">
+                        <span class="text Proffesional">Number of characters:</span>
+                        <input class="characterCount Proffesional">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -188,9 +188,11 @@ span{
           if (user) {
             document.getElementById("nav-login").innerText = "SIGNOUT";
             document.getElementById("dash").style.display = "block";
+            document.getElementById("proFeature").style.display = "block"
           } else {
             document.getElementById("nav-login").innerText = "LOGIN";
             document.getElementById("dash").style.display = "none";
+            document.getElementById("proFeature").style.display = "none"
           }
       });
   };
