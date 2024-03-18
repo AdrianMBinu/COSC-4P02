@@ -83,7 +83,7 @@
                 </div>
             </div>  
             <div class="loginPrompt">
-                <h2>Login for Pro Features</h2>
+                <h2 id="loginPrompt">Login for Pro Features</h2>
             </div>
         </div>
     
@@ -98,11 +98,13 @@
                 document.getElementById("button-grid").style.display = "none";
                 document.getElementById("google-signout-btn").style.display = "block";
                 document.getElementById("dash").style.display = "block";
+                document.getElementById("loginPrompt").innerText = "Login for Pro Features";
               } else {
                 document.getElementById("nav-login").innerText = "LOGIN";
                 document.getElementById("button-grid").style.display = "grid";
                 document.getElementById("google-signout-btn").style.display = "none";
                 document.getElementById("dash").style.display = "none";
+                document.getElementById("loginPrompt").innerText = "Currently Logged in";
               }
           });
       };
