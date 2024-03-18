@@ -108,9 +108,6 @@ span{
     font-size: 20px;
     overflow-x: auto;
 }
-.Proffesional{
-  display: none;
-}
 .switchClass{
   margin-top: 7px;
 }
@@ -150,8 +147,8 @@ span{
             <div class="thirdBox" id="proFeature">
                 <div class="outer-box">
                     <div class="inner-box">
-                        <span class="text Proffesional">Sentiment(tone):</span>
-                        <select class="selection Proffesional" id="tone">
+                        <span class="text">Sentiment(tone):</span>
+                        <select class="selection" id="tone">
                             <option value="none">None</option>
                             <option value="sad">Sad</option>
                             <option value="pro">Proffesional</option>
@@ -159,8 +156,8 @@ span{
                         </select>
                     </div>
                     <div class="inner-box">
-                        <span class="text Proffesional">Number of characters:</span>
-                        <input class="characterCount Proffesional">
+                        <span class="text">Number of characters:</span>
+                        <input class="characterCount">
                     </div>
                 </div>
             </div>
@@ -194,7 +191,7 @@ span{
           } else {
             document.getElementById("nav-login").innerText = "LOGIN";
             document.getElementById("dash").style.display = "none";
-            document.getElementById("proFeature").style.display = "none"
+            document.getElementById("proFeature").style.display = "none";
           }
       });
   };
