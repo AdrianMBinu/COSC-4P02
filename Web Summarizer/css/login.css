@@ -111,11 +111,6 @@
     color: #eee;
     opacity: 1;
 }
-.page-title {
-  float: left;
-  margin-left: 60px;
-  margin-top: 10px;
-}
   .navbar,
 .navbar li,
 .navbar li a {
@@ -163,12 +158,18 @@
     opacity: 0.35;
 }
 .navbar-logo {
-    float: left;
-    display: inline;
-    position: absolute;
-    padding: 3px 0 10px;
-    left: 1vw;
-    top: 1vh;
+  margin:0;
+}
+.topCornerTitle{
+  margin: 0;
+  float: left;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 1vw;
+}
+.page-title {
+  margin:0;
 }
 .confirmation{
   background-color: #A37C7C;
