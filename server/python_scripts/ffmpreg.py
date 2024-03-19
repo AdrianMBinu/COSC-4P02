@@ -37,6 +37,10 @@ def get_video_text(hash):
         
         j = json.loads(x.text)
         
+        print(j)
+        
+        print(j['segments'])
+        
         text = j['segments']['text']
             
         print(text)

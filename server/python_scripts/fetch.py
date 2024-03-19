@@ -38,15 +38,15 @@ def split_words(text):
     try:
         wc_mean = statistics.mean(wordc_associations)
         wc_stdev = statistics.stdev(wordc_associations)
-        wc_median = statistics.median(wordc_associations)
-        wc_variance = statistics.variance(wordc_associations, wc_mean)
+        # wc_median = statistics.median(wordc_associations)
+        # wc_variance = statistics.variance(wordc_associations, wc_mean)
         wc_rv = wc_stdev / wc_mean
         
         cc_mean = statistics.mean(charc_associations)
         cc_stdev = statistics.stdev(charc_associations)
-        cc_median = statistics.median(charc_associations)
-        cc_variance = statistics.variance(charc_associations, cc_mean)
-        cc_rv = cc_stdev / cc_mean
+        # cc_median = statistics.median(charc_associations)
+        # cc_variance = statistics.variance(charc_associations, cc_mean)
+        # cc_rv = cc_stdev / cc_mean
         
         # print(wc_mean)
         # print(wc_stdev)
