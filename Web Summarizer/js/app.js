@@ -1,10 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
     var theme = localStorage.getItem('darkModeEnabled');
+    var darkModeToggle = document.getElementById('darkModeToggle');
     if (theme === 'true') {
         // If the theme is 'dark', add the 'dark-theme' class to the body
+        darkModeToggle.checked = true;
         document.body.classList.add('dark-theme');
     } else {
         // If the theme is not 'dark', remove the 'dark-theme' class from the body
+        darkModeToggle.checked = false;
         document.body.classList.remove('dark-theme');
     }
 });//moved to seperate Signedin file
