@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full-Width Design</title>
-    <style>
-        body,
+body,
         html {
             margin: 0;
             padding: 0;
@@ -140,7 +132,7 @@
 
         .summary-item,
         .link-item {
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #BBB;
             padding: 10px 0;
             font-weight: 400;
             margin-right: 5%;
@@ -154,23 +146,19 @@
         .summary-item a,
         .link-item a {
             text-decoration: none;
-            color: #ddd
+            color: #BBB;
         }
 
         .summary-item span,
         .link-item span {
             font-size: 14px;
-            color: #ddd;
+            color: #999;
         }
 
         .dashboard-title-section {
             flex-basis: 100%;
             text-align: center;
             order: -1;
-        }
-        .title {
-            color: #DDD;
-            font-size: 50px;
         }
 
         .history-containers {
@@ -292,6 +280,10 @@
             margin-bottom: 10vh;
         }
 
+        #rename-result {
+            display: none;
+        }
+
         .enter {
             background-color: transparent;
             border: 3px solid;
@@ -327,141 +319,3 @@
         .link-item:hover {
             color: #149cbe;
         }
-
-        .sumResultDiv {
-            margin-bottom: 5vh;
-        }
-
-        .textarea {
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            background-color: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(6px);
-            color: #fff;
-            font-family: 'Raleway', sans-serif;
-            border: none;
-            border-radius: 16px;
-            resize: none;
-            transition: background-color 0.4s;
-        }
-        
-        .textarea:focus {
-            outline: 3px solid rgba(255, 255, 255, 0.5);
-        }
-        
-        .title {
-            color: #DDD;
-        }
-    </style>
-</head>
-<body>
-    <div class="navbar">
-        <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
-                style="width:40px;"></a>
-        <div class="navbar-title">
-            <p class="text light medium page-title">Web Summarizer</p>
-        </div>
-        <div class="navbar-menu">
-            <ul>
-                <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
-                <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
-                <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
-                <li><a href="../index.html" class="navbar-link">Home</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="sidebar">
-            <div class="container">
-                <div class="title-containers">
-                    <div class="dashboard-title-section">
-                        <h1 class="dashboard-title">Summarization History</h1>
-                    </div>
-                </div>
-                <div class="history-containers">
-                    <div class="dashboard-section">
-                        <ul class="summary-list">
-                            <li class="summary-item">
-                                <a class="summary-item" href="#">Title of Summarized Content 1
-                                <br>
-                                <span>Date: January 25, 2024</span></a>
-                            </li>
-                            <li class="summary-item">
-                                <a class="summary-item" href="#">Title of Summarized Content 2
-                                <br>
-                                <span>Date: January 24, 2024</span></a>
-                            </li>
-                            <!-- Add more summarized content items here -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="content">
-            <div class="secondCon">
-                <h1 class="title">Input:</h1>
-                <div class="sumResultDiv">
-                    <textarea class="textarea" id="inputarea" name="inputarea">
-                        It was a dark and stormy night...
-                    </textarea>
-                </div>
-
-                <h1 class="title">Summary:</h1>
-                <div class="sumResultDiv">
-                    <textarea class="textarea" id="resultarea" name="resultarea" disabled>
-                        It was a dark and stormy night...
-                    </textarea>
-                </div>
-                <div>
-                    <img onclick="speakText()" class="resultSymbols" src="../images/speaker.svg" alt="Image failed to load" width="60px">
-                    <img onclick="copySummary()" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="60px">
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-
-<script>
-    function handleKeyPress(event) {
-        if (event.key === "Enter") {
-            submitForm();
-            showResult(); // Whenimplemented, should only be called after a sucessful shortening via AJAX success call --- this is for testing
-        }
-
-    }
-
-    function showResult() {
-        var result = document.getElementById("rename-result");
-        result.style.display = "flex";
-    }
-
-    // CHANGE ME
-    function submitForm() {
-        var longUrl = document.getElementById("longUrl").value;
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://web-summarizer.herokuapp.com/shorten", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                document.getElementById("ShortResultText").innerHTML = response.shortUrl;
-                document.getElementById("counter").innerHTML = response.counter;
-            }
-        }
-        xhr.send(JSON.stringify({ longUrl: longUrl }));
-    }
-
-
-// CHANGE ME
-    function copyToClipboard() {
-        var shortUrl = document.getElementById("ShortResultText").innerHTML;
-        var dummy = document.createElement("input");
-        document.body.appendChild(dummy);
-        dummy.setAttribute("id", "dummy_id");
-    }
-</script>
-
-</html>

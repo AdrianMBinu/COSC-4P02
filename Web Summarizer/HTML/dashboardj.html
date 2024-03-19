@@ -140,7 +140,7 @@
 
         .summary-item,
         .link-item {
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #BBB;
             padding: 10px 0;
             font-weight: 400;
             margin-right: 5%;
@@ -154,23 +154,19 @@
         .summary-item a,
         .link-item a {
             text-decoration: none;
-            color: #ddd
+            color: #BBB;
         }
 
         .summary-item span,
         .link-item span {
             font-size: 14px;
-            color: #ddd;
+            color: #999;
         }
 
         .dashboard-title-section {
             flex-basis: 100%;
             text-align: center;
             order: -1;
-        }
-        .title {
-            color: #DDD;
-            font-size: 50px;
         }
 
         .history-containers {
@@ -292,6 +288,10 @@
             margin-bottom: 10vh;
         }
 
+        #rename-result {
+            display: none;
+        }
+
         .enter {
             background-color: transparent;
             border: 3px solid;
@@ -328,34 +328,11 @@
             color: #149cbe;
         }
 
-        .sumResultDiv {
-            margin-bottom: 5vh;
-        }
+        
 
-        .textarea {
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            background-color: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(6px);
-            color: #fff;
-            font-family: 'Raleway', sans-serif;
-            border: none;
-            border-radius: 16px;
-            resize: none;
-            transition: background-color 0.4s;
-        }
-        
-        .textarea:focus {
-            outline: 3px solid rgba(255, 255, 255, 0.5);
-        }
-        
-        .title {
-            color: #DDD;
-        }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
@@ -373,6 +350,7 @@
         </div>
     </div>
 
+
     <div class="main-content">
         <div class="sidebar">
             <div class="container">
@@ -384,15 +362,15 @@
                 <div class="history-containers">
                     <div class="dashboard-section">
                         <ul class="summary-list">
-                            <li class="summary-item">
-                                <a class="summary-item" href="#">Title of Summarized Content 1
+                            <li class="link-item">
+                                <a href="#">Shortened Link 1
                                 <br>
-                                <span>Date: January 25, 2024</span></a>
+                                <span>Original URL: http://www.example.com</span></a>
                             </li>
-                            <li class="summary-item">
-                                <a class="summary-item" href="#">Title of Summarized Content 2
+                            <li class="link-item">
+                                <a href="#">Shortened Link 2
                                 <br>
-                                <span>Date: January 24, 2024</span></a>
+                                <span>Original URL: http://www.example.org</span></a>
                             </li>
                             <!-- Add more summarized content items here -->
                         </ul>
@@ -401,27 +379,37 @@
             </div>
         </div>
         <div class="content">
-            <div class="secondCon">
-                <h1 class="title">Input:</h1>
-                <div class="sumResultDiv">
-                    <textarea class="textarea" id="inputarea" name="inputarea">
-                        It was a dark and stormy night...
-                    </textarea>
-                </div>
-
-                <h1 class="title">Summary:</h1>
-                <div class="sumResultDiv">
-                    <textarea class="textarea" id="resultarea" name="resultarea" disabled>
-                        It was a dark and stormy night...
-                    </textarea>
-                </div>
+            <div class="body">
                 <div>
-                    <img onclick="speakText()" class="resultSymbols" src="../images/speaker.svg" alt="Image failed to load" width="60px">
-                    <img onclick="copySummary()" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="60px">
+                    <div class="middleLogo">
+                        <img class="logo" src="../images/logo.png" alt="Logo Image">
+                    </div>
+                    <div class="shortSecCon">
+                        <h1 class="shortSecConh1">Input URL:</h1>
+                        <div class="renameSection">
+                            <input class="URLLink" id="longUrl" name="longUrl" placeholder="Paste Link Here"
+                                onkeypress="handleKeyPress(event)" required>
+                            </input>
+                            <button class="enter" type="button" onclick="submitForm(); showResult()">Enter</button>
+                        </div>
+                        <!-- <h1 class="shortSecConh1">Shortened URL:</h1> -->
+                        <div class="renameSection" id="rename-result">
+                            <input class="URLLink" id="ShortResultText" disabled />
+                            <button class="enter" type="button" onclick="copyToClipboard()">Copy</button>
+                            </input>
+                        </div>
+                    </div>
+                    <div class="shortThirdCon">
+                        <h1 class="shortSecConh1"># of Times Used:</h1>
+                        <div class="counter">
+                            <h2 id="counter">0</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
 <script>
