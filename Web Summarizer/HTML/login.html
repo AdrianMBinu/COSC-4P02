@@ -3,23 +3,26 @@
     <head>
     	<link href="https://fonts.googleapis.com/css?family=Raleway:500,900" rel="stylesheet">
     	<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     	<link href="../css/login.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
         <script src="../js/login.js" type="module"></script>
+        <script src="../js/signout.js" type="module"></script>
         <script src="../js/app.js"></script>
+        
 		<title>Login Page</title>
-
     </head>
-
     <body>
-        <nav class="navbar">
-            <a href="landing"><img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="28px"></a>
-            <a href="landing"><img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="40px"></a>
-            <p class="text light medium page-title">Login</p>
+            <nav class="navbar">
+                <div class="topCornerTitle">
+                  <img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="60px">
+                  <p class="text light medium page-title">Login</p>
+                </div>
             <ul>
-              <li><a href="login.html" class="navbar-link">Login</a></li>
+              <li><a href="login.html" id="nav-login" class="navbar-link">Login</a></li>
+              <li><a href="dash.html" id="dash" class="navbar-link" style="display: none;">DashBoard</a></li>
               <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
               <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
               <li><a href="../index.html" class="navbar-link">Home</a></li>
@@ -56,34 +59,54 @@
             </div>
             <div class="logContainer">
                 <div class="loginCon">
-
-                     <button class="button" id="google-login-btn">
+                    <div class="button-grid" id="button-grid">
+                     <button class="button" id="google-login-btn" style="background-color: #4285F4;">
                         <img src="../images/google2.png" alt="Google Logo">
                         <span>Sign in with Google</span>
                      </button>
-                     <button style="padding: 10px 20px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;"
-                        onclick="signOutUser()">Sign Out</button>
-
+                     <button class="button" id="twitter-login-btn" style="background-color: #000;">
+                        <img src="../images/twitter.png" alt="X Logo" >
+                        <span>Sign in with Twitter</span>
+                     </button>
+                     <button class="button" id="git-login-btn" style="background-color: #FFF;color: #000;">
+                        <img src="../images/github.png" alt="github Logo" style="width:25px">
+                        <span>Sign in with GitHub</span>
+                     </button>
+                     <button class="button" id="yahoo-login-btn" style="background-color: #6000D3;">
+                        <img src="../images/yahoo.png" alt="Yahoo Logo" style="width:30px">
+                        <span>Sign in with Yahoo</span>
+                     </button>
+                     </div>
+                     <button class="signout"
+                     id="google-signout-btn"
+                        >Sign Out</button>
                 </div>
             </div>  
             <div class="loginPrompt">
-                <h2>Login for Pro Features</h2>
+                <h2 id="loginPrompt">Login for Pro Features</h2>
             </div>
         </div>
     
-
     </body>
-
-    <script>
-        import { signOut } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-        import {auth} from '../js/firebase-init.js';
-
-        function signOutUser() {
-        signOut(auth).then(() => {
-        // Sign-out successful.
-        }).catch((error) => {
-        // An error happened.
-        });
-    }
-    </script>
+    <script type="module">
+        import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+        import { auth } from '../js/firebase-init.js';
+        window.onload = function() {
+          onAuthStateChanged(auth, (user) => {
+              if (user) {
+                document.getElementById("nav-login").innerText = "SIGNOUT";
+                document.getElementById("button-grid").style.display = "none";
+                document.getElementById("google-signout-btn").style.display = "block";
+                document.getElementById("dash").style.display = "block";
+                document.getElementById("loginPrompt").innerText = "Currently Logged in";
+              } else {
+                document.getElementById("nav-login").innerText = "LOGIN";
+                document.getElementById("button-grid").style.display = "grid";
+                document.getElementById("google-signout-btn").style.display = "none";
+                document.getElementById("dash").style.display = "none";
+                document.getElementById("loginPrompt").innerText = "Login for Pro Features";
+              }
+          });
+      };
+      </script>
 </html>

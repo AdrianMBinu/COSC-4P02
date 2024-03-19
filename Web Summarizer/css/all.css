@@ -143,17 +143,18 @@ li a {
     opacity: 0.35;
 }
 .navbar-logo {
+    margin:0;
+}
+.topCornerTitle{
+    margin: 0;
     float: left;
-    display: inline;
     position: absolute;
-    padding: 3px 0 10px;
+    display: flex;
+    align-items: center;
     left: 1vw;
-    top: 1vh;
 }
 .page-title {
-    float: left;
-    margin-left: 60px;
-    margin-top: 10px;
+    margin:0;
 }
 body,
 html {

@@ -3,6 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Raleway:500,900" rel="stylesheet">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/resultPages.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="../js/app.js"></script>
@@ -10,7 +11,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="../js/url.js"></script>
-    <script src="../js/SignedIn.js" type="module"></script>
     <title>URL Shortener</title>
     <script>
         function submitForm() {
@@ -45,7 +45,6 @@
     width: 30%;
     height: 30%;
     margin-bottom: -15dvh;
-    margin-top: -15dvh;
 
 
 }
@@ -54,16 +53,13 @@
     display: flex;
     justify-content: center;
 }
-.container{
-    display: flex;
-    justify-content:center;
-}
-.container img{
+
+.enter{
     padding: 0;
     margin-left: 20px;
     filter: invert(80%) hue-rotate(86deg);
 }
-.container img:hover{
+.enter:hover{
     filter: invert(0%) hue-rotate(86deg);
 }
 .switch {
@@ -106,7 +102,7 @@
       transform: translateX(26px);
     }
     .dark-theme {
-      background-image: url('dark_background.jpg'); /* Dark theme background image */
+      background-image: url('../images/dark_background.jpg'); /* Dark theme background image */
     }
     .switchClass{
         margin-top: 7px;
@@ -115,14 +111,17 @@
         margin-top: 7px;
     }
     </style>
-
+</script>
 </head>
 <body>
-	<nav class="navbar">
-        <a href="landing"><img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="40px"></a>
-        <p class="text light medium page-title">URL Shortener</p>
-        <li>
-            <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
+        <nav class="navbar">
+            <div class="topCornerTitle">
+              <img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="60px">
+              <p class="text light medium page-title">URL Shortener</p>
+            </div>
+        <ul>
+            <li><a href="login.html" id="nav-login" class="navbar-link loginButton">Login</a></li>
+            <li><a href="dash.html" id="dash" class="navbar-link" style="display: none;">DashBoard</a></li>
             <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
             <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
             <li><a href="../index.html" class="navbar-link">Home</a></li>
@@ -136,18 +135,6 @@
       </nav>
 
     <div class="body">
-        <!-- <div id="mainURLCon" style="display: block;">
-            <div class="middleLogo">
-                <img class="logo" src="../images/logo.png" alt="Logo Image">
-            </div>
-            <div class="container">
-                <input class="URLLink" id="longUrl" name="longUrl" placeholder="paste link here" onkeypress="handleKeyPress(event)" required>
-                    <img class="enter" type="button" src="../images/search.png" alt="Image not found" onclick="submitForm()">
-                </input>
-            </div>
-        </div> -->
-
-
         <div>
             <div class="middleLogo">
                 <img class="logo" src="../images/logo.png" alt="Logo Image">
@@ -167,13 +154,41 @@
                     <img onclick="copyToClipboard()" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="40px">
                 </div>
             </div>
-            <div class="shortThirdCon">
-                <h1 class="shortSecConh1 Proffesional"># of Times Used:</h1>
-                <div class="counter Proffesional">
-                    <h2 id="counter">0</h2>
-                </div>
             </div>
           </div>
     </div>
 </body>
+<script>
+</script>
+<script>
+    window.globalVariable = 'Non';
+</script>
+
+<script type="module">
+
+
+function setUid(user) {
+    if (user) {
+        window.globalVariable = user.uid;
+    } else {
+        window.globalVariable = "Non";
+    }
+}
+    import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+    import { auth } from '../js/firebase-init.js';
+    window.onload = function() {
+      onAuthStateChanged(auth, (user) => {
+          if (user) {
+               setUid(user)
+               document.getElementById("nav-login").innerText = "SIGNOUT";
+                document.getElementById("dash").style.display = "block";
+          } else {
+            setUid()
+            document.getElementById("nav-login").innerText = "LOGIN";
+            document.getElementById("dash").style.display = "none";
+          }
+      });
+  };
+  </script>
+
 </html>

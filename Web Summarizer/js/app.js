@@ -1,28 +1,16 @@
-// document.addEventListener("DOMContentLoaded", function() {
-//     var cachedToken = localStorage.getItem('authToken');
-//     var elements = document.querySelectorAll(".Proffesional");
-//     var logButton = document.querySelectorAll(".loginButton");
-
-//     if (cachedToken === null) {
-//         console.log('Signout');
-
-//         elements.forEach(function(element) {
-//             element.style.display = "none";
-//         });
-//         logButton.forEach(function(log) {
-//             log.textContent = 'LOGIN';
-//         });
-//     } else {
-
-//         elements.forEach(function(element) {
-//             element.style.display = "flex";
-//         });
-//         logButton.forEach(function(log) {
-//             log.textContent = 'SIGNOUT';
-//         });
-//     }//Restrict Pro features and Chnage login/signout button
-    
-// });//moved to seperate Signedin file
+document.addEventListener("DOMContentLoaded", function() {//for everytime you refresh the page
+    var theme = localStorage.getItem('darkModeEnabled');
+    var darkModeToggle = document.getElementById('darkModeToggle');
+    if (theme === 'true') {
+        // If the theme is 'dark', add the 'dark-theme' class to the body
+        darkModeToggle.checked = true;//responsible for actually getting the switch to stay red for all pages
+        document.body.classList.add('dark-theme');//responsible for actually changing the image in the background
+    } else {
+        // If the theme is not 'dark', remove the 'dark-theme' class from the body
+        darkModeToggle.checked = false;
+        document.body.classList.remove('dark-theme');
+    }
+});//moved to seperate Signedin file
 function copyToClipboard() {
     var textToCopy = document.getElementById("ShortResultText").innerText;
 
@@ -53,7 +41,6 @@ function copySummary() {
 
     tempTextArea.select();
     document.execCommand("copy");
-
     document.body.removeChild(tempTextArea);
 
 }
@@ -96,19 +83,7 @@ function urlResult(){
     }
 }
 
-    // Check if dark mode preference is stored
-    var urlParams = new URLSearchParams(window.location.search);
-    var theme = urlParams.get('theme');
-
-    if (theme === 'dark') {
-      document.body.classList.add('dark-theme');
-      document.getElementById('darkModeToggle').checked = true;
-    } else {
-      document.body.classList.remove('dark-theme');
-      document.getElementById('darkModeToggle').checked = false;
-    }
-
-    function toggleDarkMode() {
+    function toggleDarkMode() {//function called in every html page to change it to dark mode
       var darkModeToggle = document.getElementById('darkModeToggle');
       if (darkModeToggle.checked) {
         document.body.classList.add('dark-theme');

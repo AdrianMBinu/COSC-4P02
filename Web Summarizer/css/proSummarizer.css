@@ -1,0 +1,291 @@
+.text{
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+  }
+  body{
+    overflow: hidden;
+    width: 100dvw;
+    height: 100dvh;
+    background: url("../images/landing-sky.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+
+  .resultBody{
+    top: 0;
+    left: 0;
+    z-index: 1;
+    height: 100dvh;
+    width: 100dvw;
+    display: none;
+  }
+  #namer{
+    color: black;
+    width: 300px;
+    height: 35px;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+  .sumResults{
+    width:90dvw;
+    height: 60dvh;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    justify-content:left ;
+    overflow-y: auto;
+  }
+  .sumResults h3{
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .title{
+    color: aliceblue;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+    margin-left: 5dvw;
+  }
+
+  .saveButton{
+    display: flex;
+    justify-content: center;
+    color:aliceblue;
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 15px;
+    background-color: #A37C7C;
+    text-align: center;
+    margin-top: 2px;
+    margin-left: 10px;
+    align-items: center;
+  }
+  .saveButton h2{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 14px;
+  }
+  .saveButton:hover{
+    background-color: #a37c7c6f;
+    cursor: pointer;
+  }
+  .renameSection{
+    display: flex;
+    justify-content:center ;
+    margin-bottom: 10dvh;
+  }
+  .sumResultDiv{
+    display: flex;
+    justify-content: center;
+  }
+
+  .secondCon{
+    margin-right: 5dvw;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .resultSymbols{
+    filter: invert(50%) hue-rotate(86deg);
+    margin-left: 10px;
+  }
+  .resultSymbols:hover{
+    filter: invert(30%) hue-rotate(86deg);
+    cursor: pointer;
+  }
+  .secondCon div{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .URLResult{
+    width:80dvw;
+    height: 45px;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    justify-content:flex-end ;
+    overflow-x: auto;
+    display: flex;
+    justify-content: left;
+  }
+  .URLResult h3{
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .shortResultDiv{
+    display: flex;
+    justify-content: center;
+  }
+  .shortThirdCon{
+    margin-top: 10dvh;
+    display: flex;
+    align-items: center;
+  }
+  .shortSecCon{
+    margin: 0;
+  }
+  .shortSecConh1{
+    color: aliceblue;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+    margin-left: 9dvw;
+  }
+
+  .counter{
+    width:9dvw;
+    height: 40px;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    justify-content:flex-end ;
+    margin-top: 25px;
+    margin-left: 2dvw;
+    display: flex;
+    justify-content:center;
+  }
+  .counter h2{
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .text {
+    font-family: Raleway, sans-serif;
+    text-decoration: none;
+}
+.text.small {
+    font-size: 14px;
+}
+.text.medium {
+    font-size: 22px;
+}
+.text.large {
+    font-size: 32px;
+}
+.text.xlarge {
+    font-size: 72px;
+}
+.text.xxlarge {
+    font-size: 96px;
+}
+.text.left {
+    text-align: left;
+}
+.text.center {
+    text-align: center;
+}
+.text.right {
+    text-align: right;
+}
+.text.light {
+    color: #eee;
+}
+.text.light::placeholder {
+    color: #eee;
+    opacity: 1;
+}
+.page-title {
+  float: left;
+  margin-left: 60px;
+  margin-top: 10px;
+}
+  .navbar,
+.navbar li,
+.navbar li a {
+    transition: 0.4s;
+}
+#page-container,
+.navbar li,
+.navbar li a,
+.navbar ul {
+    min-height: 100%;
+}
+.navbar li a.selected,
+.navbar li a:hover {
+    opacity: 0.9;
+}
+.navbar li a,
+.navbar a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+.navbar {
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    margin-bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 1000;
+}
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background: 0 0;
+}
+.navbar li {
+    float: right;
+    display: inline;
+}
+.navbar li a {
+    display: block;
+    text-align: center;
+    padding: 13px 32px;
+    text-transform: uppercase;
+    opacity: 0.35;
+}
+.navbar-logo {
+    float: left;
+    display: inline;
+    position: absolute;
+    padding: 3px 0 10px;
+    left: 1vw;
+    top: 1vh;
+}
+.switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #FF0000;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .dark-theme {
+      background-image: url('dark_background.jpg'); /* Dark theme background image */
+    }
