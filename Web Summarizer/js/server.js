@@ -15,7 +15,7 @@ const pool = mysql.createPool({
   host: '127.0.0.1',
   user: 'cosc4p02',
   password: 'summarizeme',
-  database: '4P02Test'
+  database: '4p02'
 });
 
 // Create the urls table if not exists
