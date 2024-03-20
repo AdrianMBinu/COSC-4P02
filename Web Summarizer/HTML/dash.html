@@ -174,13 +174,13 @@
                 const urlItem = document.createElement('div');
                 urlItem.classList.add('url-item');
                 urlItem.innerHTML = `
-                    <h5>Long URL:</h3>
+                    <h5>Long URL:</h5>
                     <p><a href="${url.longUrl}" target="_blank">${url.longUrl}</a></p>
-                    <h5>Short URL:</h3>
+                    <h5>Short URL:</h5>
                     <p><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}"  target="_blank">https://cosc4p02.tpgc.me/u/${url.shortCode}</a></p>
-                    <h5>Created At:</h3>
+                    <h5>Created At:</h5>
                     <p>${date}</p>
-                    <h5>Click Count:</h3>
+                    <h5>Click Count:</h5>
                     <p>${url.clickCount}</p>
                 `;
                 urlList.appendChild(urlItem);
