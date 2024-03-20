@@ -98,7 +98,10 @@
         <!-- Content for the left side -->
     </div>
     <div class="Shortener">
-        <table id="urlTable">
+        <div id="urlList" class="url-list">
+            <!-- URL records will be inserted here -->
+        </div>
+        <!-- <table id="urlTable">
             <thead>
                 <tr>
                     <th>Long URL</th>
@@ -108,9 +111,9 @@
                 </tr>
             </thead>
             <tbody id="urlList">
-                <!-- URL records will be inserted here -->
             </tbody>
-        </table>
+        </table> -->
+
     </div>
   </div>
 </div>
@@ -148,7 +151,7 @@
     
       </script>
 
-<script>
+<!-- <script>
 
     function fetchUrls() {
     // Fetch URLs from the server
@@ -203,6 +206,53 @@
         return etDate;
         }
 
+    </script> -->
+    <script>
+
+    function fetchUrls() {
+        // Fetch URLs from the server
+        fetch('https://cosc4p02.tpgc.me/u/urls', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(urls => {
+            // Filter URLs by clientId
+            const filteredUrls = urls.filter(url => url.userId === window.globalVariable);
+            
+            // Sort the filtered URLs by createdAt timestamp in descending order
+            filteredUrls.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    
+            // Select the last 10 records
+            const lastTenUrls = filteredUrls.slice(0, 6);
+    
+            const urlList = document.getElementById('urlList');
+    
+            // Clear previous content
+            urlList.innerHTML = '';
+    
+            // Display the last 10 URLs with matching clientId
+            lastTenUrls.forEach(url => {
+                var date = convertUTCToET(url.createdAt);
+                const urlItem = document.createElement('div');
+                urlItem.classList.add('url-item');
+                urlItem.innerHTML = `
+                    <h3>Long URL:</h3>
+                    <p><a href="${url.longUrl}" target="_blank">${url.longUrl}</a></p>
+                    <h3>Short URL:</h3>
+                    <p><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}"  target="_blank">https://cosc4p02.tpgc.me/u/${url.shortCode}</a></p>
+                    <h3>Created At:</h3>
+                    <p>${date}</p>
+                    <h3>Clicks:</h3>
+                    <p>${url.clickCount}</p>
+                `;
+                urlList.appendChild(urlItem);
+            });
+        })
+        .catch(error => console.error('Error fetching URLs:', error));
+    }
     </script>
 
 
