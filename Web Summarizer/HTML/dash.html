@@ -38,42 +38,16 @@
     margin-top: 70px;
 }
 
-/* Style table */
-#urlTable {
-    width: 100%; /* Make the table full width */
-    border-collapse: collapse; /* Collapse table borders */
-}
-
-/* Style table headers */
-#urlTable th {
-    padding: 8px;
-    text-align: left;
-    background-color: #f2f2f2; /* Light gray background */
-    border-bottom: 1px solid #ddd; /* Bottom border */
-}
-
-/* Style table cells */
-#urlTable td {
-    padding: 8px;
-    border-bottom: 1px solid #ddd; 
-    max-width: 200px;
-    /* word-wrap: break-word;  */
-    overflow: hidden;
-    text-overflow: ellipsis; 
-}
-
-/* Style alternate rows */
-#urlTable tbody tr:nth-child(even) {
-    background-color: #f9f9f9; /* Lighter gray background for even rows */
-}
 
 .url-list {
-    padding: 20px;
+    padding: 30px;
 }
 
 .url-item {
     border: 1px solid #ddd;
     border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 .url-item h3 {
@@ -127,18 +101,7 @@
         <div id="urlList" class="url-list">
             <!-- URL records will be inserted here -->
         </div>
-        <!-- <table id="urlTable">
-            <thead>
-                <tr>
-                    <th>Long URL</th>
-                    <th>Short URL</th>
-                    <th>Created At</th>
-                    <th>Clicks</th>
-                </tr>
-            </thead>
-            <tbody id="urlList">
-            </tbody>
-        </table> -->
+
 
     </div>
   </div>
@@ -176,63 +139,6 @@
     
     
       </script>
-
-<!-- <script>
-
-    function fetchUrls() {
-    // Fetch URLs from the server
-    fetch('https://cosc4p02.tpgc.me/u/urls', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    .then(response => response.json())
-    .then(urls => {
-        // Filter URLs by clientId
-        const filteredUrls = urls.filter(url => url.userId === window.globalVariable);
-        
-        // Sort the filtered URLs by createdAt timestamp in descending order
-        filteredUrls.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-        // Select the last 10 records
-        const lastTenUrls = filteredUrls.slice(0, 6);
-
-        const urlList = document.getElementById('urlList');
-
-        // Display the last 10 URLs with matching clientId
-        lastTenUrls.forEach(url => {
-            var date = convertUTCToET(url.createdAt);
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td><a href="${url.longUrl}" target="_blank">${url.longUrl}</a></td>
-                <td><a href="https://cosc4p02.tpgc.me/u/${url.shortCode}"  target="_blank">https://cosc4p02.tpgc.me/u/${url.shortCode}</a></td>
-                <td>${date}</td>
-                <td style="text-align: center;">${url.clickCount}</td>
-            `;
-            urlList.appendChild(row);
-        });
-    })
-    .catch(error => console.error('Error fetching URLs:', error));
-}
-
-        function convertUTCToET(utcDate) {
-        // Create a new Date object with the UTC time
-        const date = new Date(utcDate);
-
-        // Get the UTC hours
-        const utcHours = date.getUTCHours();
-
-        // Adjust the hours for Eastern Time
-        const etHours = utcHours - 4;
-
-        const etDate = new Date(date);
-        etDate.setHours(etHours);
-
-        return etDate;
-        }
-
-    </script> -->
     <script>
 
     function fetchUrls() {
