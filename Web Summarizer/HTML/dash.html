@@ -189,11 +189,9 @@
         .catch(error => console.error('Error fetching URLs:', error));
     }
 
-    function convertUTCToET(utcDate) {
-        // Create a new Date object with the UTC time
+    function convertUTCToET2(utcDate) {
         const date = new Date(utcDate);
 
-        // Get the UTC hours
         const utcHours = date.getUTCHours();
 
         // Adjust the hours for Eastern Time
@@ -204,6 +202,33 @@
 
         return etDate;
         }
+
+        function convertUTCToET(utcDate) {
+    // Create a new Date object with the UTC time
+    const date = new Date(utcDate);
+
+    // Get the UTC hours
+    const utcHours = date.getUTCHours();
+
+    // Adjust the hours for Eastern Time
+    const etHours = utcHours - 4;
+
+    // Set the Eastern Time hours to the date object
+    date.setUTCHours(etHours);
+
+    // Get the month and day in two-digit format
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+    const day = date.getUTCDate().toString().padStart(2, '0');
+
+    // Get the hours and minutes in two-digit format
+    const hours = date.getUTCHours().toString().padStart(2, '0');
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+
+    // Construct the date string
+    const dateString = `${date.getUTCFullYear()}-${month}-${day} ${hours}:${minutes} (EDT)`;
+
+    return dateString;
+}
     </script>
 
 
