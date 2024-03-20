@@ -15,6 +15,9 @@ def summarize(text):
 	return x.text
 
 def handle_url(url):
+    if not url.startswith('http://') and not url.startswith('https://'):
+        url = 'https://' + url
+    
     exit_code, hash = ffmpreg.fetch_video(url)
     if exit_code == 0:
         ffmpreg.convert_video(hash)
