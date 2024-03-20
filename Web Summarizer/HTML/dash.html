@@ -49,7 +49,8 @@
     margin-bottom: 10px;
 }
 
-.url-item h3 {
+.url-item h5 {
+    margin-bottom: -5px;
 }
 
 .url-item p {
@@ -157,7 +158,7 @@
             filteredUrls.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     
             // Select the last 10 records
-            const lastTenUrls = filteredUrls.slice(0, 6);
+            const lastTenUrls = filteredUrls.slice(0, 5);
     
             const urlList = document.getElementById('urlList');
     
