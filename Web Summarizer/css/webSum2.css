@@ -75,6 +75,7 @@ html {
     display: flex;
     flex-direction: row;
     height: calc(100% - 40px);
+    justify-content: center;
     /* Adjust based on the navbar's height */
 }
 
@@ -89,7 +90,7 @@ html {
 }
 
 .content {
-    width: 75%;
+    width: 60%;
     /*background-color: #ddd;*/
     padding: 20px;
     height: 100%;
@@ -228,12 +229,13 @@ h1 {
 }
 
 .resultSymbols {
-    filter: invert(50%) hue-rotate(86deg);
+    filter: brightness(0) invert(1);
     margin-left: 20px;
 }
 
 .resultSymbols:hover {
-    filter: invert(30%) hue-rotate(86deg);
+    filter: brightness(0.5) saturate(3) hue-rotate(180deg);
+    transition: filter 0.2s ease;
     cursor: pointer;
 }
 
@@ -320,7 +322,9 @@ h1 {
 }
 
 .sumResultDiv {
-    margin-bottom: 5vh;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10vh;
 }
 
 .textarea {

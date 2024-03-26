@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full-Width Design</title>
-    <link href="../css/proSummarizer.css" rel="stylesheet" />
+    <link href="../css/webSum2.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar">
@@ -25,45 +25,19 @@
     </div>
 
     <div class="main-content">
-        <div class="sidebar">
-            <div class="container">
-                <div class="title-containers">
-                    <div class="dashboard-title-section">
-                        <h1 class="dashboard-title">Summarization History</h1>
-                    </div>
-                </div>
-                <div class="history-containers">
-                    <div class="dashboard-section">
-                        <ul class="summary-list">
-                            <li class="summary-item">
-                                <a class="summary-item" href="#">Title of Summarized Content 1
-                                <br>
-                                <span>Date: January 25, 2024</span></a>
-                            </li>
-                            <li class="summary-item">
-                                <a class="summary-item" href="#">Title of Summarized Content 2
-                                <br>
-                                <span>Date: January 24, 2024</span></a>
-                            </li>
-                            <!-- Add more summarized content items here -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="content">
             <div class="secondCon">
                 <h1 class="title">Input:</h1>
-                <div class="sumResultDiv">
-                    <textarea class="textarea" id="inputarea" name="inputarea">
-                        It was a dark and stormy night...
-                    </textarea>
+                <div class="renameSection">
+                    <input class="URLLink" id="longUrl" name="longUrl" placeholder="Input URL Here"
+                        onkeypress="handleKeyPress(event)" required>
+                    </input>
+                    <button class="enter" type="button" onclick="submitForm(); showResult()">Enter</button>
                 </div>
 
                 <h1 class="title">Summary:</h1>
                 <div class="sumResultDiv">
                     <textarea class="textarea" id="resultarea" name="resultarea" disabled>
-                        It was a dark and stormy night...
                     </textarea>
                 </div>
                 <div>
@@ -79,7 +53,7 @@
     function handleKeyPress(event) {
         if (event.key === "Enter") {
             submitForm();
-            showResult(); // Whenimplemented, should only be called after a sucessful shortening via AJAX success call --- this is for testing
+            showResult(); // When implemented, should only be called after a sucessful shortening via AJAX success call --- this is for testing
         }
 
     }

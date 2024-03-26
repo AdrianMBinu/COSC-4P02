@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="../css/urlShotener2.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Width Design</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
+                style="width:40px;"></a>
+        
+        <div class="navbar-title">
+            <p class="text light medium page-title">Web Summarizer</p>
+        </div>
+        <div class="navbar-menu">
+            <ul>
+                <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
+                <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
+                <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
+                <li><a href="../index.html" class="navbar-link">Home</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="content">
+            <div class="body">
+                <div>
+                    <div class="middleLogo">
+                        <img class="logo" src="../images/logo.png" alt="Logo Image">
+                    </div>
+                    <div class="shortSecCon">
+                        <h1 class="shortSecConh1">Input URL:</h1>
+                        <div class="renameSection">
+                            <input class="URLLink" id="longUrl" name="longUrl" placeholder="Input URL Here"
+                                onkeypress="handleKeyPress(event)" required>
+                            </input>
+                            <button class="enter" type="button" onclick="submitForm(); showResult()">Enter</button>
+                        </div>
+                        <!-- <h1 class="shortSecConh1">Shortened URL:</h1> -->
+                        <div class="renameSection" id="rename-result">
+                            <input class="URLLink" id="ShortResultText" disabled />
+                            <button class="enter" type="button" onclick="copyToClipboard()">Copy</button>
+                            </input>
+                        </div>
+                    </div>
+                    <div class="shortThirdCon">
+                        <h1 class="shortSecConh1"># of Times Used:</h1>
+                        <div class="counter">
+                            <h2 id="counter">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            submitForm();
+            showResult(); // Whenimplemented, should only be called after a sucessful shortening via AJAX success call --- this is for testing
+        }
+
+    }
+
+    function showResult() {
+        var result = document.getElementById("rename-result");
+        result.style.display = "flex";
+    }
+
+    // CHANGE ME
+    function submitForm() {
+        var longUrl = document.getElementById("longUrl").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://web-summarizer.herokuapp.com/shorten", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                document.getElementById("ShortResultText").innerHTML = response.shortUrl;
+                document.getElementById("counter").innerHTML = response.counter;
+            }
+        }
+        xhr.send(JSON.stringify({ longUrl: longUrl }));
+    }
+
+
+// CHANGE ME
+    function copyToClipboard() {
+        var shortUrl = document.getElementById("ShortResultText").innerHTML;
+        var dummy = document.createElement("input");
+        document.body.appendChild(dummy);
+        dummy.setAttribute("id", "dummy_id");
+    }
+</script>
+</html>
