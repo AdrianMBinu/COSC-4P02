@@ -37,15 +37,20 @@ def get_video_text(hash):
         
         j = json.loads(x.text)
         
-        print(j)
+        text = ""
         
-        print(j['segments'])
-        
-        text = j['segments']['text']
+        try:
+            text = j["text"]
+        except:
+            try:
+                text = j["segments"]["text"]
+            except:
+                print("failed to load json")
+                text = "SYSTEM FAILURE"
             
         print(text)
         
-        subprocess.run("rm", hash)
-        subprocess.run("rm", name)
+        subprocess.run(["bash", "-c", "rm " + hash + "*"])
+        #subprocess.run(["bash", "-c", "rm " + name + "*"])
         
         return text

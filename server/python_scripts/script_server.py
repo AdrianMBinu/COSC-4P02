@@ -15,24 +15,34 @@ sumDB = mysql.connector.connect(
 
 dbCursor = sumDB.cursor()
 
-def process_data(request_body):
-	summary = handle_url(request_body) # <summary> is the llm response
-	print("wrote summary of "+str(request_body)+" to database ["+str(time.ctime())+"]")
-	sum_text = json.loads(summary)["choices"][0]["text"] # <sum_text> is the text extracted from the LLM json response
-	saveCommand = 'INSERT INTO summaries(Url,Summary,Id) VALUES (%s, %s)'
-	dbCursor.execute( saveCommand, (str(request_body),str(sum_text)) )
-	sumDB.commit()
-
 def get_data(request_body):
 	fetchCommand = 'SELECT Summary FROM summaries WHERE Url="%s"'
 	dbCursor.execute( fetchCommand % str(request_body) )
 	result = dbCursor.fetchone()
 	return "Invalid query" if (result is None) else result[0]
 
+def process_data(request_body):
+	print(request_body)
+ 
+	begin_command = 'INSERT INTO summaries(url) VALUES (%s)'
+	dbCursor.execute( begin_command, (str(request_body),) )
+	sumDB.commit()
+ 
+	summary = handle_url(request_body)
+  
+	sum_text = json.loads(summary)["choices"][0]["text"] 
+	
+	end_command = 'UPDATE summaries SET summary=%s, end=CURRENT_TIMESTAMP() WHERE url=%s'
+	dbCursor.execute( end_command, (str(sum_text), str(request_body)) )
+ 
+	sumDB.commit()
+	print("wrote summary of "+str(request_body)+" to database ["+str(time.ctime())+"]")
+
+
 class app(BaseHTTPRequestHandler):
 	def do_POST(self):
 		# vv None of this is optimal or readable code, too bad vv
-		if re.search('/s/summarizer/summaryfetch', self.path):
+		if re.search('/s/fetch', self.path):
 			self.send_response(200)
 			self.send_header('Content-type','text/html')
 			self.end_headers()
@@ -40,7 +50,7 @@ class app(BaseHTTPRequestHandler):
 			request_body = self.rfile.read(content_len).decode('UTF-8')
 			response = get_data(request_body)
 			self.wfile.write(bytes(response,"utf8"))
-		elif re.search('/s/summarizer', self.path):
+		elif re.search('/s/request', self.path):
 			self.send_response(200) # set response code (200)
 			self.send_header('Content-type','text/html') # add header info 'Content-type'
 			self.end_headers() # end of header info
