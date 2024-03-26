@@ -39,29 +39,6 @@ pool.query(createTableQuery, (err, result) => {
 });
 
 
-// app.post('/shorten', (req, res) => {
-//   const { longUrl, userId } = req.body;
-
-//   if (!longUrl || !userId) {
-//     return res.status(400).json({ error: 'Long URL and user ID are required' });
-//   }
-
-//   const shortCode = shortid.generate();
-
-//   const insertQuery = 'INSERT INTO urls (shortCode, longUrl, clickCount, userId) VALUES (?, ?, 0, ?)';
-//   const values = [shortCode, longUrl, userId];
-
-//   pool.query(insertQuery, values, (err, result) => {
-//     if (err) {
-//       console.error('Database error:', err);
-//       return res.status(500).json({ error: 'Internal Server Error' });
-//     }
-
-//     const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
-//     res.json({ shortUrl, clickCount: 0});
-//   });
-// });
-
 app.post('/shorten', (req, res) => {
   const { longUrl, userId } = req.body;
 
@@ -71,7 +48,7 @@ app.post('/shorten', (req, res) => {
 
   const shortCode = shortid.generate();
 
-  const insertQuery = 'INSERT IGNORE INTO urls (shortCode, longUrl, clickCount, userId) VALUES (?, ?, 0, ?)';
+  const insertQuery = 'INSERT INTO urls (shortCode, longUrl, clickCount, userId) VALUES (?, ?, 0, ?)';
   const values = [shortCode, longUrl, userId];
 
   pool.query(insertQuery, values, (err, result) => {
@@ -80,33 +57,10 @@ app.post('/shorten', (req, res) => {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
 
-    if (result.affectedRows === 0) {
-      // If no rows were affected, it means a duplicate entry was found
-      console.log('Duplicate entry found. Fetching existing record...');
-      const selectQuery = 'SELECT shortCode, longUrl, clickCount FROM urls WHERE shortCode = ?';
-      pool.query(selectQuery, [shortCode], (selectErr, selectResult) => {
-        if (selectErr) {
-          console.error('Database error:', selectErr);
-          return res.status(500).json({ error: 'Internal Server Error' });
-        }
-        
-        if (selectResult.length === 0) {
-          console.log('Existing record not found.');
-          return res.status(404).json({ error: 'Short URL not found' });
-        }
-        
-        const existingRecord = selectResult[0];
-        console.log('Existing record:', existingRecord);
-        res.json({ shortUrl: `https://cosc4p02.tpgc.me/u/${existingRecord.shortCode}`, clickCount: existingRecord.clickCount });
-      });
-    } else {
-      const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
-      console.log('New record inserted. Short URL:', shortUrl);
-      res.json({ shortUrl, clickCount: 0 });
-    }
+    const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
+    res.json({ shortUrl, clickCount: 0});
   });
 });
-
 
 
 // API endpoint to redirect to the original URL
