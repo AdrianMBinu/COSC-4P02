@@ -80,10 +80,10 @@ app.get('/:shortCode', (req, res) => {
     }
 
     const longUrl = result[0].longUrl;
-    let clickCount = parseInt(result[0].clickCount); // Convert clickCount to integer
+    let clickCount = parseInt(result[0].clickCount);
 
     if (isNaN(clickCount)) {
-      clickCount = 0; // If clickCount is not a number, set it to 0
+      clickCount = 0; 
     }
 
     const updatedClickCount = clickCount + 1;
@@ -103,7 +103,6 @@ app.get('/:shortCode', (req, res) => {
 });
 
 
-// API endpoint to get all URLs
 app.post('/urls', (req, res) => {
   const selectAllQuery = 'SELECT * FROM urls';
 
@@ -117,7 +116,6 @@ app.post('/urls', (req, res) => {
   });
 });
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
