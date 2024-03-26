@@ -69,38 +69,25 @@ app.post('/shorten', (req, res) => {
     return res.status(400).json({ error: 'Long URL and user ID are required' });
   }
 
-  let shortCode = shortid.generate();
+  const shortCode = shortid.generate();
 
-  const insertQuery = 'INSERT INTO urls (shortCode, longUrl, clickCount, userId) VALUES (?, ?, 0, ?)';
+  const insertQuery = 'INSERT IGNORE INTO urls (shortCode, longUrl, clickCount, userId) VALUES (?, ?, 0, ?)';
   const values = [shortCode, longUrl, userId];
 
-  const checkDuplicate = () => {
-    pool.query('SELECT * FROM urls WHERE shortCode = ?', [shortCode], (err, result) => {
-      if (err) {
-        console.error('Database error:', err);
-        return res.status(500).json({ error: 'Internal Server Error' });
-      }
-      
-      if (result.length > 0) {
-        // If short code already exists, generate a new one and check again
-        shortCode = shortid.generate();
-        checkDuplicate();
-      } else {
-        // If short code is unique, insert the new URL
-        pool.query(insertQuery, values, (insertErr) => {
-          if (insertErr) {
-            console.error('Database error:', insertErr);
-            return res.status(500).json({ error: 'Internal Server Error' });
-          }
-  
-          const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
-          res.json({ shortUrl, clickCount: 0 });
-        });
-      }
-    });
-  };
+  pool.query(insertQuery, values, (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
 
-  checkDuplicate();
+    if (result.affectedRows === 0) {
+      // If no rows were affected, it means a duplicate entry was found
+      return res.status(400).json({ error: 'Short URL already exists' });
+    }
+
+    const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
+    res.json({ shortUrl, clickCount: 0 });
+  });
 });
 
 // API endpoint to redirect to the original URL
