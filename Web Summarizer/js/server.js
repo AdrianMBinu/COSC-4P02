@@ -82,13 +82,28 @@ app.post('/shorten', (req, res) => {
 
     if (result.affectedRows === 0) {
       // If no rows were affected, it means a duplicate entry was found
-      return res.status(400).json({ error: 'Short URL already exists' });
+      // Fetch the existing record from the database
+      const selectQuery = 'SELECT shortCode, longUrl, clickCount FROM urls WHERE shortCode = ?';
+      pool.query(selectQuery, [shortCode], (selectErr, selectResult) => {
+        if (selectErr) {
+          console.error('Database error:', selectErr);
+          return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        
+        if (selectResult.length === 0) {
+          return res.status(404).json({ error: 'Short URL not found' });
+        }
+        
+        const existingRecord = selectResult[0];
+        res.json({ shortUrl: `https://cosc4p02.tpgc.me/u/${existingRecord.shortCode}`, clickCount: existingRecord.clickCount });
+      });
+    } else {
+      const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
+      res.json({ shortUrl, clickCount: 0 });
     }
-
-    const shortUrl = `https://cosc4p02.tpgc.me/u/${shortCode}`;
-    res.json({ shortUrl, clickCount: 0 });
   });
 });
+
 
 // API endpoint to redirect to the original URL
 app.get('/:shortCode', (req, res) => {
