@@ -22,8 +22,8 @@ const pool = mysql.createPool({
 const createTableQuery = `
   CREATE TABLE IF NOT EXISTS urls (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    shortCode VARCHAR(255) UNIQUE,
-    longUrl TEXT UNIQUE,
+    shortCode VARCHAR(255),
+    longUrl TEXT,
     clickCount INT DEFAULT 0,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     userId VARCHAR(255)
