@@ -34,6 +34,7 @@ def process_data(request_body):
 	
 		# we do not want to be able to queue multiple urls at the same time.
 		if (dbCursor.rowcount > 0):
+			print("I already have this url SILLY")
 			return
 	
 		begin_command = 'INSERT INTO summaries(url) VALUES (%s)'
@@ -49,6 +50,7 @@ def process_data(request_body):
 	
 		sumDB.commit()
 	finally:
+		print("Unlocking")
 		lock.release()
 	print("wrote summary of "+str(request_body)+" to database ["+str(time.ctime())+"]")
 
