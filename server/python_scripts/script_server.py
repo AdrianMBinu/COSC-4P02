@@ -24,14 +24,15 @@ def get_data(request_body):
 	return "Invalid query" if (result is None) else result[0]
 
 def process_data(request_body):
-    # We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
+	# We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
+	print(f"Trying to lock for url '{request_body}'!")
 	lock.acquire()
+	print(f"Lock aquired for url '{request_body}'!")
 	try:
-		print(request_body)
-	
 		look_command = "SELECT url FROM summaries WHERE url=%s"
 		dbCursor.execute(look_command, (str(request_body),))
-	
+		dbCursor.fetchall()
+
 		# we do not want to be able to queue multiple urls at the same time.
 		if (dbCursor.rowcount > 0):
 			print("I already have this url SILLY")
