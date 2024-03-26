@@ -14,6 +14,8 @@ sumDB = mysql.connector.connect(
 )
 
 dbCursor = sumDB.cursor()
+# evil :3
+lock = threading.Lock()
 
 def get_data(request_body):
 	fetchCommand = 'SELECT Summary FROM summaries WHERE Url="%s"'
@@ -22,20 +24,32 @@ def get_data(request_body):
 	return "Invalid query" if (result is None) else result[0]
 
 def process_data(request_body):
-	print(request_body)
- 
-	begin_command = 'INSERT INTO summaries(url) VALUES (%s)'
-	dbCursor.execute( begin_command, (str(request_body),) )
-	sumDB.commit()
- 
-	summary = handle_url(request_body)
-  
-	sum_text = json.loads(summary)["choices"][0]["text"] 
+    # We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
+	lock.acquire()
+	try:
+		print(request_body)
 	
-	end_command = 'UPDATE summaries SET summary=%s, end=CURRENT_TIMESTAMP() WHERE url=%s'
-	dbCursor.execute( end_command, (str(sum_text), str(request_body)) )
- 
-	sumDB.commit()
+		look_command = "SELECT url FROM summaries WHERE url=%s"
+		dbCursor.execute(look_command, (str(request_body),))
+	
+		# we do not want to be able to queue multiple urls at the same time.
+		if (dbCursor.rowcount > 0):
+			return
+	
+		begin_command = 'INSERT INTO summaries(url) VALUES (%s)'
+		dbCursor.execute( begin_command, (str(request_body),) )
+		sumDB.commit()
+	
+		summary = handle_url(request_body)
+	
+		sum_text = json.loads(summary)["choices"][0]["text"] 
+		
+		end_command = 'UPDATE summaries SET summary=%s, end=CURRENT_TIMESTAMP() WHERE url=%s'
+		dbCursor.execute( end_command, (str(sum_text), str(request_body)) )
+	
+		sumDB.commit()
+	finally:
+		lock.release()
 	print("wrote summary of "+str(request_body)+" to database ["+str(time.ctime())+"]")
 
 
