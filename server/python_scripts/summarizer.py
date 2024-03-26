@@ -21,10 +21,9 @@ def handle_url(url):
     exit_code, hash = ffmpreg.fetch_video(url)
     if exit_code == 0:
         ffmpreg.convert_video(hash)
-        text = ffmpreg.get_video_text(hash)
-        return summarize(text)
+        return ffmpreg.get_video_text(hash)
     else:
-        return summarize(fetch_and_split(url))
+        return fetch_and_split(url)
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(prog="URL Summarizer", description="Download and summerize a url with requests / GET")

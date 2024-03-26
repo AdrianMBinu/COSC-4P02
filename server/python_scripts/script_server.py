@@ -2,7 +2,7 @@ import json #import json utilities
 import re #imports regExp
 import mysql.connector #for mySQL functionality
 from http.server import BaseHTTPRequestHandler, HTTPServer #imports http & server functionality
-from summarizer import handle_url
+from summarizer import handle_url, summarize
 import threading
 import time #for sleep and time-based dev functions
 
@@ -43,17 +43,23 @@ def process_url(url):
 			print("I already have this url SILLY")
 			return
 	
-		begin_command = 'INSERT INTO summaries(url) VALUES ("%s")'
+		begin_command = 'INSERT INTO summaries(url, url_word_count) VALUES ("%s", 0)'
 		dbCursor.execute( begin_command, (str(url),) )
 		sumDB.commit()
 	
-		summary = handle_url(url)
+		# Handle either video or text site, return text or audio -> text content
+		text = handle_url(url)
+  
+		word_count_command = 'UPDATE summaries SET url_word_count=%s WHERE url="%s"'
+		dbCursor.execute( word_count_command, (len(text), str(url)) )
+		sumDB.commit()
+  
+		summary = summarize(text)
 	
 		sum_text = json.loads(summary)["choices"][0]["text"] 
 		
-		end_command = 'UPDATE summaries SET summary="%s", end=CURRENT_TIMESTAMP() WHERE url="%s"'
-		dbCursor.execute( end_command, (str(sum_text), str(url)) )
-	
+		end_command = 'UPDATE summaries SET summary="%s", summary_word_count=%s, end=CURRENT_TIMESTAMP() WHERE url="%s"'
+		dbCursor.execute( end_command, (str(sum_text), len(sum_text), str(url)) )
 		sumDB.commit()
 	finally:
 		print("Unlocking")
