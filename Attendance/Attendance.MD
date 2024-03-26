@@ -130,3 +130,15 @@ Mar 19
 | Michael     | Present     | 
 | Brett       | Present     | 
 
+Mar 26
+| Name        | Attendance  |
+| ----------- | ----------- |
+| Maulik      | Present     | 
+| Adrian      | Present     | 
+| Deevan      | Present     | 
+| Jason       | Present     | 
+| Thanushan   | Present     | 
+| Vishant     | Present     | 
+| Michael     | Present     | 
+| Brett       | Present     | 
+
