@@ -18,24 +18,29 @@ dbCursor = sumDB.cursor()
 lock = threading.Lock()
 
 def has_url(url):
-	look_command = "SELECT url FROM summaries WHERE url='%s'"
-	dbCursor.execute(look_command % str(url))
+	look_command = "SELECT url FROM summaries WHERE url=%s"
+	dbCursor.execute(look_command, (str(url),))
 	dbCursor.fetchall()
 	if (dbCursor.rowcount > 0):
 		return True
 	return False
 
 def get_url_summary(url):
-	fetchCommand = 'SELECT summary FROM summaries WHERE url="%s"'
-	dbCursor.execute( fetchCommand % str(url) )
+	print(url)
+	fetchCommand = "SELECT summary FROM summaries WHERE url=%s"
+	dbCursor.execute( fetchCommand, (str(url),) )
 	result = dbCursor.fetchone()
 	dbCursor.fetchall()
  
-	status = False if (result is None) else True
+	status = False
+	summary = ""
+	if (result is not None):
+		summary = str(result[0])
+		status = True
 	data = {
 		"has_url": has_url(url),
 		"has_summary": status,
-		"summary": str(result[0]).strip()
+		"summary": summary.strip()
 	}
  
 	return (status, json.dumps(data));
@@ -51,22 +56,22 @@ def process_url(url):
 			print("I already have this url SILLY")
 			return
 	
-		begin_command = 'INSERT INTO summaries(url, url_word_count) VALUES ("%s", 0)'
+		begin_command = 'INSERT INTO summaries(url, url_word_count) VALUES (%s, 0)'
 		dbCursor.execute( begin_command, (str(url),) )
 		sumDB.commit()
 	
 		# Handle either video or text site, return text or audio -> text content
 		text = handle_url(url)
   
-		word_count_command = 'UPDATE summaries SET url_word_count=%s WHERE url="%s"'
+		word_count_command = 'UPDATE summaries SET url_word_count=%s WHERE url=%s'
 		dbCursor.execute( word_count_command, (len(text), str(url)) )
 		sumDB.commit()
   
 		summary = summarize(text)
 	
-		sum_text = json.loads(summary)["choices"][0]["text"] 
+		sum_text = json.loads(summary)["choices"][0]["text"].strip()
 		
-		end_command = 'UPDATE summaries SET summary="%s", summary_word_count=%s, end=CURRENT_TIMESTAMP() WHERE url="%s"'
+		end_command = 'UPDATE summaries SET summary=%s, summary_word_count=%s, end=CURRENT_TIMESTAMP() WHERE url=%s'
 		dbCursor.execute( end_command, (str(sum_text), len(sum_text), str(url)) )
 		sumDB.commit()
 	finally:
@@ -130,9 +135,10 @@ class app(BaseHTTPRequestHandler):
 			request_body = self.get_content()
 			status, json_response = get_url_summary(request_body)
    
-			self.set_headers(200 if status else 204)
+			self.set_headers(200 if status else 206)
 			self.wfile.write(bytes(json_response, "utf8"))
 		elif re.search('/s/request', self.path):
+			self.set_headers(200, "text/html")
 			request_body = self.get_content()
 			background_thread = threading.Thread(target=process_url, args=(request_body,))
 			background_thread.daemon = True
