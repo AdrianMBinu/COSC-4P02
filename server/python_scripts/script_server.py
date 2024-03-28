@@ -30,7 +30,15 @@ def get_url_summary(url):
 	dbCursor.execute( fetchCommand % str(url) )
 	result = dbCursor.fetchone()
 	dbCursor.fetchall()
-	return "INCOMPLETE SUMMARY" if (result is None) else str(result[0]).strip()
+ 
+	status = False if (result is None) else True
+	data = {
+		"has_url": has_url(url),
+		"has_summary": status,
+		"summary": str(result[0]).strip()
+	}
+ 
+	return (status, json.dumps(data));
 
 def process_url(url):
 	# We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
@@ -95,64 +103,50 @@ def get_time_estimate():
     row_data = dbCursor.fetchone()
     # make sure the cursor is clear of any extra data. should not do anything
     dbCursor.fetchall()
-    return_string = ""
     
-    # todo: better, string builder?
-    if (row_data[0] != 0):
-        return_string += str(row_data[0]) + " days, "
-        return_string += str(row_data[1]) + " hours, "
-        return_string += str(row_data[2]) + " minutes, "
-        return_string += str(row_data[3]) + " seconds"
-    elif (row_data[1] != 0):
-        return_string += str(row_data[1]) + " hours, "
-        return_string += str(row_data[2]) + " minutes, "
-        return_string += str(row_data[3]) + " seconds"
-    elif (row_data[2] != 0):
-        return_string += str(row_data[2]) + " minutes, "
-        return_string += str(row_data[3]) + " seconds"
-    else:
-        return_string += str(row_data[3]) + " seconds"
+    data = {
+		"days": row_data[0],
+		"hours": row_data[1],
+		"minutes": row_data[2],
+		"seconds": row_data[3]
+	}
     
-    return return_string
+    return json.dumps(data)
     
 
 class app(BaseHTTPRequestHandler):
+	def set_headers(self, code = 200, type = 'application/json'):
+		self.send_response(code) 
+		self.send_header('Content-type', type)
+		self.end_headers()
+    
+	def get_content(self):
+		content_len = int(self.headers.get('Content-Length',0)) 
+		return self.rfile.read(content_len).decode('UTF-8')
+
 	def do_POST(self):
 		# vv None of this is optimal or readable code, too bad vv
 		if re.search('/s/fetch', self.path):
-			self.send_response(200)
-			self.send_header('Content-type','text/html')
-			self.end_headers()
-			content_len = int(self.headers.get('Content-Length',0))
-			request_body = self.rfile.read(content_len).decode('UTF-8')
-			response = get_url_summary(request_body)
-			self.wfile.write(bytes(response, "utf8"))
+			request_body = self.get_content()
+			status, json_response = get_url_summary(request_body)
+   
+			self.set_headers(200 if status else 204)
+			self.wfile.write(bytes(json_response, "utf8"))
 		elif re.search('/s/request', self.path):
-			self.send_response(200) # set response code (200)
-			self.send_header('Content-type','text/html') # add header info 'Content-type'
-			self.end_headers() # end of header info
-			content_len = int(self.headers.get('Content-Length',0)) # <content_len> is the request-data length
-			request_body = self.rfile.read(content_len).decode('UTF-8') # read request body
+			request_body = self.get_content()
 			background_thread = threading.Thread(target=process_url, args=(request_body,))
 			background_thread.daemon = True
 			background_thread.start()
 		elif re.search('/s/estimate', self.path):
-			self.send_response(200)
-			self.send_header('content_type', 'text/html')
-			self.end_headers()
+			self.set_headers()
+			request_body = self.get_content()
 			self.wfile.write(bytes(get_time_estimate(), "utf8"))
 		else:
-			self.send_response(404)
-			self.send_header('Content-type','text/html')
-			self.end_headers()
-			erMsg = "Er 404: Invalid endpoint"
-			self.wfile.write(bytes(erMsg, "utf8"))
-	def do_GET(self): # test GET, for testing fetching an summary -- using id -- from the db
-		self.send_response(200)
-		self.send_header('Content-type', 'text/html')
-		self.end_headers()
-		polled_id = 0
-		self.wfile.write(bytes(str(polled_id),"utf8"))
+			self.set_headers(404, 'text/html')
+			self.wfile.write(bytes("Er 404: Invalid endpoint", "utf8"))
+	def do_GET(self):
+		self.set_headers(200, 'text/html')
+		self.wfile.write(bytes(str(0),"utf8"))
 
 with HTTPServer(('', 42069), app) as server:
 	server.serve_forever()
