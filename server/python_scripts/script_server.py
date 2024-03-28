@@ -32,13 +32,14 @@ def get_url_summary(url):
 	result = dbCursor.fetchone()
 	dbCursor.fetchall()
  
+	hasUrl = has_url(url)
 	status = False
 	summary = ""
-	if (result is not None):
+	if hasUrl and (result[0] is not None):
 		summary = str(result[0])
 		status = True
 	data = {
-		"has_url": has_url(url),
+		"has_url": hasUrl,
 		"has_summary": status,
 		"summary": summary.strip()
 	}
@@ -110,10 +111,10 @@ def get_time_estimate():
     dbCursor.fetchall()
     
     data = {
-		"days": row_data[0],
-		"hours": row_data[1],
-		"minutes": row_data[2],
-		"seconds": row_data[3]
+		"days": int(row_data[0]),
+		"hours": int(row_data[1]),
+		"minutes": int(row_data[2]),
+		"seconds": int(row_data[3])
 	}
     
     return json.dumps(data)
