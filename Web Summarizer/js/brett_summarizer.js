@@ -1,4 +1,5 @@
 var requested = false;
+var reqeusted_url = "";
 
 function handle_fetch_results(){
     if (this.status != 200)
@@ -11,7 +12,8 @@ function handle_fetch_results(){
 
 function handle_update_estimate(){
     console.log(this.responseText);
-    if (this.status != 200)
+    console.log(this.status);
+    if (this.status != 200 && this.responseText == "" || this.responseText == null)
         return;
     const json = JSON.parse(this.responseText);
     const element = document.getElementById("results");
@@ -20,23 +22,23 @@ function handle_update_estimate(){
 }
 
 function check_for_completion(){
-    if (!requested)
-        return;
-    const url = document.getElementById("url").value;
-
-    if (url == null || url == "")
-        return;
-
-    const fetch_request = new XMLHttpRequest();
-    fetch_request.onload = handle_fetch_results;
-    fetch_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
-    fetch_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    fetch_request.send(url);
+    if (requested && !(reqeusted_url == null || reqeusted_url == ""))
+    {
+        const fetch_request = new XMLHttpRequest();
+        fetch_request.onload = handle_fetch_results;
+        fetch_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
+        fetch_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        fetch_request.send(reqeusted_url);
+    }
 }
 
 function summarize_url(){
     const url = document.getElementById("url").value;
-    console.log(url);
+    // server will filter out double requests but we should still avoid making multiple.
+    if (reqeusted_url == url)
+    {
+        return;
+    }
 
     if (url == null || url == "")
     {
@@ -45,12 +47,10 @@ function summarize_url(){
     }
 
     requested = true;
+    reqeusted_url = url;
 
     const summarizer_request = new XMLHttpRequest();
     summarizer_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
-    summarizer_request.onload = function() {
-        console.log(this.status);
-    }
     summarizer_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     summarizer_request.send(url);
 
@@ -61,9 +61,4 @@ function summarize_url(){
     estimate_request.send(url);
 }
 
-function init(){
-    setInterval(check_for_completion, 5000);
-    // setup event handlers
-    document.getElementById('submit').onclick = summarize_url;
-}
-window.onload = init;
+setInterval(check_for_completion, 5000);
