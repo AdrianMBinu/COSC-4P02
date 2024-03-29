@@ -56,7 +56,7 @@ function summarize_url(){
 
     const estimate_request = new XMLHttpRequest();
     estimate_request.onload = handle_update_estimate;
-    estimate_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
+    estimate_request.open("POST", "https://cosc4p02.tpgc.me/s/estimate", true);
     estimate_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     estimate_request.send(url);
 }
