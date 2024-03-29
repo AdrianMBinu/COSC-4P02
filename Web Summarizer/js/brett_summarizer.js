@@ -61,4 +61,9 @@ function summarize_url(){
     estimate_request.send(url);
 }
 
-setInterval(check_for_completion, 5000);
+function init(){
+    setInterval(check_for_completion, 5000);
+    // setup event handlers
+    document.getElementById('submit').onsubmit = summarize_url;
+}
+window.onload = init;
