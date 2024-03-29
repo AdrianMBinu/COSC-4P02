@@ -6,11 +6,21 @@ function handle_fetch_results(){
     console.log(this.responseText);
     if (this.status != 200)
         return;
+
+    const json = JSON.parse(this.responseText);
+
+    // bad response, somehow we got here?
+    if (!json.has_summary){
+        console.log("hey we got here somehow");
+        return;
+    }
+
     requested = false;
+
     const url = document.getElementById("url").value;
     document.getElementById("url").value = "";
     const element = document.getElementById("results");
-    element.innerHTML = this.responseText;
+    element.innerHTML = json.summary;
     element.className = "";
 }
 
