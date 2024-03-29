@@ -5,11 +5,9 @@
         <script src="../js/brett_summarizer.js"></script>
     </head>
     <body>
-        <form onsubmit="summarize_url();">
-            <input type="text", id="url">
-            <label for="url">Url to Summarize:</label>
-            <input type="submit">
-        </form>
+        <input type="text", id="url">
+        <label for="url">Url to Summarize:</label>
+        <button onsubmit="summarize_url();">
         <p id="results" class="disable_display"></p>
     </body>
 </html>
