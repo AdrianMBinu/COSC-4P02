@@ -1,6 +1,9 @@
+var requested = false;
+
 function handle_fetch_results(){
     if (this.status != 200)
         return;
+    requested = false;
     const url = document.getElementById("url").value;
     document.getElementById("url").value = "";
     document.getElementById("results").innerHTML = this.responseText;
@@ -11,10 +14,14 @@ function handle_update_estimate(){
     if (this.status != 200)
         return;
     const json = JSON.parse(this.responseText);
-    document.getElementById("results").innerHTML = "Estimated Time Remaining: " + json.days + " Days " + json.hours + " Hours " + json.minutes + " Minutes " + json.seconds + " Seconds";
+    const element = document.getElementById("results");
+    element.className = "";
+    element.innerHTML = "Estimated Time Remaining: " + json.days + " Days " + json.hours + " Hours " + json.minutes + " Minutes " + json.seconds + " Seconds";
 }
 
 function check_for_completion(){
+    if (!requested)
+        return;
     const url = document.getElementById("url").value;
 
     if (url == null || url == "")
@@ -22,7 +29,7 @@ function check_for_completion(){
 
     const fetch_request = new XMLHttpRequest();
     fetch_request.onload = handle_fetch_results;
-    fetch_request.open("POST", "../s/fetch", true);
+    fetch_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
     fetch_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     fetch_request.send(url);
 }
@@ -37,8 +44,10 @@ function summarize_url(){
         return;
     }
 
+    requested = true;
+
     const summarizer_request = new XMLHttpRequest();
-    summarizer_request.open("POST", "../s/request", true);
+    summarizer_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
     summarizer_request.onload = function() {
         console.log(this.status);
     }
@@ -47,7 +56,7 @@ function summarize_url(){
 
     const estimate_request = new XMLHttpRequest();
     estimate_request.onload = handle_update_estimate;
-    estimate_request.open("POST", "../s/estimate", true);
+    estimate_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
     estimate_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     estimate_request.send(url);
 }
