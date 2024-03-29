@@ -39,6 +39,9 @@ function summarize_url(){
 
     const summarizer_request = new XMLHttpRequest();
     summarizer_request.open("POST", "../s/request", true);
+    summarizer_request.onload = function() {
+        console.log(this.status);
+    }
     summarizer_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     summarizer_request.send(url);
 
