@@ -2,6 +2,8 @@ var requested = false;
 var reqeusted_url = "";
 
 function handle_fetch_results(){
+    console.log(this.status);
+    console.log(this.responseText);
     if (this.status != 200)
         return;
     requested = false;
@@ -48,6 +50,15 @@ function summarize_url(){
 
     requested = true;
     reqeusted_url = url;
+
+    const fetch_request = new XMLHttpRequest();
+    fetch_request.onload = handle_fetch_results;
+    fetch_request.open("POST", "https://cosc4p02.tpgc.me/s/fetch", false);
+    fetch_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    fetch_request.send(url);
+
+    if (!requested)
+        return;
 
     const summarizer_request = new XMLHttpRequest();
     summarizer_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
