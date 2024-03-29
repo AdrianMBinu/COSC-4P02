@@ -81,7 +81,7 @@ def process_url(url):
 	print("wrote summary of "+str(url)+" to database ["+str(time.ctime())+"]")
  
 def get_time_estimate():
-    command = '''WITH total_time_sec AS (
+	command = '''WITH total_time_sec AS (
 					SELECT 
 						AVG(TIMESTAMPDIFF(SECOND, start, end)) AS seconds 
 					FROM summaries 
@@ -103,21 +103,22 @@ def get_time_estimate():
 					FLOOR(minutes_part / 60) as minutes,
 					seconds_part as seconds
 				FROM differences;'''
-    dbCursor.execute( command )
-    if (dbCursor.rowcount > 1):
-        print("We have a bit of an error in the SQL statement!")
-    row_data = dbCursor.fetchone()
-    # make sure the cursor is clear of any extra data. should not do anything
-    dbCursor.fetchall()
-    
-    data = {
-		"days": int(row_data[0]),
-		"hours": int(row_data[1]),
-		"minutes": int(row_data[2]),
-		"seconds": int(row_data[3])
-	}
-    
-    return json.dumps(data)
+	dbCursor.execute( command )
+	if (dbCursor.rowcount > 1):
+		print("We have a bit of an error in the SQL statement!")
+	row_data = dbCursor.fetchone()
+	# make sure the cursor is clear of any extra data. should not do anything
+	dbCursor.fetchall()
+	try:
+		data = {
+			"days": int(row_data[0]),
+			"hours": int(row_data[1]),
+			"minutes": int(row_data[2]),
+			"seconds": int(row_data[3])
+		}
+		return json.dumps(data)
+	except Exception:
+		return "{'days': 0, 'hours': 0, 'minutes': 0, 'seconds': 0}";
     
 
 class app(BaseHTTPRequestHandler):
