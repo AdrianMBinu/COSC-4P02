@@ -22,7 +22,7 @@ function check_for_completion(){
 
     const fetch_request = new XMLHttpRequest();
     fetch_request.onload = handle_fetch_results;
-    fetch_request.open("POST", "https://cosc4p02.tpgc.me/s/fetch", true);
+    fetch_request.open("POST", "../s/fetch", true);
     fetch_request.setRequestHeader("Content-type", "text/html");
     fetch_request.send(url);
 }
@@ -38,13 +38,13 @@ function summarize_url(){
     }
 
     const summarizer_request = new XMLHttpRequest();
-    summarizer_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
+    summarizer_request.open("POST", "../s/request", true);
     summarizer_request.setRequestHeader("Content-type", "text/html");
     summarizer_request.send(url);
 
     const estimate_request = new XMLHttpRequest();
     estimate_request.onload = handle_update_estimate;
-    estimate_request.open("POST", "https://cosc4p02.tpgc.me/s/estimate", true);
+    estimate_request.open("POST", "../s/estimate", true);
     estimate_request.setRequestHeader("Content-type", "text/html");
     estimate_request.send(url);
 }
