@@ -9,7 +9,9 @@ function handle_fetch_results(){
     requested = false;
     const url = document.getElementById("url").value;
     document.getElementById("url").value = "";
-    document.getElementById("results").innerHTML = this.responseText;
+    const element = document.getElementById("results");
+    element.innerHTML = this.responseText;
+    element.className = "";
 }
 
 function handle_update_estimate(){
