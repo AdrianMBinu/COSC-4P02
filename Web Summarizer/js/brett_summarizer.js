@@ -31,6 +31,7 @@ function handle_fetch_results(request_obj)
 // shows the rough time estimate this request is going to take (based on the last 10 requests)
 function handle_update_estimate()
 {
+    console.log(this.responseText)
     if (this.status != 200 && this.responseText == "" || this.responseText == null)
         return;
     const json = JSON.parse(this.responseText);
