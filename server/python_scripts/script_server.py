@@ -77,13 +77,16 @@ def get_url_sentiment(url):
 
 def get_url(url):
 	if url.startswith('{'):
-		json_data = json.loads(url)
-		if json_data["type"] == "summary":
-			return get_url_summary(json_data["url"])
-		elif json_data["type"] == "sentiment":
-			return get_url_sentiment(json_data["url"])
-		else:
-			print("Unsupported type!")
+		try:
+			json_data = json.loads(url)
+			if json_data["type"] == "summary":
+				return get_url_summary(json_data["url"])
+			elif json_data["type"] == "sentiment":
+				return get_url_sentiment(json_data["url"])
+			else:
+				print("Unsupported type!")
+		except:
+			print("json error")
 	return get_url_summary(url)
 
 def run_summarizer(url, word_count = 300):
@@ -157,19 +160,22 @@ def run_sentiment(url, word_count = 300):
 def process_url(request_body):
 	url = request_body
 	if request_body.startswith("{"):
-		json_data = json.loads(request_body)
-		word_count
 		try:
-			word_count = int(json_data["word_count"])
+			json_data = json.loads(request_body)
+			word_count
+			try:
+				word_count = int(json_data["word_count"])
+			except:
+				word_count = 300
+			url = json_data["url"]
+			if json_data["type"] == "summary":
+				run_summarizer(url, word_count)
+			elif json_data["type"] == "sentiment":
+				run_sentiment(url, word_count)
+			else:
+				print("unsupported type!")
 		except:
-			word_count = 300
-		url = json_data["url"]
-		if json_data["type"] == "summary":
-			run_summarizer(url, word_count)
-		elif json_data["type"] == "sentiment":
-			run_sentiment(url, word_count)
-		else:
-			print("unsupported type!")
+			print('json error')
 	else:
 		run_summarizer(url)
 	
