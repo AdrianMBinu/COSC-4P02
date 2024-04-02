@@ -1,5 +1,6 @@
 var requested = false;
 var requested_url = "";
+var type = "summary";
 
 // handler for fetch request
 // updates innerhtml of the results tag to whatever the summary is. Does nothing if summary is not complete.
@@ -52,7 +53,11 @@ function send_fetch_request(url, on_complete = noop)
     };
     fetch_request.open("POST", "https://cosc4p02.tpgc.me/s/fetch", true);
     fetch_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    fetch_request.send(url);
+    json_data = {
+        "url": url,
+        "type": type
+    };
+    fetch_request.send(json_data);
 }
 
 // periodic function for checking if the request has been completed.
@@ -66,6 +71,11 @@ function check_for_completion()
 function summarize_url()
 {
     const url = document.getElementById("url").value;
+    const word_count = document.getElementById("word_count").value;
+    if (document.getElementById("sentiment").checked)
+        type = "sentiment";
+    else
+        type = "summary";
     // server will filter out double requests but we should still avoid making multiple.
     if (requested_url == url)
         return;
@@ -89,7 +99,12 @@ function summarize_url()
         const summarizer_request = new XMLHttpRequest();
         summarizer_request.open("POST", "https://cosc4p02.tpgc.me/s/request", true);
         summarizer_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        summarizer_request.send(url);
+        json_data = {
+            "url": url,
+            "word_count": word_count,
+            "type": type
+        };
+        summarizer_request.send(json_data);
 
         // send a request for a time estimate. server side MIGHT use the url to determine a more accurate estimate
         // for now it currently use returns the average time of the last 10, no accounting for character count.
