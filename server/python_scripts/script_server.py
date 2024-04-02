@@ -48,7 +48,7 @@ def get_url_summary(url):
 		status = True
 	data = {
 		"has_url": hasUrl,
-		"has_summary": status,
+		"has_text": status,
 		"summary": summary.strip()
 	}
  
@@ -69,7 +69,7 @@ def get_url_sentiment(url):
 		status = True
 	data = {
 		"has_url": hasUrl,
-		"has_sentiment": status,
+		"has_text": status,
 		"sentiment": sentiment.strip()
 	}
  

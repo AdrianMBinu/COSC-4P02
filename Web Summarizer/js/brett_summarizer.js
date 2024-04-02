@@ -13,7 +13,7 @@ function handle_fetch_results(request_obj)
     const json = JSON.parse(request_obj.responseText);
 
     // bad response, somehow we got here?
-    if (!json.has_summary){
+    if (!json.has_text){
         console.log("hey we got here somehow");
         return;
     }
