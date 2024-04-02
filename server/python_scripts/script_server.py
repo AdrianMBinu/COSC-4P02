@@ -75,6 +75,17 @@ def get_url_sentiment(url):
  
 	return (status, json.dumps(data));
 
+def get_url(url):
+	if url.startswith('{'):
+		json_data = json.loads(url)
+		if json_data["type"] == "summary":
+			return get_url_summary(json_data["url"])
+		elif json_data["type"] == "sentiment":
+			return get_url_sentiment(json_data["url"])
+		else:
+			print("Unsupported type!")
+	return get_url_summary(url)
+
 def run_summarizer(url, word_count = 300):
     # We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
 	print(f"Trying to lock for url (summary) '{url}'!")
@@ -218,14 +229,36 @@ class app(BaseHTTPRequestHandler):
 		# vv None of this is optimal or readable code, too bad vv
 		if re.search('/s/fetch', self.path):
 			request_body = self.get_content()
-			status, json_response = get_url_summary(request_body)
+			status, json_response = get_url(request_body)
    
+			self.set_headers(200 if status else 206)
+			self.wfile.write(bytes(json_response, "utf8"))
+		elif re.search('/s/fetch_sentiment', self.path):
+			request_body = self.get_content()
+			status, json_response = get_url_sentiment(request_body)
+			self.set_headers(200 if status else 206)
+			self.wfile.write(bytes(json_response, "utf8"))
+		elif re.search('/s/fetch_summary', self.path):
+			request_body = self.get_content()
+			status, json_response = get_url_summary(request_body)
 			self.set_headers(200 if status else 206)
 			self.wfile.write(bytes(json_response, "utf8"))
 		elif re.search('/s/request', self.path):
 			self.set_headers(200, "text/html")
 			request_body = self.get_content()
 			background_thread = threading.Thread(target=process_url, args=(request_body,))
+			background_thread.daemon = True
+			background_thread.start()
+		elif re.search('/s/request_sentiment', self.path):
+			self.set_headers(200, "text/html")
+			request_body = self.get_content()
+			background_thread = threading.Thread(target=run_sentiment, args=(request_body,))
+			background_thread.daemon = True
+			background_thread.start()
+		elif re.search('/s/request_summary', self.path):
+			self.set_headers(200, "text/html")
+			request_body = self.get_content()
+			background_thread = threading.Thread(target=run_summarizer, args=(request_body,))
 			background_thread.daemon = True
 			background_thread.start()
 		elif re.search('/s/estimate', self.path):
