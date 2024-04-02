@@ -142,3 +142,15 @@ Mar 26
 | Michael     | Present     | 
 | Brett       | Present     | 
 
+Apr 2
+| Name        | Attendance      |
+| ----------- | -----------     |
+| Maulik      | Present         | 
+| Adrian      | Not Present     | 
+| Deevan      | Present         | 
+| Jason       | Present         | 
+| Thanushan   | Present         | 
+| Vishant     | Present         | 
+| Michael     | Present         | 
+| Brett       | Present         |
+
