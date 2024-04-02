@@ -57,7 +57,7 @@ function send_fetch_request(url, on_complete = noop)
         "url": url,
         "type": type
     };
-    fetch_request.send(json_data.stringify());
+    fetch_request.send(JSON.stringify(json_data));
 }
 
 // periodic function for checking if the request has been completed.
@@ -104,7 +104,7 @@ function summarize_url()
             "word_count": word_count,
             "type": type
         };
-        summarizer_request.send(json_data.stringify());
+        summarizer_request.send(JSON.stringify(json_data));
 
         // send a request for a time estimate. server side MIGHT use the url to determine a more accurate estimate
         // for now it currently use returns the average time of the last 10, no accounting for character count.
