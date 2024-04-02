@@ -4,15 +4,22 @@ import argparse
 import ffmpreg
 from fetch import fetch_and_split
 
-def summarize(text):
+def run_llm(prompt):
 	llm_url = 'http://192.168.69.3:6980/v1/completions'
-	prompt = re.sub(r'[^\x00-\x7F]+|\\','',text)
-
-	data = '{"model" : "llama-2-7b-chat/ggml-model-q4_0.gguf", "prompt": "'+prompt+'. A summary of all the previous text in 300 words is", "temperature": 0.7}'
+	data = '{"model" : "llama-2-7b-chat/ggml-model-q4_0.gguf", "prompt": "'+prompt+'", "temperature": 0.7}'
 
 	x = requests.post(llm_url,data, headers = {"Content-Type": "application/json"})
 
 	return x.text
+
+def sentiment(text, word_count = 300):
+	prompt = re.sub(r'[^\x00-\x7F]+|\\','',text) + ". A sentiment analysis of all the previous text in " + str(word_count) + " words is"
+	return run_llm(prompt)
+
+def summarize(text, word_count = 300):
+	prompt = re.sub(r'[^\x00-\x7F]+|\\','',text) + ". A summary of all the previous text in " + str(word_count) + " words is"
+	return run_llm(prompt)
+
 
 def handle_url(url):
     if not url.startswith('http://') and not url.startswith('https://'):

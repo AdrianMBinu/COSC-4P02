@@ -2,7 +2,7 @@ import json #import json utilities
 import re #imports regExp
 import mysql.connector #for mySQL functionality
 from http.server import BaseHTTPRequestHandler, HTTPServer #imports http & server functionality
-from summarizer import handle_url, summarize
+from summarizer import handle_url, summarize, sentiment
 import threading
 import time #for sleep and time-based dev functions
 
@@ -17,8 +17,16 @@ dbCursor = sumDB.cursor()
 # evil :3
 lock = threading.Lock()
 
-def has_url(url):
+def has_url_summary(url):
 	look_command = "SELECT url FROM summaries WHERE url=%s"
+	dbCursor.execute(look_command, (str(url),))
+	dbCursor.fetchall()
+	if (dbCursor.rowcount > 0):
+		return True
+	return False
+
+def has_url_sentiment(url):
+	look_command = "SELECT url FROM sentiments WHERE url=%s"
 	dbCursor.execute(look_command, (str(url),))
 	dbCursor.fetchall()
 	if (dbCursor.rowcount > 0):
@@ -32,7 +40,7 @@ def get_url_summary(url):
 	result = dbCursor.fetchone()
 	dbCursor.fetchall()
  
-	hasUrl = has_url(url)
+	hasUrl = has_url_summary(url)
 	status = False
 	summary = ""
 	if hasUrl and (result[0] is not None):
@@ -46,14 +54,35 @@ def get_url_summary(url):
  
 	return (status, json.dumps(data));
 
-def process_url(url):
-	# We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
-	print(f"Trying to lock for url '{url}'!")
+def get_url_sentiment(url):
+	print(url)
+	fetchCommand = "SELECT sentiment FROM sentiments WHERE url=%s"
+	dbCursor.execute( fetchCommand, (str(url),) )
+	result = dbCursor.fetchone()
+	dbCursor.fetchall()
+ 
+	hasUrl = has_url_sentiment(url)
+	status = False
+	sentiment = ""
+	if hasUrl and (result[0] is not None):
+		sentiment = str(result[0])
+		status = True
+	data = {
+		"has_url": hasUrl,
+		"has_sentiment": status,
+		"sentiment": sentiment.strip()
+	}
+ 
+	return (status, json.dumps(data));
+
+def run_summarizer(url, word_count = 300):
+    # We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
+	print(f"Trying to lock for url (summary) '{url}'!")
 	lock.acquire()
-	print(f"Lock aquired for url '{url}'!")
+	print(f"Lock aquired for url (summary) '{url}'!")
 	try:
 		# we do not want to be able to queue the same url more than once (to save resources).
-		if (has_url(url)):
+		if (has_url_summary(url)):
 			print("I already have this url SILLY")
 			return
 	
@@ -68,7 +97,7 @@ def process_url(url):
 		dbCursor.execute( word_count_command, (len(text), str(url)) )
 		sumDB.commit()
   
-		summary = summarize(text)
+		summary = summarize(text, word_count)
 	
 		sum_text = json.loads(summary)["choices"][0]["text"].strip()
 		
@@ -79,6 +108,60 @@ def process_url(url):
 		print("Unlocking")
 		lock.release()
 	print("wrote summary of "+str(url)+" to database ["+str(time.ctime())+"]")
+ 
+def run_sentiment(url, word_count = 300):
+     # We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
+	print(f"Trying to lock for url (sentiment) '{url}'!")
+	lock.acquire()
+	print(f"Lock aquired for url (sentiment) '{url}'!")
+	try:
+		# we do not want to be able to queue the same url more than once (to save resources).
+		if (has_url_sentiment(url)):
+			print("I already have this url SILLY")
+			return
+	
+		begin_command = 'INSERT INTO sentiments(url, url_word_count) VALUES (%s, 0)'
+		dbCursor.execute( begin_command, (str(url),) )
+		sumDB.commit()
+	
+		# Handle either video or text site, return text or audio -> text content
+		text = handle_url(url)
+  
+		word_count_command = 'UPDATE sentiments SET url_word_count=%s WHERE url=%s'
+		dbCursor.execute( word_count_command, (len(text), str(url)) )
+		sumDB.commit()
+  
+		sentiment = sentiment(text, word_count)
+	
+		sent_text = json.loads(sentiment)["choices"][0]["text"].strip()
+		
+		end_command = 'UPDATE sentiments SET sentiment=%s, sentiment_word_count=%s, end=CURRENT_TIMESTAMP() WHERE url=%s'
+		dbCursor.execute( end_command, (str(sent_text), len(sent_text), str(url)) )
+		sumDB.commit()
+	finally:
+		print("Unlocking")
+		lock.release()
+	print("wrote summary of "+str(url)+" to database ["+str(time.ctime())+"]")
+
+def process_url(request_body):
+	url = request_body
+	if request_body.startswith("{"):
+		json_data = json.loads(request_body)
+		word_count
+		try:
+			word_count = int(json_data["word_count"])
+		except:
+			word_count = 300
+		url = json_data["url"]
+		if json_data["type"] == "summary":
+			run_summarizer(url, word_count)
+		elif json_data["type"] == "sentiment":
+			run_sentiment(url, word_count)
+		else:
+			print("unsupported type!")
+	else:
+		run_summarizer(url)
+	
  
 def get_time_estimate():
 	command = '''WITH total_time_sec AS (
