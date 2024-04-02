@@ -49,7 +49,7 @@ def get_url_summary(url):
 	data = {
 		"has_url": hasUrl,
 		"has_text": status,
-		"summary": summary.strip()
+		"text": summary.strip()
 	}
  
 	return (status, json.dumps(data));
@@ -70,7 +70,7 @@ def get_url_sentiment(url):
 	data = {
 		"has_url": hasUrl,
 		"has_text": status,
-		"sentiment": sentiment.strip()
+		"text": sentiment.strip()
 	}
  
 	return (status, json.dumps(data));

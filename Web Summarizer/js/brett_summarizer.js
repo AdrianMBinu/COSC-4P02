@@ -24,7 +24,7 @@ function handle_fetch_results(request_obj)
     // clear url and update the summary text, and enable displaying of the <p>
     const element = document.getElementById("results");
     document.getElementById("url").value = "";
-    element.innerHTML = json.summary;
+    element.innerHTML = json.text;
     element.className = "";
 }
 
