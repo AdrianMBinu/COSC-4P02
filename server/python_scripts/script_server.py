@@ -2,7 +2,7 @@ import json #import json utilities
 import re #imports regExp
 import mysql.connector #for mySQL functionality
 from http.server import BaseHTTPRequestHandler, HTTPServer #imports http & server functionality
-from summarizer import handle_url, summarize, sentiment
+import summarizer
 import threading
 import time #for sleep and time-based dev functions
 
@@ -85,7 +85,8 @@ def get_url(url):
 				return get_url_sentiment(json_data["url"])
 			else:
 				print("Unsupported type!")
-		except:
+		except Exception as e:
+			print(e)
 			print("json error")
 	return get_url_summary(url)
 
@@ -105,13 +106,13 @@ def run_summarizer(url, word_count = 300):
 		sumDB.commit()
 	
 		# Handle either video or text site, return text or audio -> text content
-		text = handle_url(url)
+		text = summarizer.handle_url(url)
   
 		word_count_command = 'UPDATE summaries SET url_word_count=%s WHERE url=%s'
 		dbCursor.execute( word_count_command, (len(text), str(url)) )
 		sumDB.commit()
   
-		summary = summarize(text, word_count)
+		summary = summarizer.summarize(text, word_count)
 	
 		sum_text = json.loads(summary)["choices"][0]["text"].strip()
 		
@@ -139,13 +140,13 @@ def run_sentiment(url, word_count = 300):
 		sumDB.commit()
 	
 		# Handle either video or text site, return text or audio -> text content
-		text = handle_url(url)
+		text = summarizer.handle_url(url)
   
 		word_count_command = 'UPDATE sentiments SET url_word_count=%s WHERE url=%s'
 		dbCursor.execute( word_count_command, (len(text), str(url)) )
 		sumDB.commit()
   
-		sentiment = sentiment(text, word_count)
+		sentiment = summarizer.sentiment(text, word_count)
 	
 		sent_text = json.loads(sentiment)["choices"][0]["text"].strip()
 		
@@ -155,18 +156,19 @@ def run_sentiment(url, word_count = 300):
 	finally:
 		print("Unlocking")
 		lock.release()
-	print("wrote summary of "+str(url)+" to database ["+str(time.ctime())+"]")
+	print("wrote sentiment of "+str(url)+" to database ["+str(time.ctime())+"]")
 
 def process_url(request_body):
 	url = request_body
 	if request_body.startswith("{"):
 		try:
 			json_data = json.loads(request_body)
-			word_count
+			word_count = 300
 			try:
 				word_count = int(json_data["word_count"])
 			except:
 				word_count = 300
+			print(f"Running with word count {word_count}")
 			url = json_data["url"]
 			if json_data["type"] == "summary":
 				run_summarizer(url, word_count)
@@ -174,7 +176,8 @@ def process_url(request_body):
 				run_sentiment(url, word_count)
 			else:
 				print("unsupported type!")
-		except:
+		except Exception as e:
+			print(e)
 			print('json error')
 	else:
 		run_summarizer(url)
