@@ -184,20 +184,26 @@ body,
         }
 
         .middleLogo {
-            margin-top: 80px;
+            margin: 0px;
             display: flex;
             justify-content: center;
         }
-
+        
         .logo {
-            width: 30%;
-            height: 30%;
-            margin-bottom: -15dvh;
-            margin-top: -15dvh;
+            width: 28%;
+            height: 28%;
+            margin-bottom: -10dvh;
+            margin-top: -7dvh;
+        } /* Very good */
+
+        .title {
+            color: #DDD;
+            font-size: 50px;
         }
 
         .shortSecCon {
             margin: 0;
+            justify-content: center;
         }
 
         .shortSecConh1 {
@@ -319,4 +325,8 @@ body,
 
         .link-item:hover {
             color: #149cbe;
+        }
+
+        .input-and-title-container {
+            max-width: 50vw;
         }

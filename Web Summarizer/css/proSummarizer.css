@@ -228,12 +228,12 @@ h1 {
 }
 
 .resultSymbols {
-    filter: invert(50%) hue-rotate(86deg);
+    filter: brightness(0) invert(1);
     margin-left: 20px;
 }
 
 .resultSymbols:hover {
-    filter: invert(30%) hue-rotate(86deg);
+    filter: brightness(100) hue-rotate(60deg) invert(0.5);
     cursor: pointer;
 }
 
@@ -279,8 +279,11 @@ h1 {
 
 .renameSection {
     display: flex;
-    justify-content: center;
     margin-bottom: 10vh;
+}
+
+.input-div{
+    justify-content: center;
 }
 
 .enter {
@@ -320,7 +323,10 @@ h1 {
 }
 
 .sumResultDiv {
-    margin-bottom: 5vh;
+    width: 60vw;
+    display: flex;
+    justify-content: left;
+    margin-bottom: 10px;
 }
 
 .textarea {

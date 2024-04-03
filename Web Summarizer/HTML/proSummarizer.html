@@ -54,16 +54,16 @@
         <div class="content">
             <div class="secondCon">
                 <h1 class="title">Input:</h1>
-                <div class="sumResultDiv">
-                    <textarea class="textarea" id="inputarea" name="inputarea">
-                        It was a dark and stormy night...
-                    </textarea>
+                <div class="renameSection">
+                    <input class="URLLink" id="longUrl" name="longUrl" placeholder="Input URL Here"
+                        onkeypress="handleKeyPress(event)" required>
+                    </input>
+                    <button class="enter" type="button" onclick="submitForm(); showResult()">Enter</button>
                 </div>
 
                 <h1 class="title">Summary:</h1>
                 <div class="sumResultDiv">
                     <textarea class="textarea" id="resultarea" name="resultarea" disabled>
-                        It was a dark and stormy night...
                     </textarea>
                 </div>
                 <div>
