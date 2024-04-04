@@ -90,7 +90,34 @@ def get_url(url):
 			print("json error")
 	return get_url_summary(url)
 
-def run_summarizer(url, word_count = 300):
+def get_all_user_urls(type, userid):
+    # result of poor design dummy
+	column = "sentiment"
+	table = "sentiments"
+	wordcount = "sentiment_word_count"
+	if type == "summary":
+		column = "summary"
+		table = "summaries"
+		wordcount = "summary_word_count"
+	fetchCommand = "SELECT url,url_word_count,%s,%s FROM %s WHERE userid=%s"
+	dbCursor.execute( fetchCommand, (wordcount, column, table, userid))
+	results = dbCursor.fetchall()
+	results_struct = []
+	for result in results:
+		results_struct.append({
+			"url": result[0],
+			"url_word_count": result[1],
+			"result_word_count": result[2],
+			"result_text": results[3]
+		})
+		print(result)
+	data = {
+		"results": results_struct
+	}
+ 
+	return json.dumps(data);
+
+def run_summarizer(url, userid, word_count = 300):
     # We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
 	print(f"Trying to lock for url (summary) '{url}'!")
 	lock.acquire()
@@ -101,8 +128,8 @@ def run_summarizer(url, word_count = 300):
 			print("I already have this url SILLY")
 			return
 	
-		begin_command = 'INSERT INTO summaries(url, url_word_count) VALUES (%s, 0)'
-		dbCursor.execute( begin_command, (str(url),) )
+		begin_command = 'INSERT INTO summaries(url, url_word_count, userid) VALUES (%s, 0, %s)'
+		dbCursor.execute( begin_command, (str(url), userid) )
 		sumDB.commit()
 	
 		# Handle either video or text site, return text or audio -> text content
@@ -124,7 +151,7 @@ def run_summarizer(url, word_count = 300):
 		lock.release()
 	print("wrote summary of "+str(url)+" to database ["+str(time.ctime())+"]")
  
-def run_sentiment(url, word_count = 300):
+def run_sentiment(url, userid, word_count = 300):
      # We need the lock to make sure that there is no double requests of urls. The LLM will struggle if we run more than one query at once.
 	print(f"Trying to lock for url (sentiment) '{url}'!")
 	lock.acquire()
@@ -135,8 +162,8 @@ def run_sentiment(url, word_count = 300):
 			print("I already have this url SILLY")
 			return
 	
-		begin_command = 'INSERT INTO sentiments(url, url_word_count) VALUES (%s, 0)'
-		dbCursor.execute( begin_command, (str(url),) )
+		begin_command = 'INSERT INTO sentiments(url, url_word_count, userid) VALUES (%s, 0, %s)'
+		dbCursor.execute( begin_command, (str(url), userid) )
 		sumDB.commit()
 	
 		# Handle either video or text site, return text or audio -> text content
@@ -170,17 +197,22 @@ def process_url(request_body):
 				word_count = 300
 			print(f"Running with word count {word_count}")
 			url = json_data["url"]
+			userid = 0
+			try:
+				userid = int(json_data["userid"])
+			except:
+				userid = 0
 			if json_data["type"] == "summary":
-				run_summarizer(url, word_count)
+				run_summarizer(url, userid, word_count)
 			elif json_data["type"] == "sentiment":
-				run_sentiment(url, word_count)
+				run_sentiment(url, userid, word_count)
 			else:
 				print("unsupported type!")
 		except Exception as e:
 			print(e)
 			print('json error')
 	else:
-		run_summarizer(url)
+		run_summarizer(url, 0)
 	
  
 def get_time_estimate():
@@ -239,9 +271,21 @@ class app(BaseHTTPRequestHandler):
 		if re.search('/s/fetch', self.path):
 			request_body = self.get_content()
 			status, json_response = get_url(request_body)
-   
 			self.set_headers(200 if status else 206)
 			self.wfile.write(bytes(json_response, "utf8"))
+		elif re.search('/s/user_requests_fetch', self.path):
+			request_body = self.get_content()
+			json_data = json.loads(request_body)
+			userid = 0
+			type = "summary"
+			try:
+				type = json_data['type']
+				userid = int(json_data['userid'])
+				self.set_headers(200)
+				json_response = get_all_user_urls(type, userid)
+				self.wfile.write(bytes(json_response, "utf8"))
+			except:
+				self.set_headers(206)
 		elif re.search('/s/fetch_sentiment', self.path):
 			request_body = self.get_content()
 			status, json_response = get_url_sentiment(request_body)
