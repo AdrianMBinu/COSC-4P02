@@ -234,8 +234,7 @@ h1 {
 }
 
 .resultSymbols:hover {
-    filter: brightness(0.5) saturate(3) hue-rotate(180deg);
-    transition: filter 0.2s ease;
+    filter: brightness(100) hue-rotate(60deg) invert(0.5);
     cursor: pointer;
 }
 
@@ -285,6 +284,19 @@ h1 {
     margin-bottom: 10vh;
 }
 
+.middleLogo {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    width: 30%;
+    height: 30%;
+    margin-bottom: -15dvh;
+    margin-top: -12dvh;
+}
+
 .enter {
     background-color: transparent;
     border: 3px solid;
@@ -324,7 +336,7 @@ h1 {
 .sumResultDiv {
     display: flex;
     justify-content: center;
-    margin-bottom: 10vh;
+    margin-bottom: 10px;
 }
 
 .textarea {
@@ -344,8 +356,4 @@ h1 {
 
 .textarea:focus {
     outline: 3px solid rgba(255, 255, 255, 0.5);
-}
-
-.title {
-    color: #DDD;
 }
