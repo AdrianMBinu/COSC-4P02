@@ -9,6 +9,9 @@ body,
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 14px;
         }
 
         .navbar {
@@ -17,11 +20,25 @@ body,
             justify-content: space-between;
             width: 100%;
             background-color: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(4px);
-            color: white;
-            padding: 10px 0;
+            backdrop-filter: blur(2px);
+            color: #EEE;
+            padding: 0;
             position: relative;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            max-height: 50px;
             /* Ensure absolute positioning within navbar */
+        }
+        .navbar li {
+            float: right;
+            display: inline;
+        }
+        .navbar li a {
+            display: block;
+            text-align: center;
+            padding: 13px 32px;
+            text-transform: uppercase;
+            opacity: 0.35;
         }
 
         .navbar-menu ul {
@@ -61,9 +78,61 @@ body,
 
         .navbar-title {
             /* Adjust based on your layout needs */
-            margin-left: 5px;
-            text-align: left;
+            margin: 0;
+            float: left;
+            display: flex;
+            align-items: center;
+            left: 1vw;
         }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+          }
+          .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          .switchClass{
+            margin-top: 3px !important;
+            padding-right: 2px !important;
+        }
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+          }
+          .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+          }
+          input:checked + .slider {
+            background-color: #FF0000;
+          }
+          input:checked + .slider:before {
+            transform: translateX(26px);
+          }
+          .dark-theme {
+            background-image: url('../images/dark_background.jpg'); /* Dark theme background image */
+          }
+
+        
 
         /* Ensure the page-title class does not interfere with alignment */
         .page-title {
@@ -71,11 +140,15 @@ body,
             padding: 0;
         }
 
+        .text.medium{
+            font-size: 22px;
+        }
+
 
         .main-content {
             display: flex;
             flex-direction: row;
-            height: calc(100% - 40px);
+            height: calc(100% - 50px);
             /* Adjust based on the navbar's height */
         }
 
@@ -136,23 +209,41 @@ body,
             padding: 10px 0;
             font-weight: 400;
             margin-right: 5%;
+            display: inline-grid;
         }
+
+        .summary-item a {
+            text-decoration: none;
+            color: #BBB;
+        }
+
+        .link-info{
+            color: aliceblue;
+        }
+
+        .link-click{
+            color: aliceblue;
+        }
+
+        .link-url{
+            color: #149cbe;
+            text-decoration: none;
+        }
+
+        .link-url:hover{
+            text-decoration: underline;
+        }
+
 
         .summary-item:last-child,
         .link-item:last-child {
             border-bottom: none;
         }
 
-        .summary-item a,
-        .link-item a {
-            text-decoration: none;
-            color: #BBB;
-        }
-
         .summary-item span,
         .link-item span {
             font-size: 14px;
-            color: #999;
+            color: #DDD;
         }
 
         .dashboard-title-section {
@@ -247,7 +338,6 @@ body,
             border-radius: 20px;
             display: flex;
             justify-content: flex-end;
-            margin-top: 25px;
             margin-left: 2dvw;
             display: flex;
             justify-content: center;
@@ -255,8 +345,9 @@ body,
         }
 
         .counter h2 {
-            margin-top: 12px;
-            font-size: 14px;
+            margin-top: 0;
+            font-size: 30px;
+            color: aliceblue;
         }
 
         .URLLink {

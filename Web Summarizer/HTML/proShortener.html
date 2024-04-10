@@ -5,23 +5,39 @@
     <meta charset="UTF-8">
     <link href="../css/proShortener.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full-Width Design</title>
+    <title>Pro Shortener</title>
+
+    <style>
+        .link-info {
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 100%;
+            text-overflow: ellipsis;
+        }
+
+    </style>    
 </head>
+
 
 <body>
     <div class="navbar">
-        <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
-                style="width:40px;"></a>
-        
         <div class="navbar-title">
+            <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
+                style="width:60px;"></a>
             <p class="text light medium page-title">Web Summarizer</p>
         </div>
         <div class="navbar-menu">
             <ul>
-                <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
-                <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
-                <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
+                <li class= "switchClass">
+                    <label class="switch">
+                      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+                    <span class="slider"></span>
+                    </label><!--this is the switch-->
+              </li>
                 <li><a href="../index.html" class="navbar-link">Home</a></li>
+                <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
+                <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
+                <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
             </ul>
         </div>
     </div>
@@ -31,21 +47,21 @@
             <div class="container">
                 <div class="title-containers">
                     <div class="dashboard-title-section">
-                        <h1 class="dashboard-title">Summarization History</h1>
+                        <h1 class="dashboard-title">Shortening  History</h1>
                     </div>
                 </div>
                 <div class="history-containers">
                     <div class="dashboard-section">
-                        <ul class="summary-list">
+                        <ul class="summary-list" id="summary-list">
                             <li class="link-item">
                                 <a href="#">Shortened Link 1
-                                <br>
-                                <span>Original URL: http://www.example.com</span></a>
+                                    <br>
+                                    <span>Original URL: http://www.example.com</span></a>
                             </li>
                             <li class="link-item">
                                 <a href="#">Shortened Link 2
-                                <br>
-                                <span>Original URL: http://www.example.org</span></a>
+                                    <br>
+                                    <span>Original URL: http://www.example.org</span></a>
                             </li>
                             <!-- Add more summarized content items here -->
                         </ul>
@@ -65,19 +81,13 @@
                             <input class="URLLink" id="longUrl" name="longUrl" placeholder="Paste Link Here"
                                 onkeypress="handleKeyPress(event)" required>
                             </input>
-                            <button class="enter" type="button" onclick="submitForm(); showResult()">Enter</button>
+                            <button class="enter" type="button" onclick="submitForm()">Enter</button>
                         </div>
                         <!-- <h1 class="shortSecConh1">Shortened URL:</h1> -->
                         <div class="renameSection" id="rename-result">
                             <input class="URLLink" id="ShortResultText" disabled />
                             <button class="enter" type="button" onclick="copyToClipboard()">Copy</button>
                             </input>
-                        </div>
-                    </div>
-                    <div class="shortThirdCon">
-                        <h1 class="shortSecConh1"># of Times Used:</h1>
-                        <div class="counter">
-                            <h2 id="counter">0</h2>
                         </div>
                     </div>
                 </div>
@@ -87,43 +97,172 @@
 
 </body>
 
+
 <script>
+
+    fetchUID()
+
+    function fetchUID() {
+        if (!window.globalVariable) {
+            window.globalVariable = "Non";
+        }
+        fetchUrls();
+    }
+
     function handleKeyPress(event) {
         if (event.key === "Enter") {
             submitForm();
-            showResult(); // Whenimplemented, should only be called after a sucessful shortening via AJAX success call --- this is for testing
         }
-
     }
 
-    function showResult() {
+    function showResult(shortUrl, clickCount) {
         var result = document.getElementById("rename-result");
         result.style.display = "flex";
+
+        document.getElementById('ShortResultText').value = shortUrl;
     }
 
-    // CHANGE ME
-    function submitForm() {
-        var longUrl = document.getElementById("longUrl").value;
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://web-summarizer.herokuapp.com/shorten", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                document.getElementById("ShortResultText").innerHTML = response.shortUrl;
-                document.getElementById("counter").innerHTML = response.counter;
-            }
+    async function submitForm() {
+        var url = document.getElementById("longUrl").value;
+        if (!url) {
+            alert("Please input a URL.");
+            return;
         }
-        xhr.send(JSON.stringify({ longUrl: longUrl }));
+
+        const data = {
+            "longUrl": url,
+            "userId": window.globalVariable
+        };
+
+        try {
+            const response = await fetch('https://cosc4p02.tpgc.me/u/shorten', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Bad network response (thrown in proSummarizer)');
+            }
+
+            const urlData = await response.json();
+            showResult(urlData.shortUrl, urlData.clickCount);
+        } catch (error) {
+            console.error(error.message)
+            showResult('Error fetching shortened url, try again later.', -1)
+        }
     }
 
 
-// CHANGE ME
+
     function copyToClipboard() {
-        var shortUrl = document.getElementById("ShortResultText").innerHTML;
-        var dummy = document.createElement("input");
-        document.body.appendChild(dummy);
-        dummy.setAttribute("id", "dummy_id");
+        const shortenedUrl = document.getElementById('ShortResultText').value;
+        navigator.clipboard.writeText(shortenedUrl)
+            .then(() => {
+                alert('Shortened URL copied to clipboard.');
+            })
+            .catch(err => {
+                console.error('Error in copying text: ', err);
+            });
+    }
+    function fetchUrls() {
+        // Fetch URLs from the server
+        fetch('https://cosc4p02.tpgc.me/u/urls', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(urls => {
+                // Filter URLs by clientId
+                const filteredUrls = urls.filter(url => url.userId === window.globalVariable);
+
+                // Sort the filtered URLs by createdAt timestamp in descending order
+                filteredUrls.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+                // Select the last 10 records
+                const lastTenUrls = filteredUrls.slice(0, 5);
+
+                const urlList = document.getElementById('summary-list');
+
+                // Clear previous content
+                urlList.innerHTML = '';
+
+                // Display the last 10 URLs with matching clientId
+                lastTenUrls.forEach(url => {
+                    var date = convertUTCToET(url.createdAt);
+                    const urlItem = document.createElement('li');
+                    urlItem.classList.add('link-item');
+                    // urlItem.innerHTML = `
+                    // <div>
+                    //     <h5>Long URL:</h5>
+                    //     <p><a href="${url.longUrl}" target="_blank">${url.longUrl}</a></p>
+                    //     <h5>Short URL:</h5>
+                    //     <p><a href="cosc4p02.tpgc.me/u/${url.shortCode}"  target="_blank">https://cosc4p02.tpgc.me/u/${url.shortCode}</a></p>
+                    //     <h5>Created At:</h5>
+                    //     <p>${date}</p>
+                    //     <div class="clicks">
+                    //         <h5>Click Count:</h5>
+                    //         <p>${url.clickCount}</p>
+                    //     </div>
+                    // </div>
+                    // `;
+
+                    urlItem.innerHTML = `
+                    <span class="link-info">${url.longUrl}</span>
+                    <br>
+                    <a class="link-url" href="https://cosc4p02.tpgc.me/u/${url.shortCode}">cosc4p02.tpgc.me/u/${url.shortCode}</a>
+                    <br>
+                    <span class="link-click">Click Count: ${url.clickCount}</span>
+                    `
+                    urlList.appendChild(urlItem);
+                });
+            })
+            .catch(error => console.error('Error fetching URLs:', error));
+    }
+
+    function convertUTCToET2(utcDate) {
+        const date = new Date(utcDate);
+
+        const utcHours = date.getUTCHours();
+
+        // Adjust the hours for Eastern Time
+        const etHours = utcHours - 4;
+
+        const etDate = new Date(date);
+        etDate.setHours(etHours);
+
+        return etDate;
+    }
+
+    function convertUTCToET(utcDate) {
+        // Create a new Date object with the UTC time
+        const date = new Date(utcDate);
+
+        // Adjust the hours for Eastern Time
+        const etDate = new Date(date.getTime() - 4 * 60 * 60 * 1000);
+
+        // Get the weekday name
+        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const weekday = weekdays[etDate.getUTCDay()];
+
+        // Get the day, month, and year
+        const day = etDate.getUTCDate().toString().padStart(2, '0');
+        const month = (etDate.getUTCMonth() + 1).toString().padStart(2, '0'); // Month is zero-based
+        const year = etDate.getUTCFullYear();
+
+        // Get the hours and minutes in two-digit format
+        const hours = etDate.getUTCHours().toString().padStart(2, '0');
+        const minutes = etDate.getUTCMinutes().toString().padStart(2, '0');
+
+        // Construct the date string
+        const dateString = `${weekday}, ${day}-${month}-${year} ${hours}:${minutes} (EDT)`;
+
+        return dateString;
     }
 </script>
+
 </html>

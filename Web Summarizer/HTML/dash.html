@@ -128,25 +128,25 @@
         }
         fetchUrls();
     }
-        import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-        import { auth } from '../js/firebase-init.js';
-        window.onload = function() {
-          onAuthStateChanged(auth, (user) => {
-              if (user) {
-                   setUid(user)
-                   document.getElementById("nav-login").innerText = "SIGNOUT";
-                   document.getElementById("dash").style.display = "block";
-              } else {
+    import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+    import { auth } from '../js/firebase-init.js';
+    window.onload = function() {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUid(user)
+                document.getElementById("nav-login").innerText = "SIGNOUT";
+                document.getElementById("dash").style.display = "block";
+            } else {
                 setUid()
                 document.getElementById("nav-login").innerText = "LOGIN";
                 window.location.href = "https://cosc4p02.tpgc.me/index.html"
                 document.getElementById("dash").style.display = "none";
-              }
-          });
-      };
-    
-    
-      </script>
+            }
+        });
+    };
+
+
+</script>
     <script>
 
     function fetchUrls() {
