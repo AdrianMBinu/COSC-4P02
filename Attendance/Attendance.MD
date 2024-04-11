@@ -154,3 +154,15 @@ Apr 2
 | Michael     | Present         | 
 | Brett       | Present         |
 
+Apr 9
+| Name        | Attendance  |
+| ----------- | ----------- |
+| Maulik      | Present     | 
+| Adrian      | Present     | 
+| Deevan      | Present     | 
+| Jason       | Present     | 
+| Thanushan   | Present     | 
+| Vishant     | Present     | 
+| Michael     | Present     | 
+| Brett       | Present     | 
+

@@ -8,7 +8,7 @@ function shortenUrl() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ longUrl, userId }), // Include userId in the request body
+        body: JSON.stringify({ longUrl, userId }),
     })
         .then(response => response.json())
         .then(data => {
