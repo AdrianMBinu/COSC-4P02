@@ -1,192 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:500,900" rel="stylesheet">
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <link href="../css/urlShotener2.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/resultPages.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="../js/app.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="../js/url.js"></script>
-    <title>URL Shortener</title>
-    <script>
-        function submitForm() {
-
-            var inputElement = document.getElementById('longUrl').value;
-            if (inputElement !== '') {
-                shortenUrl(); 
-                // urlResult();
-            } else {
-                alert('Please enter a URL.');
-            }
-        }
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                submitForm();
-            }
-        }
-    </script>
-    <style>
-  .URLLink{
-    width:80dvw;
-    height: 45px; 
-    background-color: white;
-    border-radius: 20px;
-    overflow-x: auto;
-    margin: 0;
-    color: black;
-    font-size: 20px;
-  }
-
-.logo{
-    width: 30%;
-    height: 30%;
-    margin-bottom: -15dvh;
-
-
-}
-.middleLogo{
-    margin: 0px;
-    display: flex;
-    justify-content: center;
-}
-
-.enter{
-    padding: 0;
-    margin-left: 20px;
-    filter: invert(80%) hue-rotate(86deg);
-}
-.enter:hover{
-    filter: invert(0%) hue-rotate(86deg);
-}
-.switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-    input:checked + .slider {
-      background-color: #FF0000;
-    }
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-    .dark-theme {
-      background-image: url('../images/dark_background.jpg'); /* Dark theme background image */
-    }
-    .switchClass{
-        margin-top: 7px;
-    }
-    .switchClass{
-        margin-top: 7px;
-    }
-    </style>
-</script>
+    <title>Full-Width Design</title>
 </head>
+
 <body>
-        <nav class="navbar">
-            <div class="topCornerTitle">
-              <img class="navbar-logo" src="../images/logo.png" alt="Image failed to load" width="60px">
-              <p class="text light medium page-title">URL Shortener</p>
-            </div>
-        <ul>
-            <li><a href="login.html" id="nav-login" class="navbar-link loginButton">Login</a></li>
-            <li><a href="dash.html" id="dash" class="navbar-link" style="display: none;">DashBoard</a></li>
-            <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
-            <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
-            <li><a href="../index.html" class="navbar-link">Home</a></li>
-            <li class= "switchClass">
-          <label class="switch">
-            <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
-          <span class="slider"></span>
-          </label><!--this is the switch-->
-    </li>
-        </ul>
-      </nav>
-
-    <div class="body">
-        <div>
-            <div class="middleLogo">
-                <img class="logo" src="../images/logo.png" alt="Logo Image">
-            </div>
-            <div class="shortSecCon">
-                <h1 class="shortSecConh1">Input URL:</h1>
-                <div class="renameSection">
-                    <input class="URLLink" id="longUrl" name="longUrl" placeholder="paste link here" onkeypress="handleKeyPress(event)" required>
-                    <img class="enter" type="button" src="../images/search.png" alt="Image not found" onclick="submitForm()">
-                </input>
-                </div>
-                <h1 class="shortSecConh1">Shortened URL:</h1>
-                <div class="shortResultDiv">
-                    <div class="URLResult">
-                        <h3 id="ShortResultText"></h3>
-                    </div>
-                    <img onclick="copyToClipboard()" class="resultSymbols" src="../images/copyButton.svg" alt="Image failed to load" width="40px">
-                </div>
-            </div>
-            </div>
-          </div>
+    <div class="navbar">
+        <div class="navbar-title">
+            <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
+                style="width:60px;"></a>
+            <p class="text light medium page-title">Web Summarizer</p>
+        </div>
+        <div class="navbar-menu">
+            <ul>
+                <li class= "switchClass">
+                    <label class="switch">
+                      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+                    <span class="slider"></span>
+                    </label><!--this is the switch-->
+              </li>
+                <li><a href="../index.html" class="navbar-link">Home</a></li>
+                <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
+                <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
+                <li><a id="nav-login" href="login.html" class="navbar-link loginButton">Login</a></li>
+            </ul>
+        </div>
     </div>
+    <div class="main-content">
+        <div class="content">
+            <div class="body">
+                <div>
+                    <div class="middleLogo">
+                        <img class="logo" src="../images/logo.png" alt="Logo Image">
+                    </div>
+                    <div class="shortSecCon">
+                        <h1 class="shortSecConh1">Input URL:</h1>
+                        <div class="renameSection">
+                            <input class="URLLink" id="longUrl" name="longUrl" placeholder="Input Link Here"
+                                onkeypress="handleKeyPress(event)" required>
+                            </input>
+                            <button class="enter" type="button" onclick="submitForm()">Enter</button>
+                        </div>
+                        <!-- <h1 class="shortSecConh1">Shortened URL:</h1> -->
+                        <div class="renameSection" id="rename-result">
+                            <input class="URLLink" id="ShortResultText" disabled />
+                            <button class="enter" type="button" onclick="copyToClipboard()">Copy</button>
+                            </input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
+
 <script>
-</script>
-<script>
-    window.globalVariable = 'Non';
-</script>
 
-<script type="module">
-
-
-function setUid(user) {
-    if (user) {
-        window.globalVariable = user.uid;
-    } else {
-        window.globalVariable = "Non";
+    function fetchUID() {
+        if (!window.globalVariable) {
+            window.globalVariable = "Non";
+        }
+        else {
+            window.location.replace("https://cosc4p02.tpgc.me/proShortener.html")
+        }
     }
-}
-    import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
-    import { auth } from '../js/firebase-init.js';
-    window.onload = function() {
-      onAuthStateChanged(auth, (user) => {
-          if (user) {
-               setUid(user)
-               document.getElementById("nav-login").innerText = "SIGNOUT";
-                document.getElementById("dash").style.display = "block";
-          } else {
-            setUid()
-            document.getElementById("nav-login").innerText = "LOGIN";
-            document.getElementById("dash").style.display = "none";
-          }
-      });
-  };
-  </script>
 
+    fetchUID();
+
+
+    function toggleDarkMode() {//function called in every html page to change it to dark mode
+      var darkModeToggle = document.getElementById('darkModeToggle');
+      if (darkModeToggle.checked) {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'true'); // Store dark mode preference
+      } else {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'false'); // Remove dark mode preference
+      }
+    }
+
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            submitForm();
+        }
+    }
+
+    function showResult(shortUrl, clickCount) {
+        var result = document.getElementById("rename-result");
+        result.style.display = "flex";
+
+        document.getElementById('ShortResultText').value = shortUrl;
+    }
+
+    async function submitForm() {
+        var url = document.getElementById("longUrl").value;
+        if (!url) {
+            alert("Please input a URL.");
+            return;
+        }
+
+        const data = {
+            "longUrl": url,
+            "userId": window.globalVariable
+        };
+
+        try {
+            const response = await fetch('https://cosc4p02.tpgc.me/u/shorten', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Bad network response (thrown in proSummarizer)');
+            }
+
+            const urlData = await response.json();
+            showResult(urlData.shortUrl, urlData.clickCount);
+        } catch (error) {
+            console.error(error.message)
+            showResult('Error fetching shortened url, try again later.', -1)
+        }
+    }
+
+
+    function copyToClipboard() {
+        const shortenedUrl = document.getElementById('ShortResultText').value;
+        navigator.clipboard.writeText(shortenedUrl)
+            .then(() => {
+                alert('Shortened URL copied to clipboard.');
+            })
+            .catch(err => {
+                console.error('Error in copying text: ', err);
+            });
+    }
+</script>
 </html>

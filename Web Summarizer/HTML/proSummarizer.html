@@ -118,6 +118,7 @@
     function fetchUID() {
         if (!window.globalVariable) {
             window.globalVariable = "Non";
+            window.location.replace("https://cosc4p02.tpgc.me/webSummarizer.html")
         }
     }
 
@@ -272,12 +273,11 @@
     }
 
 
-    // CHANGE ME
     function copyToClipboard() {
-        const summaryText = document.getElementById('resultarea').value;
-        navigator.clipboard.writeText(summaryText)
+        const shortenedUrl = document.getElementById('ShortResultText').value;
+        navigator.clipboard.writeText(shortenedUrl)
             .then(() => {
-                alert('Summary copied to clipboard.');
+                alert('Shortened URL copied to clipboard.');
             })
             .catch(err => {
                 console.error('Error in copying text: ', err);
