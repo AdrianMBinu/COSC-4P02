@@ -5,10 +5,17 @@ html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: url("../images/landing-sky.jpg");
+    background: url("../images/background.PNG");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.dark-theme {
+    background-image: url('../images/dark_background.jpg');
+    /* Dark theme background image */
 }
 
 .navbar {
@@ -17,11 +24,27 @@ html {
     justify-content: space-between;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(4px);
-    color: white;
-    padding: 10px 0;
+    backdrop-filter: blur(2px);
+    color: #EEE;
+    padding: 0;
     position: relative;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    max-height: 50px;
     /* Ensure absolute positioning within navbar */
+}
+
+.navbar li {
+    float: right;
+    display: inline;
+}
+
+.navbar li a {
+    display: block;
+    text-align: center;
+    padding: 13px 32px;
+    text-transform: uppercase;
+    opacity: 0.35;
 }
 
 .navbar-menu ul {
@@ -61,8 +84,66 @@ html {
 
 .navbar-title {
     /* Adjust based on your layout needs */
-    margin-left: 5px;
-    text-align: left;
+    margin: 0;
+    float: left;
+    display: flex;
+    align-items: center;
+    left: 1vw;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switchClass {
+    margin-top: 3px !important;
+    padding-right: 2px !important;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #FF0000;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.dark-theme {
+    background-image: url('../images/dark_background.jpg');
+    /* Dark theme background image */
 }
 
 /* Ensure the page-title class does not interfere with alignment */
@@ -71,10 +152,14 @@ html {
     padding: 0;
 }
 
+.text.medium {
+    font-size: 22px;
+}
+
 .main-content {
     display: flex;
     flex-direction: row;
-    height: calc(100% - 40px);
+    height: calc(100% - 50px);
     /* Adjust based on the navbar's height */
 }
 
@@ -91,7 +176,7 @@ html {
 .content {
     width: 75%;
     /*background-color: #ddd;*/
-    padding: 20px;
+    padding: 75px 0;
     height: 100%;
     box-sizing: border-box;
 }
@@ -135,6 +220,7 @@ h1 {
     padding: 10px 0;
     font-weight: 400;
     margin-right: 5%;
+    width: 100%;
 }
 
 .summary-item:last-child,
@@ -162,6 +248,7 @@ h1 {
 .title {
     color: #DDD;
     font-size: 50px;
+    margin-left: 8dvw;
 }
 
 .history-containers {
@@ -279,6 +366,7 @@ h1 {
 
 .renameSection {
     display: flex;
+    justify-content: center;
     margin-bottom: 10vh;
 }
 
@@ -325,8 +413,9 @@ h1 {
 .sumResultDiv {
     width: 60vw;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     margin-bottom: 10px;
+    padding-left: 8dvw;
 }
 
 .textarea {
@@ -350,4 +439,8 @@ h1 {
 
 .title {
     color: #DDD;
+}
+
+.images{
+    padding-left: 8dvw;
 }

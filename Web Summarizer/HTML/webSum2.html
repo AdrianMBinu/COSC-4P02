@@ -4,24 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full-Width Design</title>
+    <title>Web Summarizer</title>
     <link href="../css/webSum2.css" rel="stylesheet" />
     <script src="../js/app.js"></script>
 </head>
 
 <body>
     <div class="navbar">
-        <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
-                style="width:40px;"></a>
         <div class="navbar-title">
+            <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
+                style="width:60px;"></a>
             <p class="text light medium page-title">Web Summarizer</p>
         </div>
         <div class="navbar-menu">
             <ul>
-                <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
-                <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
-                <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
+                <li class= "switchClass">
+                    <label class="switch">
+                      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+                    <span class="slider"></span>
+                    </label><!--this is the switch-->
+              </li>
                 <li><a href="../index.html" class="navbar-link">Home</a></li>
+                <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
+                <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
+                <li><a id="nav-login" href="login.html" class="navbar-link loginButton">Login</a></li>
             </ul>
         </div>
     </div>
@@ -58,19 +64,25 @@
 <script>
     const URL = "https://cosc4p02.tpgc.me/"
 
-    document.addEventListener("DOMContentLoaded", function () {//for everytime you refresh the page
-        var theme = localStorage.getItem('darkModeEnabled');
-        var darkModeToggle = document.getElementById('darkModeToggle');
-        if (theme === 'true') {
-            // If the theme is 'dark', add the 'dark-theme' class to the body
-            darkModeToggle.checked = true;//responsible for actually getting the switch to stay red for all pages
-            document.body.classList.add('dark-theme');//responsible for actually changing the image in the background
-        } else {
-            // If the theme is not 'dark', remove the 'dark-theme' class from the body
-            darkModeToggle.checked = false;
-            document.body.classList.remove('dark-theme');
+    function fetchUID() {
+        if (!window.globalVariable) {
+            window.globalVariable = "Non";
         }
-    });
+    }
+
+    fetchUID();
+
+
+    function toggleDarkMode() {//function called in every html page to change it to dark mode
+      var darkModeToggle = document.getElementById('darkModeToggle');
+      if (darkModeToggle.checked) {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'true'); // Store dark mode preference
+      } else {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'false'); // Remove dark mode preference
+      }
+    }
 
     function handleKeyPress(event) {
         if (event.key === "Enter") {

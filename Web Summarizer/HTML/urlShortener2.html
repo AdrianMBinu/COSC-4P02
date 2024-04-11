@@ -10,18 +10,23 @@
 
 <body>
     <div class="navbar">
-        <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
-                style="width:40px;"></a>
-        
         <div class="navbar-title">
+            <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
+                style="width:60px;"></a>
             <p class="text light medium page-title">Web Summarizer</p>
         </div>
         <div class="navbar-menu">
             <ul>
-                <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
-                <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
-                <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
+                <li class= "switchClass">
+                    <label class="switch">
+                      <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+                    <span class="slider"></span>
+                    </label><!--this is the switch-->
+              </li>
                 <li><a href="../index.html" class="navbar-link">Home</a></li>
+                <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
+                <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
+                <li><a id="nav-login" href="login.html" class="navbar-link loginButton">Login</a></li>
             </ul>
         </div>
     </div>
@@ -38,19 +43,13 @@
                             <input class="URLLink" id="longUrl" name="longUrl" placeholder="Input Link Here"
                                 onkeypress="handleKeyPress(event)" required>
                             </input>
-                            <button class="enter" type="button" onclick="submitForm(); showResult()">Enter</button>
+                            <button class="enter" type="button" onclick="submitForm()">Enter</button>
                         </div>
                         <!-- <h1 class="shortSecConh1">Shortened URL:</h1> -->
                         <div class="renameSection" id="rename-result">
                             <input class="URLLink" id="ShortResultText" disabled />
                             <button class="enter" type="button" onclick="copyToClipboard()">Copy</button>
                             </input>
-                        </div>
-                    </div>
-                    <div class="shortThirdCon">
-                        <h1 class="shortSecConh1"># of Times Used:</h1>
-                        <div class="counter">
-                            <h2 id="counter">0</h2>
                         </div>
                     </div>
                 </div>
@@ -61,42 +60,83 @@
 </body>
 
 <script>
+
+    function fetchUID() {
+        if (!window.globalVariable) {
+            window.globalVariable = "Non";
+        }
+    }
+
+    fetchUID();
+
+
+    function toggleDarkMode() {//function called in every html page to change it to dark mode
+      var darkModeToggle = document.getElementById('darkModeToggle');
+      if (darkModeToggle.checked) {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'true'); // Store dark mode preference
+      } else {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'false'); // Remove dark mode preference
+      }
+    }
+
     function handleKeyPress(event) {
         if (event.key === "Enter") {
             submitForm();
-            showResult(); // Whenimplemented, should only be called after a sucessful shortening via AJAX success call --- this is for testing
         }
-
     }
 
-    function showResult() {
+    function showResult(shortUrl, clickCount) {
         var result = document.getElementById("rename-result");
         result.style.display = "flex";
+
+        document.getElementById('ShortResultText').value = shortUrl;
     }
 
-    // CHANGE ME
-    function submitForm() {
-        var longUrl = document.getElementById("longUrl").value;
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://web-summarizer.herokuapp.com/shorten", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                document.getElementById("ShortResultText").innerHTML = response.shortUrl;
-                document.getElementById("counter").innerHTML = response.counter;
-            }
+    async function submitForm() {
+        var url = document.getElementById("longUrl").value;
+        if (!url) {
+            alert("Please input a URL.");
+            return;
         }
-        xhr.send(JSON.stringify({ longUrl: longUrl }));
+
+        const data = {
+            "longUrl": url,
+            "userId": window.globalVariable
+        };
+
+        try {
+            const response = await fetch('https://cosc4p02.tpgc.me/u/shorten', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Bad network response (thrown in proSummarizer)');
+            }
+
+            const urlData = await response.json();
+            showResult(urlData.shortUrl, urlData.clickCount);
+        } catch (error) {
+            console.error(error.message)
+            showResult('Error fetching shortened url, try again later.', -1)
+        }
     }
 
 
-// CHANGE ME
     function copyToClipboard() {
-        var shortUrl = document.getElementById("ShortResultText").innerHTML;
-        var dummy = document.createElement("input");
-        document.body.appendChild(dummy);
-        dummy.setAttribute("id", "dummy_id");
+        const shortenedUrl = document.getElementById('ShortResultText').value;
+        navigator.clipboard.writeText(shortenedUrl)
+            .then(() => {
+                alert('Shortened URL copied to clipboard.');
+            })
+            .catch(err => {
+                console.error('Error in copying text: ', err);
+            });
     }
 </script>
 </html>

@@ -37,7 +37,7 @@
                 <li><a href="../index.html" class="navbar-link">Home</a></li>
                 <li><a href="webSummarizer.html" class="navbar-link">Summarizer</a></li>
                 <li><a href="urlShortener.html" class="navbar-link">URL Shortener</a></li>
-                <li><a href="login.html" class="navbar-link loginButton">Login</a></li>
+                <li><a id="nav-login" href="login.html" class="navbar-link loginButton">Login</a></li>
             </ul>
         </div>
     </div>
@@ -97,6 +97,34 @@
 
 </body>
 
+<script type="module">
+    function setUid(user) {
+        if (user) {
+            window.globalVariable = user.uid;
+        } else {
+            window.globalVariable = "Non";
+        }
+        fetchUrls();
+    }
+    import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+    import { auth } from '../js/firebase-init.js';
+    window.onload = function() {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUid(user)
+                document.getElementById("nav-login").innerText = "SIGNOUT";
+                //document.getElementById("dash").style.display = "block";
+            } else {
+                setUid()
+                document.getElementById("nav-login").innerText = "LOGIN";
+                window.location.href = "https://cosc4p02.tpgc.me/index.html"
+                //document.getElementById("dash").style.display = "none";
+            }
+        });
+    };
+</script>
+
+
 
 <script>
 
@@ -153,6 +181,17 @@
             console.error(error.message)
             showResult('Error fetching shortened url, try again later.', -1)
         }
+    }
+
+    function toggleDarkMode() {//function called in every html page to change it to dark mode
+      var darkModeToggle = document.getElementById('darkModeToggle');
+      if (darkModeToggle.checked) {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'true'); // Store dark mode preference
+      } else {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('darkModeEnabled', 'false'); // Remove dark mode preference
+      }
     }
 
 
@@ -217,6 +256,7 @@
                     <a class="link-url" href="https://cosc4p02.tpgc.me/u/${url.shortCode}">cosc4p02.tpgc.me/u/${url.shortCode}</a>
                     <br>
                     <span class="link-click">Click Count: ${url.clickCount}</span>
+                    <span class="date">${date}</span>
                     `
                     urlList.appendChild(urlItem);
                 });
