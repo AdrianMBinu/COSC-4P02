@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link href="../css/urlShotener2.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full-Width Design</title>
+    <title>URL Shortener</title>
 </head>
 
 <body>
@@ -142,4 +142,19 @@
             });
     }
 </script>
+<script type="module">
+
+    import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+    import { auth } from '../js/firebase-init.js';
+    window.onload = function() {
+      onAuthStateChanged(auth, (user) => {
+          if (user) {
+               document.getElementById("nav-login").innerText = "SIGNOUT";
+          } else {
+            setUid()
+            document.getElementById("nav-login").innerText = "LOGIN";
+          }
+      });
+  };
+  </script>
 </html>
