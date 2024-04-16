@@ -134,6 +134,9 @@ def run_summarizer(url, userid, word_count = 300):
 	
 		# Handle either video or text site, return text or audio -> text content
 		text = summarizer.handle_url(url)
+		if len(text) == 0:
+			print("Failed to fetch website")
+			return
   
 		word_count_command = 'UPDATE summaries SET url_word_count=%s WHERE url=%s'
 		dbCursor.execute( word_count_command, (len(text), str(url)) )
@@ -168,6 +171,10 @@ def run_sentiment(url, userid, word_count = 300):
 	
 		# Handle either video or text site, return text or audio -> text content
 		text = summarizer.handle_url(url)
+  
+		if len(text) == 0:
+			print("Failed to fetch website")
+			return
   
 		word_count_command = 'UPDATE sentiments SET url_word_count=%s WHERE url=%s'
 		dbCursor.execute( word_count_command, (len(text), str(url)) )
