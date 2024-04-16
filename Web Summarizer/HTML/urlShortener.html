@@ -61,16 +61,16 @@
 
 <script>
 
-    function fetchUID() {
-        if (!window.globalVariable) {
-            window.globalVariable = "Non";
-        }
-        else {
-            window.location.replace("https://cosc4p02.tpgc.me/HTML/proShortener.html")
-        }
-    }
+    // function fetchUID() {
+    //     if (!window.globalVariable) {
+    //         window.globalVariable = "Non";
+    //     }
+    //     else {
+    //         window.location.replace("https://cosc4p02.tpgc.me/HTML/proShortener.html")
+    //     }
+    // }
 
-    fetchUID();
+    // fetchUID();
 
 
     function toggleDarkMode() {//function called in every html page to change it to dark mode
@@ -144,6 +144,15 @@
 </script>
 <script type="module">
 
+function setUid(user) {
+        if (user) {
+            window.globalVariable = user.uid;
+            window.location.replace("https://cosc4p02.tpgc.me/HTML/proShortener.html")
+        } else {
+            window.globalVariable = "Non";
+        }
+    }
+
     import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
     import { auth } from '../js/firebase-init.js';
     window.onload = function() {
@@ -157,4 +166,5 @@
       });
   };
   </script>
+
 </html>
