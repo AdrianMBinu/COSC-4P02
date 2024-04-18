@@ -88,6 +88,7 @@ def get_url(url):
 		except Exception as e:
 			print(e)
 			print("json error")
+	print(url)
 	return get_url_summary(url)
 
 def get_all_user_urls(type, userid):
