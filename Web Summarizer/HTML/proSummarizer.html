@@ -72,8 +72,8 @@
                 </div>
 
                 <div class="checkbox-div">
-                    <input class="URLLink" id="word_count" placeholder="Word count" value="300" required></input>
-                    <label class="sentiment">Use Sentiment?</label>
+                    <input class="URLLinkWord" id="word_count" placeholder="Word count" value="300" required></input>
+                    <label class="sentiment">Use <br>Sentiment?</label>
                     <input type="checkbox" id="sentiment" class="checkbox">
                     </input>
                 </div>
@@ -125,10 +125,10 @@
 </script>
 
 <script>
+    let summaryItems = [];
     const URL = "https://cosc4p02.tpgc.me/";
 
     fetchUrls();
-
 
     function toggleDarkMode() {//function called in every html page to change it to dark mode
       var darkModeToggle = document.getElementById('darkModeToggle');
@@ -152,7 +152,7 @@
         document.getElementById('resultarea').value = summaryText;
     }
 
-    function fetchUrls() {
+    function fetchHistory() {
         console.log(window.globalVariable);
         // Fetch URLs from the server
         fetch('https://cosc4p02.tpgc.me/s/user_requests_fetch', {
@@ -188,7 +188,7 @@
                 urlList.innerHTML = '';
 
                 // Display the last 10 URLs with matching clientId
-                lastTenUrls.forEach(url => {
+                lastTenUrls.forEach((url, index) => {
                     var date = convertUTCToET(url.createdAt);
                     const urlItem = document.createElement('li');
                     urlItem.classList.add('link-item');
@@ -202,9 +202,16 @@
                     <span class="date">${date}</span>
                     `
                     urlList.appendChild(urlItem);
+                    summaryItems.push(url);
+                    urlItem.addEventListener('click', () => showContent(index))
                 });
             })
             .catch(error => console.error('Error fetching URLs:', error));
+    }
+
+    function showContent(index) {
+        document.getElementById('url').value = summaryItems[index]['longUrl'];
+        document.getElementById('resultarea').value = summaryItems[index]['summary'];
     }
 
     function speakText() {

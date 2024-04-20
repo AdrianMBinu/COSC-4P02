@@ -395,6 +395,7 @@ h1 {
 }
 
 .sumResultDiv {
+    height: 9vw;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;

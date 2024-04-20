@@ -350,7 +350,22 @@ h1 {
 }
 
 .URLLink {
-    width: 50vw;
+    width: 40vw;
+    background-color: rgba(0, 0, 0, 0.75);
+    /* Semi-transparent black background */
+    border-radius: 20px;
+    padding: 15px 32px;
+    overflow-x: auto;
+    border: 0;
+    margin: 0;
+    color: #EEE;
+    font-size: 20px;
+    padding-left: 2vw;
+    backdrop-filter: blur(4px);
+}
+
+.URLLinkWord {
+    width: 37.5vw;
     background-color: rgba(0, 0, 0, 0.75);
     /* Semi-transparent black background */
     border-radius: 20px;
@@ -366,8 +381,9 @@ h1 {
 
 .renameSection {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     margin-bottom: 2vh;
+    margin-left: 8vw;
 }
 
 .input-div{
@@ -411,7 +427,8 @@ h1 {
 }
 
 .sumResultDiv {
-    width: 60vw;
+    width: 44vw;
+    height: 9vw;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
@@ -448,12 +465,14 @@ h1 {
 .timer-text{
     color: #DDD;
     font-size: 30px;
+    justify-content: center;
+    padding-left: 8dvw;
 }
 
 .sentiment {
     color: white;
     text-align: center;
-    padding: 0 0 0 10px;
+    padding: 0 10px 0 10px;
     font-size: 20px;
 }
 
@@ -464,6 +483,7 @@ h1 {
 
 .checkbox-div {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     margin-bottom: 2vh;
+    margin-left: 8vw;
 }
