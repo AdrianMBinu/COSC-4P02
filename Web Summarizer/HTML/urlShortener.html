@@ -62,18 +62,6 @@
 
 <script>
 
-    // function fetchUID() {
-    //     if (!window.globalVariable) {
-    //         window.globalVariable = "Non";
-    //     }
-    //     else {
-    //         window.location.replace("https://cosc4p02.tpgc.me/HTML/proShortener.html")
-    //     }
-    // }
-
-    // fetchUID();
-
-
     function toggleDarkMode() {//function called in every html page to change it to dark mode
       var darkModeToggle = document.getElementById('darkModeToggle');
       if (darkModeToggle.checked) {
@@ -159,7 +147,7 @@ function setUid(user) {
       onAuthStateChanged(auth, (user) => {
           if (user) {
                document.getElementById("nav-login").innerText = "SIGNOUT";
-               window.location.replace("https://cosc4p02.tpgc.me/HTML/proShortener.html")
+               window.location.replace("https://cosc4p02.tpgc.me/HTML/proShortener.html");
           } else {
             setUid()
             document.getElementById("nav-login").innerText = "LOGIN";

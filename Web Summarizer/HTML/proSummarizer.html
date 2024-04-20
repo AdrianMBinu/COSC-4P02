@@ -99,13 +99,14 @@
     window.onload = function() {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setUid(user)
+                setUid(user);
                 document.getElementById("nav-login").innerText = "SIGNOUT";
                 //document.getElementById("dash").style.display = "block";
             } else {
-                setUid()
-                document.getElementById("nav-login").innerText = "LOGIN";
-                window.location.href = "https://cosc4p02.tpgc.me/index.html"
+                setUid();
+                window.location.replace("https://cosc4p02.tpgc.me/HTML/webSummarizer.html");
+                //document.getElementById("nav-login").innerText = "LOGIN";
+                //window.location.href = "https://cosc4p02.tpgc.me/index.html"
                 //document.getElementById("dash").style.display = "none";
             }
         });
@@ -113,16 +114,8 @@
 </script>
 
 <script>
-    const URL = "https://cosc4p02.tpgc.me/"
+    const URL = "https://cosc4p02.tpgc.me/";
 
-    function fetchUID() {
-        if (!window.globalVariable) {
-            window.globalVariable = "Non";
-            window.location.replace("https://cosc4p02.tpgc.me/webSummarizer.html")
-        }
-    }
-
-    fetchUID();
     fetchUrls();
 
 

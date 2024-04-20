@@ -62,19 +62,7 @@
 </body>
 
 <script>
-    const URL = "https://cosc4p02.tpgc.me/"
-
-    function fetchUID() {
-        if (!window.globalVariable) {
-            window.globalVariable = "Non";
-        }
-        else {
-            window.location.replace("https://cosc4p02.tpgc.me/proSummarizer.html")
-        }
-    }
-
-    fetchUID();
-
+    const URL = "https://cosc4p02.tpgc.me/";
 
     function toggleDarkMode() {//function called in every html page to change it to dark mode
       var darkModeToggle = document.getElementById('darkModeToggle');
@@ -146,7 +134,6 @@
     }
 
 
-    // CHANGE ME
     function copyToClipboard() {
         const summaryText = document.getElementById('resultarea').value;
         navigator.clipboard.writeText(summaryText)
@@ -166,7 +153,8 @@
         window.onload = function() {
           onAuthStateChanged(auth, (user) => {
               if (user) {
-                   document.getElementById("nav-login").innerText = "SIGNOUT";
+                    document.getElementById("nav-login").innerText = "SIGNOUT";
+                    window.location.replace("https://cosc4p02.tpgc.me/HTML/proSummarizer.html");
               } else {
                 setUid()
                 document.getElementById("nav-login").innerText = "LOGIN";
