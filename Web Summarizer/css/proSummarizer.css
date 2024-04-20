@@ -367,7 +367,7 @@ h1 {
 .renameSection {
     display: flex;
     justify-content: center;
-    margin-bottom: 10vh;
+    margin-bottom: 2vh;
 }
 
 .input-div{
@@ -443,4 +443,27 @@ h1 {
 
 .images{
     padding-left: 8dvw;
+}
+
+.timer-text{
+    color: #DDD;
+    font-size: 30px;
+}
+
+.sentiment {
+    color: white;
+    text-align: center;
+    padding: 0 0 0 10px;
+    font-size: 20px;
+}
+
+.checkbox{
+    height: 30px;
+    width: 30px;
+}
+
+.checkbox-div {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2vh;
 }
