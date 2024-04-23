@@ -178,3 +178,15 @@ Apr 16
 | Michael     | Not Present     | 
 | Brett       | Present         | 
 
+Apr 23
+| Name        | Attendance      |
+| ----------- | -----------     |
+| Maulik      | Present         | 
+| Adrian      | Present         | 
+| Deevan      | Not Present     | 
+| Jason       | Present         | 
+| Thanushan   | Present         | 
+| Vishant     | Present         | 
+| Michael     | Not Present     | 
+| Brett       | Not Present     | 
+
