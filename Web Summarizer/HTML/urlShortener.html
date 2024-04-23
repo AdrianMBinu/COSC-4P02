@@ -12,7 +12,7 @@
 <body>
     <div class="navbar">
         <div class="navbar-title">
-            <a href="landing" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
+            <a href="../index.html" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
                 style="width:60px;"></a>
             <p class="text light medium page-title">URL Shortener</p>
         </div>
@@ -61,18 +61,6 @@
 </body>
 
 <script>
-
-    // function fetchUID() {
-    //     if (!window.globalVariable) {
-    //         window.globalVariable = "Non";
-    //     }
-    //     else {
-    //         window.location.replace("https://cosc4p02.tpgc.me/HTML/proShortener.html")
-    //     }
-    // }
-
-    // fetchUID();
-
 
     function toggleDarkMode() {//function called in every html page to change it to dark mode
       var darkModeToggle = document.getElementById('darkModeToggle');
@@ -159,7 +147,7 @@ function setUid(user) {
       onAuthStateChanged(auth, (user) => {
           if (user) {
                document.getElementById("nav-login").innerText = "SIGNOUT";
-               window.location.replace("https://cosc4p02.tpgc.me/HTML/proShortener.html")
+               window.location.replace("https://cosc4p02.tpgc.me/HTML/proShortener.html");
           } else {
             setUid()
             document.getElementById("nav-login").innerText = "LOGIN";
