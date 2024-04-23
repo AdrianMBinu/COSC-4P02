@@ -6,16 +6,19 @@ import summarizer
 import threading
 import time #for sleep and time-based dev functions
 
-sumDB = mysql.connector.connect(
-	host="localhost",
-	user="cosc4p02",
-	password="summarizeme",
-	database="4p02"
-)
-
-dbCursor = sumDB.cursor()
 # evil :3
 lock = threading.Lock()
+
+def connect():
+	sumDB = mysql.connector.connect(
+		host="localhost",
+		user="cosc4p02",
+		password="summarizeme",
+		database="4p02"
+	)
+	return (sumDB, sumDB.cursor())
+
+sumDB, dbCursor = connect()
 
 def has_url_summary(url):
 	look_command = "SELECT url FROM summaries WHERE url=%s"
@@ -86,8 +89,9 @@ def get_url(url):
 			else:
 				print("Unsupported type!")
 		except Exception as e:
-			print(e)
+			print(f"Exception on line 89: {e}")
 			print("json error")
+			print(f"request url in question: {url}")
 	print(url)
 	return get_url_summary(url)
 
@@ -217,8 +221,9 @@ def process_url(request_body):
 			else:
 				print("unsupported type!")
 		except Exception as e:
-			print(e)
-			print('json error')
+			print(f"Silly Exception: {e}")
+			print('json error 2')
+			print(f"request body in question {request_body}")
 	else:
 		run_summarizer(url, 0)
 	
@@ -275,6 +280,8 @@ class app(BaseHTTPRequestHandler):
 		return self.rfile.read(content_len).decode('UTF-8')
 
 	def do_POST(self):
+		global sumDB, dbCursor
+		sumDB, dbCursor = connect()
 		# vv None of this is optimal or readable code, too bad vv
 		if re.search('/s/fetch', self.path):
 			request_body = self.get_content()

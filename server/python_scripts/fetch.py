@@ -3,7 +3,15 @@ import argparse
 import functools 
 import re
 from bs4 import BeautifulSoup
+from bs4.element import Comment
 import statistics
+
+def tag_visible(element):
+    if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
+        return False
+    if isinstance(element, Comment):
+        return False
+    return True
 
 def fetch_url(url):
     request = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"})
@@ -14,12 +22,14 @@ def fetch_url(url):
     
     # We are using BeautifulSoup to parse the HTML
     parser = BeautifulSoup(request.text, features="html.parser")
+    texts = parser.findAll(text=True)
+    visible_texts = filter(tag_visible, texts)
     
     # remove unwanted elements
-    for script in parser(["script", "style", "header", "footer"]):
-        script.extract()
+    # for script in parser(["script", "style", "header", "footer", "head"]):
+    #     script.extract()
     
-    return parser.get_text() 
+    return u"\n".join(text.strip() for text in visible_texts)
 
 def split_words(text):
     lines = (line.strip() for line in text.splitlines())
@@ -88,7 +98,9 @@ def word_count(words):
     return len(words)
 
 def fetch_and_split(url):
-    return split_words(fetch_url(url))
+    text = fetch_url(url)
+    print(text)
+    return split_words(text)
     
 
 if __name__ == "__main__":
