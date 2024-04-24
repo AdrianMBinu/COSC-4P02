@@ -104,8 +104,8 @@ def get_all_user_urls(type, userid):
 		column = "summary"
 		table = "summaries"
 		wordcount = "summary_word_count"
-	fetchCommand = "SELECT url,url_word_count,%s,%s FROM %s WHERE userid=%s"
-	dbCursor.execute( fetchCommand, (wordcount, column, table, userid))
+	fetchCommand = "SELECT url,url_word_count,%s,%s FROM " + table + " WHERE userid=%s"
+	dbCursor.execute( fetchCommand, (wordcount, column, userid))
 	results = dbCursor.fetchall()
 	results_struct = []
 	for result in results:
@@ -299,8 +299,9 @@ class app(BaseHTTPRequestHandler):
 				self.set_headers(200)
 				json_response = get_all_user_urls(type, userid)
 				self.wfile.write(bytes(json_response, "utf8"))
-			except:
+			except Exception as e:
 				self.set_headers(206)
+				self.wfile.write(bytes(str(e), "utf8"))
 		elif re.search('/s/fetch_sentiment', self.path):
 			request_body = self.get_content()
 			status, json_response = get_url_sentiment(request_body)
