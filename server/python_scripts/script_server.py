@@ -113,7 +113,7 @@ def get_all_user_urls(type, userid):
 			"url": result[0],
 			"url_word_count": result[1],
 			"result_word_count": result[2],
-			"result_text": results[3]
+			"result_text": result[3]
 		})
 		print(result)
 	data = {
