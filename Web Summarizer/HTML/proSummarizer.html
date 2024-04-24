@@ -11,7 +11,7 @@
 <body>
     <div class="navbar">
         <div class="navbar-title">
-            <a href="../index.html" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
+            <a href="../index.html" class="navbar-logo"><img src="../images/logonew.png" alt="Image failed to load"
                 style="width:60px;"></a>
             <p class="text light medium page-title">Web Summarizer</p>
         </div>
@@ -60,7 +60,7 @@
         </div>
         <div class="content">
             <div class="middleLogo">
-                <img class="logo" src="../images/logo.png" alt="Logo Image">
+                <img class="logo" src="../images/logonew.png" alt="Logo Image">
             </div>
             <div class="shortSecCon">
                 <h1 class="title">Input:</h1>
@@ -103,7 +103,7 @@
         } else {
             window.globalVariable = "Non";
         }
-        fetchUrls();
+        fetchHistory();
     }
     import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
     import { auth } from '../js/firebase-init.js';
@@ -128,7 +128,7 @@
     let summaryItems = [];
     const URL = "https://cosc4p02.tpgc.me/";
 
-    fetchUrls();
+    fetchHistory();
 
     function toggleDarkMode() {//function called in every html page to change it to dark mode
       var darkModeToggle = document.getElementById('darkModeToggle');

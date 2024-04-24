@@ -12,7 +12,7 @@
 <body>
     <div class="navbar">
         <div class="navbar-title">
-            <a href="../index.html" class="navbar-logo"><img src="../images/logo.png" alt="Image failed to load"
+            <a href="../index.html" class="navbar-logo"><img src="../images/logonew.png" alt="Image failed to load"
                 style="width:60px;"></a>
             <p class="text light medium page-title">Web Summarizer</p>
         </div>
@@ -34,7 +34,7 @@
     <div class="main-content">
         <div class="content">
             <div class="middleLogo">
-                <img class="logo" src="../images/logo.png" alt="Logo Image">
+                <img class="logo" src="../images/logonew.png" alt="Logo Image">
             </div>
             <div class="secondCon">
                 <h1 class="title">Input:</h1>
@@ -187,11 +187,11 @@
     function summarize_url()
     {
         const url = document.getElementById("url").value;
-        const word_count = document.getElementById("word_count").value;
-        if (document.getElementById("sentiment").checked)
-            type = "sentiment";
-        else
-            type = "summary";
+        //const word_count = document.getElementById("word_count").value;
+        //if (document.getElementById("sentiment").checked)
+        //    type = "sentiment";
+        //else
+        //    type = "summary";
         // server will filter out double requests but we should still avoid making multiple.
         if (requested_url == url)
             return;
@@ -217,7 +217,7 @@
             summarizer_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             json_data = {
                 "url": url,
-                "word_count": word_count,
+                "word_count": 300,
                 "type": type
             };
             summarizer_request.send(JSON.stringify(json_data));
@@ -239,7 +239,13 @@
 
 
 <script type="module">
-
+        function setUid(user) {
+                if (user) {
+                    window.globalVariable = user.uid;
+                } else {
+                    window.globalVariable = "Non";
+                }
+        }
         import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
         import { auth } from '../js/firebase-init.js';
         window.onload = function() {
