@@ -279,10 +279,10 @@ h1 {
 }
 
 .logo {
-    width: 30%;
-    height: 30%;
-    margin-bottom: -15dvh;
-    margin-top: -15dvh;
+    width: 15%;
+    height: 15%;
+    margin-bottom: -20dvh;
+    margin-top: -10dvh;
 }
 
 .shortSecCon {
@@ -428,7 +428,7 @@ h1 {
 
 .sumResultDiv {
     width: 44vw;
-    height: 6.5vw;
+    height: 8vw;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
