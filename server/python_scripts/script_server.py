@@ -104,8 +104,8 @@ def get_all_user_urls(type, userid):
 		column = "summary"
 		table = "summaries"
 		wordcount = "summary_word_count"
-	fetchCommand = "SELECT url,url_word_count,%s,%s FROM " + table + " WHERE userid=%s"
-	dbCursor.execute( fetchCommand, (wordcount, column, userid))
+	fetchCommand = "SELECT url,url_word_count," + wordcount + "," + column + " FROM " + table + " WHERE userid=%s"
+	dbCursor.execute( fetchCommand, (userid, ))
 	results = dbCursor.fetchall()
 	results_struct = []
 	for result in results:
