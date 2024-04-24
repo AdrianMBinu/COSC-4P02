@@ -283,6 +283,7 @@ h1 {
     height: 15%;
     margin-bottom: -20dvh;
     margin-top: -10dvh;
+    margin-right: 10dvw;
 }
 
 .shortSecCon {
@@ -428,7 +429,7 @@ h1 {
 
 .sumResultDiv {
     width: 44vw;
-    height: 8vw;
+    height: 12vw;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;

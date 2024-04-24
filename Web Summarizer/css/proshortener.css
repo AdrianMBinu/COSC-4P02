@@ -288,16 +288,17 @@ h1 {
 }
 
 .middleLogo {
-    margin: 0px;
+    margin-top: 10dvh;
     display: flex;
     justify-content: center;
 }
 
 .logo {
-    width: 25%;
-    height: 25%;
-    margin-bottom: -15dvh;
-    margin-top: -13dvh;
+    width: 15%;
+    height: 15%;
+    margin-bottom: -20dvh;
+    margin-top: -18dvh;
+    margin-right: 10dvw;
 }
 
 .shortSecCon {

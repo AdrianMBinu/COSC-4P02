@@ -162,7 +162,7 @@
             },
             body: JSON.stringify(
                 { 
-                    userId: window.globalVariable,
+                    userid: window.globalVariable,
                     type: "summary"
                 }
             )
@@ -172,46 +172,47 @@
                 return response;
             })
             .then(response => response.json())
-            .then(urls => {
+            .then(summaries => {
                 // Filter URLs by clientId
-                const filteredUrls = urls.filter(url => url.userId === window.globalVariable);
+                //const filteredUrls = urls.filter(url => url.userId === window.globalVariable);
 
                 // Sort the filtered URLs by createdAt timestamp in descending order
-                filteredUrls.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                //filteredUrls.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
                 // Select the last 10 records
-                const lastTenUrls = filteredUrls.slice(0, 5);
+                //const lastTenUrls = url.slice(0, 5);
 
-                const urlList = document.getElementById('summary-list');
+                const summaryList = document.getElementById('summary-list');
 
                 // Clear previous content
-                urlList.innerHTML = '';
+                summaryList.innerHTML = '';
 
                 // Display the last 10 URLs with matching clientId
-                lastTenUrls.forEach((url, index) => {
-                    var date = convertUTCToET(url.createdAt);
-                    const urlItem = document.createElement('li');
-                    urlItem.classList.add('link-item');
+                summaries.forEach((summary, index) => {
+                    //var date = convertUTCToET(url.createdAt);
+                    const summaryItem = document.createElement('li');
+                    summaryItem.classList.add('summary-item');
 
-                    urlItem.innerHTML = `
-                    <span class="link-info">${url.longUrl}</span>
+                    summaryItem.innerHTML = `
+                    <a class="summary-url" href="https://cosc4p02.tpgc.me/u/${summary.url}"><span class="summary-info">${summary.url}</span></a>
                     <br>
-                    <a class="link-url" href="https://cosc4p02.tpgc.me/u/${url.shortCode}">cosc4p02.tpgc.me/u/${url.shortCode}</a>
+                    <span class="summary-click">URL Word Count: ${url.result_text}</span>
                     <br>
-                    <span class="link-click">Click Count: ${url.clickCount}</span>
+                    <span class="summary-click">URL Word Count: ${url.url_word_count}</span>
+                    <span class="summary-click">Summary Word Count: ${url.result_word_count}</span>
                     <span class="date">${date}</span>
                     `
-                    urlList.appendChild(urlItem);
-                    summaryItems.push(url);
-                    urlItem.addEventListener('click', () => showContent(index))
+                    summaryList.appendChild(summaryItem);
+                    summaryItems.push(summary);
+                    summaryItem.addEventListener('click', () => showContent(index))
                 });
             })
             .catch(error => console.error('Error fetching URLs:', error));
     }
 
     function showContent(index) {
-        document.getElementById('url').value = summaryItems[index]['longUrl'];
-        document.getElementById('resultarea').value = summaryItems[index]['summary'];
+        document.getElementById('url').value = summaryItems[index]['url'];
+        document.getElementById('resultarea').value = summaryItems[index]['result_text'];
     }
 
     function speakText() {
