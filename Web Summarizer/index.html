@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-  <head>
+
+<head>
   <link href="https://fonts.googleapis.com/css?family=Raleway:500,900" rel="stylesheet">
   <meta charset="utf-8">
   <title>Web Summarizer</title>
@@ -9,8 +10,9 @@
   <script src="js/firebase-init.js" type="module"></script>
   <script src="js/app.js"></script>
 </head>
+
 <body>
-  
+
   <nav class="navbar">
     <div class="navbar-title">
       <img class="navbar-logo" src="images/logonew.png" alt="Image failed to load" width="60px">
@@ -21,56 +23,60 @@
       <li><a href="HTML/urlShortener.html" class="navbar-link">URL Shortener</a></li>
       <li><a href="HTML/webSummarizer.html" class="navbar-link">Summarizer</a></li>
       <li><a href="index.html" class="navbar-link">Home</a></li>
-      <li class= "switchClass">
-          <label class="switch">
-            <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
+      <li class="switchClass">
+        <label class="switch">
+          <input type="checkbox" onchange="toggleDarkMode()" id="darkModeToggle">
           <span class="slider"></span>
-          </label><!--this is the switch-->
-    </li>
+        </label><!--this is the switch-->
+      </li>
     </ul>
   </nav>
   <div class="container-fluid" id="page-container">
-<heading3 id="greeting" class="greeting"></heading3>
-<h1 class="text center light xxlarge">Web Summarizer</h1>
-<h2 class="text center light medium">Which feature would you like to use?</h2>
-<div class="inline-div">
-<form class="inline" action="HTML/webSummarizer.html" method="get">
-  <input type="submit" value="Summarizer" class="text medium light">
-</form>
-<form class="inline" action="HTML/urlShortener.html" method="get">
-<input type="submit" value="URL Shortener" class="text medium light">
-</form>
-</div>
-</div>
+    <div class="middleLogo">
+      <img class="logo" src="images/logonew.png" alt="Logo Image">
+  </div>
+    <heading3 id="greeting" class="greeting"></heading3>
+    <h1 class="text center light xxlarge">Web Summarizer</h1>
+    <h2 class="text center light medium">Which feature would you like to use?</h2>
+    <div class="inline-div">
+      <form class="inline" action="HTML/webSummarizer.html" method="get">
+        <input type="submit" value="Summarizer" class="text medium light">
+      </form>
+      <form class="inline" action="HTML/urlShortener.html" method="get">
+        <input type="submit" value="URL Shortener" class="text medium light">
+      </form>
+    </div>
+  </div>
 </body>
 <script type="module">
-  import {onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js";
   import { auth } from './js/firebase-init.js';
-  window.onload = function() {
+  window.onload = function () {
     onAuthStateChanged(auth, (user) => {
-        var elements = document.querySelectorAll(".Proffesional");
-        var logButton = document.querySelectorAll(".loginButton");
-        if (user) {
-            const uid = user.uid;
-            document.getElementById("greeting").innerText = `Hello, ${user.displayName || 'User'}`;
-            elements.forEach(function(element) {
-                element.style.display = "flex";
-            });
-            logButton.forEach(function(log) {
-                log.textContent = 'SIGNOUT';
-            });
-            //document.getElementById("dash").style.display = "block";
-        } else {
-          document.getElementById("greeting").innerText = "";
-          elements.forEach(function(element) {
-                element.style.display = "none";
-            });
-            logButton.forEach(function(log) {
-                log.textContent = 'LOGIN';
-            });
-            //document.getElementById("dash").style.display = "none";
-        }
+      var elements = document.querySelectorAll(".Proffesional");
+      var logButton = document.querySelectorAll(".loginButton");
+      if (user) {
+        const uid = user.uid;
+        document.getElementById("greeting").innerText = `Hello, ${user.displayName || 'User'}`;
+        elements.forEach(function (element) {
+          element.style.display = "flex";
+        });
+        logButton.forEach(function (log) {
+          log.textContent = 'SIGNOUT';
+        });
+        //document.getElementById("dash").style.display = "block";
+      } else {
+        document.getElementById("greeting").innerText = "";
+        elements.forEach(function (element) {
+          element.style.display = "none";
+        });
+        logButton.forEach(function (log) {
+          log.textContent = 'LOGIN';
+        });
+        //document.getElementById("dash").style.display = "none";
+      }
     });
-};
+  };
 </script>
+
 </html>

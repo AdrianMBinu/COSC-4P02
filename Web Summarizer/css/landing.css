@@ -257,3 +257,16 @@ input:checked+.slider:before {
     display: flex;
     align-items: center;
 }
+
+.middleLogo {
+    margin-top: 12dvh;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    width: 15%;
+    height: 15%;
+    margin-bottom: -20dvh;
+    margin-top: -20dvh;
+}
