@@ -211,7 +211,7 @@ def process_url(request_body):
 			url = json_data["url"]
 			userid = 0
 			try:
-				userid = int(json_data["userid"])
+				userid = json_data["userid"]
 			except:
 				userid = 0
 			if json_data["type"] == "summary":
@@ -295,7 +295,7 @@ class app(BaseHTTPRequestHandler):
 			type = "summary"
 			try:
 				type = json_data['type']
-				userid = int(json_data['userid'])
+				userid = json_data['userid']
 				self.set_headers(200)
 				json_response = get_all_user_urls(type, userid)
 				self.wfile.write(bytes(json_response, "utf8"))
