@@ -192,6 +192,9 @@
                 // Display the last 10 URLs with matching clientId
                 summaries.forEach((summary, index) => {
                     //var date = convertUTCToET(url.createdAt);
+                    if(summary.result_text == null) {
+                        return;
+                    }
                     const summaryItem = document.createElement('li');
                     summaryItem.classList.add('summary-item');
 
