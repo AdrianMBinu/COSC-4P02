@@ -240,6 +240,10 @@ h1 {
     color: #ddd;
 }
 
+.summary-item:hover{
+    cursor: pointer;
+}
+
 .summary-info{
     color: #149cbe;
 }
