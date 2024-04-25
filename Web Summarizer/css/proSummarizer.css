@@ -242,6 +242,7 @@ h1 {
 
 .summary-item:hover{
     cursor: pointer;
+    color: #149cbe;
 }
 
 .summary-info{
