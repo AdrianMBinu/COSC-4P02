@@ -173,7 +173,6 @@
             })
             .then(response => response.json())
             .then(summaries => {
-                summaries.reverse();
                 // Filter URLs by clientId
                 //const filteredUrls = urls.filter(url => url.userId === window.globalVariable);
 
@@ -185,11 +184,10 @@
                 console.log(summaries);
                 summaries = summaries["results"];
                 console.log(summaries);
+                summaries.reverse();
                 const summaryList = document.getElementById('summary-list');
-
                 // Clear previous content
                 summaryList.innerHTML = '';
-
                 // Display the last 10 URLs with matching clientId
                 summaries.forEach((summary, index) => {
                     //var date = convertUTCToET(url.createdAt);
