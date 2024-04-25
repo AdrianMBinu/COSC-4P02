@@ -198,11 +198,9 @@
                     summaryItem.innerHTML = `
                     <a class="summary-url" href="https://cosc4p02.tpgc.me/u/${summary.url}"><span class="summary-info">${summary.url}</span></a>
                     <br>
-                    <span class="summary-click">Summary: ${summary.result_text}</span>
+                    <span class="summary-click">Summary: ${summary.result_text.slice(0,50)}</span>
                     <br>
-                    <span class="summary-click">Summary Word Count: ${summary.result_word_count}</span>
-                    <br>
-                    <span class="summary-click">URL Word Count: ${summary.url_word_count}</span>
+                    <span class="summary-click">Summary Character Count: ${summary.result_word_count}</span>
                     `
                     //<span class="summary-click">URL Word Count: ${summary.url_word_count}</span>
                     summaryList.appendChild(summaryItem);
