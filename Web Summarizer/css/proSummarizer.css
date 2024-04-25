@@ -240,6 +240,13 @@ h1 {
     color: #ddd;
 }
 
+.summary-info{
+    color: #149cbe;
+}
+.summary-info:hover{
+    text-decoration: underline;
+}
+
 .dashboard-title-section {
     flex-basis: 100%;
     text-align: center;
