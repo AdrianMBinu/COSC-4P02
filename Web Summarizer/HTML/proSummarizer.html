@@ -271,7 +271,7 @@
         // clear url and update the summary text, and enable displaying of the <p>
         const element = document.getElementById("resultarea");
         //document.getElementById("url").value = "";
-        element.textContent = json.text;
+        element.value = json.text;
         //element.className = "";
         const time_element = document.getElementById("est-time-text");
         time_element.textContent = "Estimated Time Remaining: ";
