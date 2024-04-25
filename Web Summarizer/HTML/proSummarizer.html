@@ -173,6 +173,7 @@
             })
             .then(response => response.json())
             .then(summaries => {
+                summaries.reverse();
                 // Filter URLs by clientId
                 //const filteredUrls = urls.filter(url => url.userId === window.globalVariable);
 
