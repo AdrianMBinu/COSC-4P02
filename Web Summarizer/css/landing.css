@@ -2,106 +2,139 @@
     font-family: Raleway, sans-serif;
     text-decoration: none;
 }
+
 .text.small {
     font-size: 14px;
 }
+
 .text.medium {
     font-size: 22px;
 }
+
 .text.large {
     font-size: 32px;
 }
+
 .text.xlarge {
     font-size: 72px;
 }
+
 .text.xxlarge {
     font-size: 96px;
 }
+
 .text.left {
     text-align: left;
 }
+
 .text.center {
     text-align: center;
 }
+
 .text.right {
     text-align: right;
 }
+
 .text.light {
     color: #eee;
 }
+
 .text.light::placeholder {
     color: #eee;
     opacity: 1;
 }
+
 .text.light:-ms-input-placeholder {
     color: #eee;
 }
+
 .text.light::-ms-input-placeholder {
     color: #eee;
 }
+
 .text.center::placeholder {
     text-align: center;
 }
+
 .text.center:-ms-input-placeholder {
     text-align: center;
 }
+
 .text.center::-ms-input-placeholder {
     text-align: center;
 }
+
 .text.dark {
     color: #333;
 }
+
 .text.red {
     color: #7a1400;
 }
+
 .text.underline {
     text-decoration: underline;
 }
+
 a.text {
     color: #eee;
 }
+
 .text.no-margin-top {
     margin-top: 0;
 }
+
 .text.no-margin-right {
     margin-right: 0;
 }
+
 .text.no-margin-bottom {
     margin-bottom: 0;
 }
+
 .text.no-margin-left {
     margin-left: 0;
 }
+
 .text.no-margin {
     margin: 0;
 }
+
 .text.small-margin {
     margin: 5px;
 }
+
 .text.small-margin-top {
     margin-top: 5px;
 }
+
 .text.small-margin-right {
     margin-right: 5px;
 }
+
 .text.small-margin-bottom {
     margin-bottom: 5px;
 }
+
 .text.small-margin-left {
     margin-left: 5px;
 }
+
 .text.nolink {
     text-decoration: none;
 }
+
 .text.xbold {
     font-weight: 900;
 }
+
 body,
 html {
     overflow: auto;
     height: 100%;
 }
-body{
+
+body {
     overflow: hidden;
     width: 100dvw;
     height: 100dvh;
@@ -112,86 +145,115 @@ body{
     margin: 0;
     padding: 0;
 }
+
 #page-container {
     min-height: 100%;
     background-size: auto 100%;
     height: 100%;
     padding: 25vh;
 }
+
 .maginalize {
     margin-top: 10vh;
 }
-.inline-div{
+
+.inline-div {
     text-align: center;
 }
-.inline{
+
+.inline {
     display: inline;
 }
-input{
+
+input {
     width: 200px;
     height: 50px;
     padding: 8px 8px;
     color: #EEE;
 }
-input[type="submit"]{
+
+input[type="submit"] {
     background: transparent;
     border: solid 1px #EEE;
     transition: 0.5s;
 }
-input[type="submit"]:hover{
+
+input[type="submit"]:hover {
     background: #EEE;
     color: #333;
 }
 
-.greeting{
+.greeting {
     font-size: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #EEE;
 }
+
 .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-    input:checked + .slider {
-      background-color: #FF0000;
-    }
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-    .dark-theme {
-      background-image: url("../images/dark_background.jpg"); /* Dark theme background image */
-    }
-    .switchClass{
-        margin-top: 7px;
-    }
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #FF0000;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.dark-theme {
+    background-image: url("../images/dark_background.jpg");
+    /* Dark theme background image */
+}
+
+.switchClass {
+    margin-top: 7px;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.navbar-title {
+    margin: 0;
+    float: left;
+    display: flex;
+    align-items: center;
+}

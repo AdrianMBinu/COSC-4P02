@@ -286,3 +286,15 @@
     .switchClass{
         margin-top: 7px;
     }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      margin-right: 5px;
+  }
+  
+  .navbar-title {
+      margin: 0;
+      float: left;
+      display: flex;
+      align-items: center;
+  }
