@@ -6,7 +6,7 @@ Software Engineering Process: Scrum
 
 Members:
 -	Maulik Mann			6994214	mm20as@brocku.ca
--	Adrian Binu			6970677	ab19xe@brocku.ca  
+-	Adrian Mankuzhiyil Binu			6970677	ab19xe@brocku.ca  
 -	Thanushan Pirapakaran	6890206	tp19uy@brocku.ca 
 -	Vishant Khamar		7062920	vk20if@brocku.ca 
 -	Devaan Zastrow		6932842	dz19xr@brocku.ca 
